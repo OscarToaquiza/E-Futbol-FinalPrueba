@@ -6,20 +6,19 @@ import * as jsPDF from  'jspdf'
   styleUrls: ['./tabla-posiciones.component.css']
 })
 export class TablaPosicionesComponent implements OnInit {
-
+  public pdf:any;
   constructor() { }
 
   ngOnInit() {
   }
 
-  // You'll need to make your image into a Data URL
-    // Use http://dataurl.net/#dataurlmaker    
     a(){
       let doc = new jsPDF()
       
       doc.setFontSize(40)
-      doc.fromHTML('<h1>Hola</h1>',35, 25) 
-      doc.save('file.pdf');     
+      doc.fromHTML('<h1>Hola</h1>',35, 25)       
+      this.pdf=doc.output('datauristring');
+      // doc.save('file.pdf');     
     }    
 
 }
