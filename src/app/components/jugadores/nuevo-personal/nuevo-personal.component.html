@@ -1,0 +1,135 @@
+<div class="jumbotron">
+  <h2>Nuevo Personal</h2>
+  <hr>
+<form>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="name" class="col-form-label">Nombres</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user" aria-hidden="true"></i></div>
+          <input type="text" class="form-control" name="personal.nombre_personal" #nombre_personal="ngModel"
+          [(ngModel)]="personal.nombre_personal" placeholder="Ingrese el nombre">
+        </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4" class="col-form-label">Apellidos</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user-o" aria-hidden="true"></i></div>
+          <input type="text" class="form-control" name="personal.apellido_personal" #apellido_personal="ngModel" 
+          [(ngModel)]="personal.apellido_personal" placeholder="Ingrese apellido">
+        </div>
+      
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputAddress" class="col-form-label">Cédula</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-address-card-o" aria-hidden="true"></i></div>
+          <input type="number"  class="form-control" name="personal.cedula_personal" #cedula_personal="ngModel" 
+          [(ngModel)]="personal.cedula_personal" placeholder="Ingrese la Cédula">
+        </div>
+      
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputAddress2" class="col-form-label">Fecha de nacimiento</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+          <input type="date" class="form-control"
+          name="personal.fecha_nacimiento_personal"
+          #fecha_nacimiento_personal="ngModel"
+            [(ngModel)]="personal.fecha_nacimiento_personal">
+        </div>
+      
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity" class="col-form-label">Observación</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-eye" aria-hidden="true"></i></div>
+          <input type="text" class="form-control" name="personal.observacion_personal" #observacion_personal="ngModel"
+          [(ngModel)]="personal.observacion_personal" placeholder="Ingrese una observación">
+        </div>
+     
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputState" class1="col-form-label">Rol</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
+          <select id="inputState" class="form-control"  name="personal.rol_personal"
+          [(ngModel)]="personal.rol_personal">elelija
+         <option disabled hidden [value]="selectUndefinedOptionValue">Elija un rol</option>
+         <option [ngValue]="'jugador'">Jugador</option>
+         <option [ngValue]="'presidente'">Presidente</option>
+         <option [ngValue]="'ambos'">Ambos</option>
+       </select>
+        </div>
+      
+    </div>
+    <div class=" form-group col-md-2">
+        <label for="che" class1="col-form-label">Estado del Jugador</label>
+        <label class="custom-control custom-checkbox">
+            <input id="che" class="custom-control-input" type="checkbox" name="personal.estado_personal" [(ngModel)]="personal.estado_personal"
+            #personal.estado_personal="ngModel" > 
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Activo</span>
+        </label>
+      <!-- <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" name="personal.estado_personal" [(ngModel)]="personal.estado_personal"
+        #personal.estado_personal="ngModel" > Activo
+      </label> -->
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="inputCity" class="col-form-label">Tarjetas rojas</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <input type="text" class="form-control" name="personal.TR_personal" #TR_personal="ngModel" 
+          [(ngModel)]="personal.TR_personal" disabled>
+          <div id="tarjetaRoja" class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-clone" aria-hidden="true"></i></div>
+        </div>
+      
+    </div>
+    <div class="form-group col-md-4">
+      <label for="inputCity" class="col-form-label">Tarjetas amarillas</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <input type="text" class="form-control" name="personal.TA_personal" #personal.TA_personal="ngModel" 
+          [(ngModel)]="personal.TA_personal" disabled>
+          <div id="tarjetaAmarilla" class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-clone" aria-hidden="true"></i></div>
+        </div>
+      
+    </div>
+    
+    <div class="form-group col-md-4">
+      <label for="inputZip" class="col-form-label">Goles marcados</label>
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <input type="text" class="form-control" name="personal.goles_persona" #personal.goles_persona="ngModel"
+          [(ngModel)]="personal.goles_personal" disabled>
+          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o" aria-hidden="true"></i></div>
+        </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputCity" class="col-form-label">Sanciones</label>
+      
+      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user-times" aria-hidden="true"></i></div>
+          <input type="text" class="form-control" name="personal.sancion_personal" #personal.sancion_personal="ngModel"
+          [(ngModel)]="personal.sancion_personal" placeholder="Ingrese una observación">
+        </div>
+      
+    </div>
+    <div class="form-group col-md-6">
+      <label for="file"  class="col-form-label">Foto de Perfil: </label>
+      <label class="custom-file">
+          <input type="file" id="file" class="custom-file-input" (change)="imagen($event)" required>
+          <span class="custom-file-control">Click Aquí..</span>
+        </label>
+    </div> 
+  </div>
+  <button type="submit" class="btn btn-success" (click)="guardarPersonal()">Guardar</button>
+</form>
+</div>

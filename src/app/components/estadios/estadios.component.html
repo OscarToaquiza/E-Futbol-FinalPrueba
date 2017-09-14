@@ -1,0 +1,36 @@
+<div class="container" >
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="text-center">
+        ESTADIOS HABILITADOS
+      </h1>
+      <!-- <button class="btn btn-success" data-toggle="collapse" href="#AgregarEstadio" aria-expanded="false" aria-controls="AgregarEstadio">Agregar Nuevo Estadio</button> -->
+    </div>
+  </div>
+  <!-- <hr class="featurette-divider"> -->
+
+  <div class="row featurette jumbotron" *ngFor="let estadio of estadios">
+    <div class="col-md-7 col-lg-7">
+      <h2 class="featurette-heading">{{estadio.nombre_estadio}}
+      </h2>
+      <p> <strong>Descripción General del Estadio</strong> </p>
+      <p>{{estadio.observacion_estadio}}</p>
+      <p><span class="text-muted"> <strong>Direccion:</strong> 
+        {{estadio.direccion_estadio}}
+        <a *ngIf="estadio.nombre_estadio == 'Estadio San Isidro'" href="https://www.google.com/maps/dir/El+Salto,+Latacunga,+Ecuador/Estadio+de+San+Isidro,+Latacunga,+Ecuador/@-0.781564,-78.6382478,12754m/data=!3m1!1e3!4m19!4m18!1m10!1m1!1s0x91d461aedabad169:0xb2709b216996a462!2m2!1d-78.6179307!2d-0.9317691!3m4!1m2!1d-78.592682!2d-0.7826285!3s0x91d4590dc1fd1e33:0xec7a169335a79bb0!1m5!1m1!1s0x91d4590af672ae0f:0x1dc10e30539c5512!2m2!1d-78.5915433!2d-0.7771814!3e0?hl=es" target="_blank">Como llegar</a>
+        <a *ngIf="estadio.nombre_estadio == 'Estadio de las Americas'" href="https://www.google.com/maps/dir/El+Salto,+Latacunga,+Ecuador/Estadio+de+las+Americas,+Latacunga,+Ecuador/@-0.8618767,-78.6849039,12z/data=!4m13!4m12!1m5!1m1!1s0x91d461aedabad169:0xb2709b216996a462!2m2!1d-78.6179307!2d-0.9317691!1m5!1m1!1s0x91d45922a83cec13:0x835791c8dee424ff!2m2!1d-78.6007534!2d-0.7944161?hl=es-ES" target="_blank" >Como llegar</a>
+      </span></p>
+      <p><span class="text-muted"> <strong>Referncia:</strong> 
+        {{estadio.ruta_estadio}}        
+      </span></p>
+    </div>
+    <div class="col-md-5 col-lg-5">
+      <img class="featurette-image img-fluid mx-auto" src="assets/img/estadio_america.jpg" alt="Generic placeholder image">
+      <iframe *ngIf="estadio.nombre_estadio == 'Estadio San Isidro'" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3438.823787177303!2d-78.59373198570485!3d-0.7771813994330264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d4590af672ae0f%3A0x1dc10e30539c5512!2sEstadio+de+San+Isidro!5e1!3m2!1ses!2s!4v1505319043382" width="400" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+      <iframe *ngIf="estadio.nombre_estadio == 'Estadio de las Americas'" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.4348189235407!2d-78.6029420857049!3d-0.7944160994204577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d45922a83cec13%3A0x835791c8dee424ff!2sEstadio+de+las+Americas!5e0!3m2!1ses!2sec!4v1505064890469"   frameborder="0" allowfullscreen></iframe>
+    </div>
+  </div>
+
+
+  <hr class="featurette-divider">
+</div>

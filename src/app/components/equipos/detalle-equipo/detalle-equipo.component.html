@@ -1,0 +1,93 @@
+<div >
+    <div class="card container">
+      <div class="card-header text-center">
+        <h3>Información del Equipo</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-10">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
+                    <input type="text"  #edicion_equipo.nombre_equipo="ngModel" [(ngModel)]="edicion_equipo.nombre_equipo" name="up_nombre_equipo" class="form-control" placeholder="Nombre del Equipo" required autofocus>
+                    <div class="invalid-feedback">
+                      Please provide a valid city.
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
+                    <input type="number" #edicion_equipo.anio_fundacion_equipo="ngModel" [(ngModel)]="edicion_equipo.anio_fundacion_equipo" name="up_anio_fundacion_equipo" class="form-control" placeholder="Año de Fundacion" required>
+                    <div class="invalid-feedback">
+                      Please provide a valid city.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle"></i></div>
+                    <input type="text" #edicion_equipo.color_principal_equipo="ngModel" [(ngModel)]="edicion_equipo.color_principal_equipo" name="up_color_principal_equipo" class="form-control" placeholder="Color Principal" required autofocus>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle-o"></i></div>
+                    <input type="text" #edicion_equipo.color_secundario_equipo="ngModel" [(ngModel)]="edicion_equipo.color_secundario_equipo" name="up_color_secundario_equipo" class="form-control" placeholder="Color Secundario" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+  
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                          <textarea type="text" class="form-control" name="" placeholder="Descripción General"
+                          #descripcion_equipo="ngModel" [(ngModel)]="edicion_equipo.descripcion_equipo">
+                          </textarea>
+                        </div>
+                      </div>
+  
+                </div>
+                <div class="col-md-6">
+                  
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                          <textarea type="text" class="form-control" name="" placeholder="Observación del Equipo"
+                          #observacion_equipo="ngModel" [(ngModel)]="edicion_equipo.observacion_equipo">
+                          </textarea>
+                        </div>
+                      </div>
+  
+                </div>
+              </div> 
+            <!-- 3 -->
+          </div>
+          
+  
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

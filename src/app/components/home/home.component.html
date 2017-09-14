@@ -1,0 +1,17 @@
+<app-slider [noticias]="noticias"></app-slider>
+<div class="row posiciones">
+        <div class="col-lg-8 tabla_posiciones" [ngSwitch]="verElemento">
+                <app-tabla-posiciones *ngSwitchCase="'tabla'"></app-tabla-posiciones>
+                <app-agregar-noticia (cerrar)="onCloseNoticiaAdd($event)" (notificacion)="onUpdateNoticia($event)" *ngSwitchCase="'agregarNoticia'"></app-agregar-noticia>
+                <app-editar-noticia (cerrar)="onCloseNoticiaEditar($event)" (notificacion)="onUpdateNoticia($event)" [noticia_nueva]="noticia_editar" *ngSwitchCase="'editarNoticia'" ></app-editar-noticia>     
+                
+        </div>
+        <div class="col-lg-4 tabla_noticias">
+                <app-ver-noticias [notificacion]="msgEvent"  
+                         (mostrar)="mostrarElemento($event,noticiaEditar)">
+                </app-ver-noticias>
+        </div>
+</div>
+
+<hr class="featurette-divider">
+

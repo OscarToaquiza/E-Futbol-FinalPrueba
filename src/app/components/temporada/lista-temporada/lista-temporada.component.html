@@ -1,0 +1,43 @@
+<div class="card text-center">
+  <div class="card-header">
+    <h3>LISTA DE TEMPORADAS</h3>
+  </div>
+  <div class="card-block">
+    <br>
+    <button  *ngIf="identity" class="btn btn-primary btn-lg btn-block " (click) = "ver_formulario($event)">
+        Craear Nueva Temporada
+    </button>
+    <div class="card margenCard" *ngFor="let item of temporadas">
+        <div class="card-header">
+            <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+            <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+        </div>
+      <div class="card-block">
+        <h4 class="card-title">{{item.nombre_temporada}}</h4>
+        <p>
+          <strong>Fecha de Inicio: {{item.fecha_inicio |date}} </strong><br>
+          <strong>Fecha Fin:{{item.fecha_fin |date}} </strong>
+        </p>
+      <div *ngIf="(item.estado_temporada) == false">
+          <p>Temporada marcada como actual: <i class="fa fa-times" aria-hidden="true"></i></p>
+      </div>
+      <div *ngIf="(item.estado_temporada) == true">
+          <p>Temporada marcada como actual: <i class="fa fa-check" aria-hidden="true"></i></p>
+      </div>
+      </div>
+      <div class="card-footer">
+        <button *ngIf="identity" class="btn btn-success" (click)="datos_temporada($event,item)" >Editar</button>   
+        <div *ngIf="!identity">
+            <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+            <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+        </div>
+        <!-- <button  class="btn btn-danger float-right">Eliminar</button> -->
+      </div> 
+    </div>
+      <br>
+  </div>
+  <div class="card-footer">
+    <strong>Sección de Temporadas T.O.D. 2017</strong>    
+  </div>
+</div>
+

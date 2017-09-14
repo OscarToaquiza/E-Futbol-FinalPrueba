@@ -1,0 +1,341 @@
+<br><br>
+<div class="container marketing">
+  <div class="row">
+    <div class="col-lg-4 equipo" *ngFor="let equi of equipos; let i = index">
+        <div class="card">
+          <div class="card-header">
+            <h3>{{equi.nombre_equipo}}</h3>
+          </div>
+          <div class="card-block">
+            <img class="rounded-circle imgcenter" [src]="srcItem[i]" alt="Generic placeholder image" width="140"
+              height="140">
+            <br>
+            <p class="card-text">Año de Fundación: {{equi.anio_fundacion_equipo}}</p>
+            <p>
+              <a [routerLink]="['/detalle-equipo',equi._id]" (click)="guardarEquipoSeleccionado(equi)" class="btn btn-primary" role="button">Ver más detalles &raquo;</a>
+            </p>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Presidente: Juan Manuel Zoto Zoto</small>
+            <p>Presidente: Juan Manuel Zoto Zoto</p>
+            <a *ngIf="identity" class="btn btn-warning pull-left" role="button" 
+            data-toggle="collapse" href="#editarEquipo" (click)="verUpdateEquipo(equi)" aria-expanded="false" aria-controls="editarEquipo"
+            >Modificar</a>
+            <a *ngIf="identity" (click)="eliminarEquipo(equi)" class="btn btn-danger pull-right"  role="button">Eliminar</a>
+          </div> 
+        </div>
+      </div>
+
+
+    <div class="col-lg-4 equipo" *ngIf="formulario_equipo == true && identity">
+      <div class="card">
+        <div class="card-header">
+          <h3>Crear Nuevo Equipo</h3>
+        </div>
+        <div class="card-block">
+          <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" (click)="ver_registro_equipo($event)">
+                                                   <img id="addequipo" class="rounded-circle imgcenter" src="assets/popper/docs/images/nuevo.jpg" alt="Generic placeholder image" width="140" height="140">
+                                                  </a>
+          <br>
+          <h2><i class="fa fa-hand-o-up" aria-hidden="true"></i></h2>
+          <p class="card-text">Click sobre la Imagen para empezar</p>
+          <br>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">Presidente: Juan Manuel Zoto Zoto</small>
+          <p>Presidente: Juan Manuel Zoto Zoto</p>
+        </div>
+      </div>
+    </div>
+    <!-- /.col-lg-4 -->
+  </div>
+  <!-- /.row -->
+</div>
+
+<!-- <p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Link with href
+  </a>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-target
+  </button>
+</p> -->
+<div class="collapse" id="collapseExample">
+  <div class="card container">
+    <div class="card-header text-center">
+      <h3>Crear Nuevo Equipo</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-10">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
+  <!-- <input  name="cedula" #cedula="ngModel" [(ngModel)]="user.cedula" class="form-control" id="cedula" placeholder="Cédula de identidad" aria-describedby="cedula" required autofocus> -->
+                  <input type="text" name="name" class="form-control" placeholder="Nombre del Equipo" #nombre_equipo="ngModel" [(ngModel)]="nuevo_equipo.nombre_equipo" required autofocus>
+                  <div class="invalid-feedback">                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
+                  <input type="number" name="name" class="form-control" placeholder="Año de Fundacion" #anio_fundacion_equipo="ngModel" [(ngModel)]="nuevo_equipo.anio_fundacion_equipo" required>
+                  <div class="invalid-feedback">                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle"></i></div>
+                  <input type="text" name="name" class="form-control" placeholder="Color Principal" #color_principal_equipo="ngModel" [(ngModel)]="nuevo_equipo.color_principal_equipo" required>
+                  <div class="invalid-feedback">                      
+                    </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle-o"></i></div>
+                  <input type="text" name="name" class="form-control" placeholder="Color Secundario" #color_secundario_equipo="ngModel" [(ngModel)]="nuevo_equipo.color_secundario_equipo" required>
+                  <div class="invalid-feedback">                      
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- sdfghjkl -->
+          <div class="row">
+              <div class="col-md-6">
+
+                  <div class="form-group">
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                        <textarea type="text" class="form-control" name="" placeholder="Descripción General"
+                        #descripcion_equipo="ngModel" [(ngModel)]="nuevo_equipo.descripcion_equipo">
+                        </textarea>
+                      </div>
+                    </div>
+
+              </div>
+              <div class="col-md-6">
+                
+                  <div class="form-group">
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                        <textarea type="text" class="form-control" name="" placeholder="Observación del Equipo"
+                        #observacion_equipo="ngModel" [(ngModel)]="nuevo_equipo.observacion_equipo">
+                        </textarea>
+                      </div>
+                    </div>
+
+              </div>
+            </div>
+
+
+
+          <!-- 3 -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-cog"></i></div>
+                  <select class="form-control" [(ngModel)]="categoriaSeleccionada">
+                    <option selected>Seleccione la Categoria a la que pertenece</option>
+                    <option [ngValue]="categoria._id"  *ngFor="let categoria of categorias">{{categoria.nombre_categoria}}</option>                        
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0" *ngIf="addAndDelete">
+                <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-trophy"></i></div>
+                <div class="input-group">                
+                  <span>
+                      <button class="btn btn-success" type="button" (click)="addLogro()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>                            
+                    </span>
+                  </div>
+              </div>
+          <div class="form-group">
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0" *ngFor="let logro of nuevo_equipo.logros_equipo; let i=index">
+              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-trophy"></i></div>
+              <div class="input-group">
+                  <input type="text" class="form-control" name="logro_{{i}}"   [(ngModel)]="nuevo_equipo.logros_equipo[i].logro" placeholder="Logros del Equipo" aria-label="Logros">
+                  <span class="input-group-btn">
+                    <button class="btn btn-success" type="button" (click)="addLogro()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                    <button class="btn btn-danger" type="button" (click)="deleteLogro(i)"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
+                  </span>
+                </div>
+            </div>
+          </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-2">
+          <div class="form-group">
+            <input type="file" (change)="imagen($event)" name="file-5[]" id="file-5" class=" inputfile inputfile-4" />
+            <label for="file-5" ><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span>{{nombre_escudo}}</span></label>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <div class="card-footer">
+      <button class="btn btn-success pull-left" type="submit" (click)="guardarEquipo()">Guardar Equipo </button>
+      <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
+      <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample"
+        (click)="cancelar_registro_equipo($event)">Cancelar</a>
+    </div>
+  </div>
+</div>
+
+<div class="collapse" id="editarEquipo">
+    <div class="card container">
+      <div class="card-header text-center">
+        <h3>Editar Equipo</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-10">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
+                    <input type="text"  #edicion_equipo.nombre_equipo="ngModel" [(ngModel)]="edicion_equipo.nombre_equipo" name="up_nombre_equipo" class="form-control" placeholder="Nombre del Equipo" required autofocus>
+                    <div class="invalid-feedback">
+                      Please provide a valid city.
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
+                    <input type="number" #edicion_equipo.anio_fundacion_equipo="ngModel" [(ngModel)]="edicion_equipo.anio_fundacion_equipo" name="up_anio_fundacion_equipo" class="form-control" placeholder="Año de Fundacion" required>
+                    <div class="invalid-feedback">
+                      Please provide a valid city.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle"></i></div>
+                    <input type="text" #edicion_equipo.color_principal_equipo="ngModel" [(ngModel)]="edicion_equipo.color_principal_equipo" name="up_color_principal_equipo" class="form-control" placeholder="Color Principal" required autofocus>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle-o"></i></div>
+                    <input type="text" #edicion_equipo.color_secundario_equipo="ngModel" [(ngModel)]="edicion_equipo.color_secundario_equipo" name="up_color_secundario_equipo" class="form-control" placeholder="Color Secundario" required>
+                    <div class="invalid-feedback">
+                        Please provide a valid city.
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+  
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                          <textarea type="text" class="form-control" name="" placeholder="Descripción General"
+                          #descripcion_equipo="ngModel" [(ngModel)]="edicion_equipo.descripcion_equipo">
+                          </textarea>
+                        </div>
+                      </div>
+  
+                </div>
+                <div class="col-md-6">
+                  
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                          <textarea type="text" class="form-control" name="" placeholder="Observación del Equipo"
+                          #observacion_equipo="ngModel" [(ngModel)]="edicion_equipo.observacion_equipo">
+                          </textarea>
+                        </div>
+                      </div>
+  
+                </div>
+              </div>
+            <!-- 3 -->
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-cog"></i></div>
+                    <select class="form-control" [(ngModel)]="categoriaSeleccionada">
+                        <option selected>Seleccione la Categoria a la que pertenece</option>
+                        <option [ngValue]="categoria._id" [disabled]="categoriaActualId==categoria._id" *ngFor="let categoria of categorias">{{categoria.nombre_categoria}}<span *ngIf="categoriaActualId==categoria._id">(Categoria Actual)</span></option>                        
+                      </select>
+                  </div>
+                </div>
+              </div>              
+              <div class="col-md-6">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0" *ngIf="addAndDelete">
+                      <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-trophy"></i></div>
+                      <div class="input-group">                
+                        <span>
+                            <button class="btn btn-success" type="button" (click)="addLogro()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>                            
+                          </span>
+                        </div>
+                    </div>
+                <div class="form-group">
+                  <div class="input-group mb-2 mr-sm-2 mb-sm-0" *ngFor="let logro of edicion_equipo.logros_equipo; let i=index">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-trophy"></i></div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="logro_{{i}}"   [(ngModel)]="edicion_equipo.logros_equipo[i].logro" placeholder="Logros del Equipo" aria-label="Logros">
+                        <span class="input-group-btn">
+                          <button class="btn btn-success" type="button" (click)="addLogro()"><i class="fa fa-plus-circle" aria-hidden="true"></i></button>
+                          <button class="btn btn-danger" type="button" (click)="deleteLogro(i)"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
+                        </span>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-lg-2">
+            <div class="form-group">
+              <input type="file" (change)="imagen($event)" name="file-5[]" id="file-5" class=" inputfile inputfile-4" />
+              <label for="file-5" ><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span>{{nombre_escudo}}</span></label>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-success pull-left"  role="button" (click)="updateEquipo()">Guardar los Cambios</a>
+        <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#editarEquipo" aria-expanded="true" aria-controls="editarEquipo">Cancelar los Cambios</a>
+      </div>
+    </div>
+  </div>
+  

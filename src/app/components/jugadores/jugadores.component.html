@@ -1,0 +1,21 @@
+<div class="container">
+<div class="row">
+        <!-- <div class="col-lg-8 tabla_posiciones" [ngSwitch]="verElemento"> -->
+        <div class="col-lg-8" >
+                <app-seccion-equipo (mostrar)="mostrarDescripcionEquipo($event)"></app-seccion-equipo>
+        </div>
+        <div class="col-lg-4 ">
+                
+                <app-seccion-personal-equipo [equip]="equipo" (emitir)="mostrarNuevoPer($event)" *ngIf="verLista"></app-seccion-personal-equipo>
+                
+        </div>
+</div>
+<div class="row" >
+  <div class="col-lg-8" [hidden]="!verNuevoPersonal">
+      <app-nuevo-personal [IdEquipo]="equipo._id" *ngIf="verNuevoPersonal" ></app-nuevo-personal>
+  </div>
+
+</div>
+</div>
+<hr class="featurette-divider">
+

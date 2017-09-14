@@ -1,0 +1,39 @@
+body{
+    background-color: black;
+}
+
+.frm{
+    background-color:#ffffff;
+    display: inline-block;
+    padding: 20px;
+}
+
+.frm-login{
+    background-image: url('/assets/img/football-form-login.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;    
+}
+
+.frm-login>.modal-header,.frm-login>.modal-body,.frm-login>.modal-footer{
+    color:white;
+    background-color: rgba(0,0,0,0.5);   
+}
+
+.pre-frm-noticia{
+    padding: 10px;
+    box-shadow: 0px 0px 5px  #111;
+}
+
+.contenido-secundario-noticia{
+    padding: 5px;
+    color:#ffffff;
+}
+
+.fecha-noticia
+{
+    border-radius: 5px 5px 0px 0px!important;
+}
+
+.Error{
+    height: 10px;
+}

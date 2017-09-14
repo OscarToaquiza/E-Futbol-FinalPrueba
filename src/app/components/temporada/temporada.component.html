@@ -1,0 +1,23 @@
+<div class="row container-fluid">
+  <div class="col-lg-8" [ngSwitch]="verElemento">
+    <app-ver-temporada
+    *ngSwitchCase="'nueva-temporada'"
+    [valor]="ver_formulario"
+    (notify)="onNotifyClicked2($event)"
+    ></app-ver-temporada> 
+    <app-editar-temporada
+    (notify)="onNotifyClicked2($event)"
+    [valor]="ver_formulario"
+    *ngSwitchCase="'editar-temporada'"
+    [temporadaParaEditar]="datosFormuladrioEditar"
+    [idEditar]="id_editar"
+    >
+    </app-editar-temporada>
+  </div>
+  <div class="col-lg-4">
+    <app-lista-temporada
+    (notify)="onNotifyClicked($event)"
+    (DatosTemporadaEditar)="datosTemporadaEditar($event)"
+    ></app-lista-temporada>
+  </div>
+</div>
