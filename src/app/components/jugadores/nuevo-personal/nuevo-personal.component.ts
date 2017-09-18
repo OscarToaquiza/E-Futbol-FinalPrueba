@@ -5,6 +5,8 @@ import { GLOBAL } from '../../../services/global';
 import { UserService } from '../../../services/user.service';
 import { EquipoService } from '../../../services/equipo.service';
 
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-nuevo-personal',
   templateUrl: './nuevo-personal.component.html',
@@ -62,18 +64,29 @@ export class NuevoPersonalComponent implements OnInit, OnChanges {
     this._PS.addPersonal(this.url+'personal/guardar',this.personal,this.filesToUpload,this.token,'url_foto_personal')
       .then(response=>{
 
-        if(response){
-          alert(JSON.stringify(response));
+        if(!response){
+          console.log(response);
+          // alert("algo salio muy mal :(");
+          
+          // alert("personal creado");
+          // this._ES.addPersonalAEquipo(this.personal,this.personal);
+        }else{
+          console.log(response);
+          // alert(JSON.stringify(response));
           this.personalCreado = response;
           // console.log(response.personal);
           // console.log(this.ab.personal._id);
           // alert(this.ab.personal._id);
           // this.personal=response;
-
            this._ES.addPersonalAEquipo(this.personalCreado.personal._id,this.IdEquipo)
                   .subscribe(response=>{
                     if(response){
-                      alert("asignado al equipo"+this.IdEquipo);
+                      swal(
+                        'El ' + this.personalCreado.personal.rol_personal + ' ' +  this.personalCreado.personal.nombre_personal,
+                        'ha sido regisrtrado y agregado al equipo de manera exitosa',
+                        'success'
+                      );
+                      // alert("asignado al equipo"+this.IdEquipo);
                     }else{
                       console.log("error");                      
                     }
@@ -84,12 +97,16 @@ export class NuevoPersonalComponent implements OnInit, OnChanges {
                     console.log(error);
 
                   });
-          alert("personal creado");
-          // this._ES.addPersonalAEquipo(this.personal,this.personal);
-        }else{
-          alert("algo salio muy mal :(");
         }
-      });
+      }).catch((e) => {
+    let body = JSON.parse(e);
+    // console.log(body.mensaje);
+    swal(
+      '¡' + body.mensaje + '!',
+      '',
+      'error'
+    );
+  });
   }
 
 

@@ -7,17 +7,29 @@
             <h3>{{equi.nombre_equipo}}</h3>
           </div>
           <div class="card-block">
-            <img class="rounded-circle imgcenter" [src]="srcItem[i]" alt="Generic placeholder image" width="140"
-              height="140">
+            <img  *ngIf="equi.escudo_equipo" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + equi.escudo_equipo}}" alt="Generic placeholder image" width="140"
+            height="140">
+            <img *ngIf="!equi.escudo_equipo" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}" alt="Generic placeholder image" width="140"
+            height="140">
             <br>
             <p class="card-text">Año de Fundación: {{equi.anio_fundacion_equipo}}</p>
+            <div class="card-text"><strong>Categoria: </strong> 
+              <p *ngIf="(equi.estado_equipo)">
+                Ya Asignado</p>
+              <p *ngIf="!(equi.estado_equipo)">
+                No Asignado</p>
+            </div>
             <p>
               <a [routerLink]="['/detalle-equipo',equi._id]" (click)="guardarEquipoSeleccionado(equi)" class="btn btn-primary" role="button">Ver más detalles &raquo;</a>
             </p>
           </div>
           <div class="card-footer">
-            <small class="text-muted">Presidente: Juan Manuel Zoto Zoto</small>
-            <p>Presidente: Juan Manuel Zoto Zoto</p>
+            <div *ngFor="let item of (equi.personal_equipo)">
+              <p *ngIf="item.rol_personal == 'presidente' || item.rol_personal == 'ambos'">
+                <strong>Presidente: </strong> {{item.nombre_personal}} {{item.apellido_personal}}
+              </p>
+            </div>
+            <!-- <p>Presidente: Juan Manuel Zoto Zoto</p> -->
             <a *ngIf="identity" class="btn btn-warning pull-left" role="button" 
             data-toggle="collapse" href="#editarEquipo" (click)="verUpdateEquipo(equi)" aria-expanded="false" aria-controls="editarEquipo"
             >Modificar</a>
@@ -42,8 +54,7 @@
           <br>
         </div>
         <div class="card-footer">
-          <small class="text-muted">Presidente: Juan Manuel Zoto Zoto</small>
-          <p>Presidente: Juan Manuel Zoto Zoto</p>
+          <small class="text-muted"><i class="fa fa-creative-commons" aria-hidden="true"></i> T.O.D. 2017</small>
         </div>
       </div>
     </div>
@@ -291,7 +302,7 @@
                   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-cog"></i></div>
                     <select class="form-control" [(ngModel)]="categoriaSeleccionada">
-                        <option selected>Seleccione la Categoria a la que pertenece</option>
+                        <option selected >Seleccione la Categoria a la que pertenece</option>
                         <option [ngValue]="categoria._id" [disabled]="categoriaActualId==categoria._id" *ngFor="let categoria of categorias">{{categoria.nombre_categoria}}<span *ngIf="categoriaActualId==categoria._id">(Categoria Actual)</span></option>                        
                       </select>
                   </div>

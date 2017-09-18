@@ -21,8 +21,8 @@ export class JugadoresComponent implements OnInit {
   mostrarDescripcionEquipo(evento){
     if(evento.mensaje.elementoSeleccionado){
       this.equipo=evento.mensaje.elementoSeleccionado;
-      console.log("este equipo resivo");
-      console.log(this.equipo);
+      // console.log("este equipo resivo");
+      // console.log(this.equipo);
       this.verLista=true;
       // this.verNuevoPersonal=false;
     }

@@ -20,7 +20,9 @@
         <div class="card-header">
                 <h4 class="card-title">{{equipo.nombre_equipo}}</h4>
         </div>
-        <img class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + equipo.escudo_equipo}}" alt="Generic placeholder image" width="140"
+        <img  *ngIf="equipo.escudo_equipo" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + equipo.escudo_equipo}}" alt="Generic placeholder image" width="140"
+        height="140">
+        <img *ngIf="!equipo.escudo_equipo" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}" alt="Generic placeholder image" width="140"
         height="140">
         <div class="card-body">
           <p class="card-text"> <strong> Descripcion General: </strong> {{equipo.descripcion_equipo}}</p>

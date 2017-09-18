@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as jsPDF from  'jspdf'
+import * as jsPDF from 'jspdf';
 import * as $ from 'jquery';
 @Component({
   selector: 'app-tabla-posiciones',
