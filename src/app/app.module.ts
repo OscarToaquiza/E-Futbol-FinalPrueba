@@ -80,7 +80,7 @@ import {OrdenVector} from './pipes/orden-vector';
     VerTemporadaComponent,
     EditarTemporadaComponent,
     DetalleEquipoComponent,
-    CalendarioGeneralComponent
+    CalendarioGeneralComponent,
     OrdenVector
   ],
   imports: [
