@@ -11,3 +11,7 @@
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
 }
+
+/* .ng-invalid.ng-touched:not(form){
+    border:1px solid red;
+} */

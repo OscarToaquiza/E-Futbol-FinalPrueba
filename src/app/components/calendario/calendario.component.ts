@@ -186,19 +186,24 @@ export class CalendarioComponent implements OnInit {
     fecha.tarjetas_roja_equipo2 = new Array(TR2);
   }
 
-  guardarFecha(fechas){
+  guardarFecha(fechas,r){
     console.log(fechas);
     fechas.forEach(element => {
-      this._fechaService.updateCalendario(this.token,element,element._id)
-      .subscribe((response)=>{
-        console.log(response);      
-      },(err)=>{        
-          swal(
-            'Oops...',
-            '¡Algo salio mal, pruebe despues de un momento!',
-            'error'
-          )                            
-      });
+      if(element.primera_segunda==r) 
+      {
+        element.jugado=true;
+        this._fechaService.updateCalendario(this.token,element,element._id)
+        .subscribe((response)=>{
+          console.log(response);      
+        },(err)=>{        
+            swal(
+              'Oops...',
+              '¡Algo salio mal, pruebe despues de un momento!',
+              'error'
+            )                            
+        });
+      }     
+      
     }); 
     // this.obtenerCalendario(this.categoriaSeleccionada);   
   }

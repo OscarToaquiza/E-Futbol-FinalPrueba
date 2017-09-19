@@ -4,6 +4,7 @@ import { PersonalService } from '../../../services/personal.service';
 import { GLOBAL } from '../../../services/global';
 import { UserService } from '../../../services/user.service';
 import { EquipoService } from '../../../services/equipo.service';
+import{NgForm} from '@angular/forms';
 
 import swal from 'sweetalert2';
 
@@ -57,7 +58,10 @@ export class NuevoPersonalComponent implements OnInit, OnChanges {
     console.log(fileInput);
   }
 
-  guardarPersonal() {
+  guardarPersonal(persona:NgForm ) {
+    console.log(persona.value);
+    console.log(persona);
+    
     console.log("Personal a Guardar");
     console.log(this.personal);
     // console.log("Cedula de ciudadani valida ======> " + this.verificarCedula(this.personal.cedula_personal));
