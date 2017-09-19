@@ -126,11 +126,7 @@
         </div>
         <div class="col-12" *ngIf="verVuelta == '2'">
                 <div *ngFor="let item of segundaVuelta; let i=index">
-                        <!-- Fecha Numero: {{item.n_fecha +1 }} -->
-                        <!-- <div>
-                                        Fecha Numero: {{item.n_fecha +1 }} 
-                                        {{item.id_equipo1.nombre_equipo}} VS {{item.id_equipo2.nombre_equipo}}
-                                </div> -->
+                        
                                 <hr>
                         <div class="row" *ngIf="item.id_equipo1 != null && item.id_equipo2 != null">
                             <div class="col-2">

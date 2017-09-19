@@ -1,4 +1,5 @@
 import { element } from 'protractor';
+import * as _ from 'lodash';
 import {Pipe,PipeTransform} from '@angular/core';
 @Pipe({
     name: 'OrdenVector'
@@ -7,16 +8,8 @@ import {Pipe,PipeTransform} from '@angular/core';
   export class OrdenVector  {
           
       transform(array, args?: string) {
-        array.sort((a: any, b: any) => {
-            if (a < b) {
-              return -1;
-            } else if (a > b) {
-              return 1;
-            } else {
-              return 0;
-            }
-          });
-          return array;
+        return _.orderBy(array, ['P','GD'], ['desc','desc']);
+          
       
 
         // return array.filter(element => {                                               
