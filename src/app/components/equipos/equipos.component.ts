@@ -152,6 +152,9 @@ export class EquiposComponent implements OnInit {
     this.edicion_equipo.descripcion_equipo = equipo.descripcion_equipo;
     this.edicion_equipo.observacion_equipo = equipo.observacion_equipo;
     this.edicion_equipo.escudo_equipo = equipo.escudo_equipo;
+    this.edicion_equipo.estado_equipo = equipo.estado_equipo;
+    console.log(this.edicion_equipo.estado_equipo);
+    // this.categoriaSeleccionada = this.edicion_equipo.estado_equipo; 
     if (this.edicion_equipo.logros_equipo.length == 0) {
       this.addAndDelete = true;
     } else {
@@ -173,44 +176,99 @@ export class EquiposComponent implements OnInit {
   updateEquipo() {
     console.log("img");
     console.log(this.edicion_equipo);
-    console.log(this.identity);
     let id = this.edicion_equipo._id;
-    //Actualizar la Noticia:
-    // console.log("this.categoriaActualId=>"+this.categoriaActualId);    
-    this._equipoService.updateEquipo(this.url + 'equipo/actualizar/' + id, this.edicion_equipo, this.filesToUpload, this.token, 'escudo_equipo')
-      .then(response => {
-        if (response) {
-          console.log(response);
-          // console.log("AcutalID=>"+this.categoriaActualId+"Seleccionada=>"+this.categoriaSeleccionada);        
-          if (this.categoriaActualId != this.categoriaSeleccionada && this.categoriaSeleccionada != '' && this.categoriaSeleccionada != undefined) {
-            if (this.categoriaActualId != '' && this.categoriaActualId != undefined) {
-              this._categoriaService.pullEquipoInToCategoria(this.token, this.categoriaActualId, { codigo_equipo: this.edicion_equipo._id })
-                .subscribe(() => {
-                  console.log("Se ha quitado el equipo de su categoría actual.");
-                });
-            }
-            this._categoriaService.putEquipoInToCategoria(this.token, this.categoriaSeleccionada, { codigo_equipo: this.edicion_equipo._id })
-              .subscribe(() => {
-                console.log("Se ha añadido al equipo en una nueva categoría.");
-              });
-          }
-          swal(
-            '¡Modificado!',
-            'Los cambios se guardaron con exito.',
-            'success'
-          )
-          this.obtenerequipos();
-          this.edicion_equipo = new Equipo('', '', '', this.a, this.a, '', '', '', null, true, this.a);
-        }
 
+    if (this.categoriaActualId != this.categoriaSeleccionada &&
+      this.categoriaSeleccionada != '' && this.categoriaSeleccionada != undefined) {
+
+        this.edicion_equipo.estado_equipo = true;
+
+      if (this.categoriaActualId != '' && this.categoriaActualId != undefined) {
+
+        this._categoriaService.pullEquipoInToCategoria(this.token, this.categoriaActualId, 
+          { codigo_equipo: this.edicion_equipo._id }).subscribe( res2 => {
+            console.log('Se ha quitado el equipo de su categoría actual.');
+          });
+      }
+      this._categoriaService.putEquipoInToCategoria(this.token, this.categoriaSeleccionada, { codigo_equipo: this.edicion_equipo._id })
+        .subscribe(() => {
+          console.log('Se ha añadido al equipo en una nueva categoría.');
+          this._equipoService.
+          updateEquipo(this.url + 'equipo/actualizar/' + id, this.edicion_equipo, this.filesToUpload, this.token, 'escudo_equipo')
+          .then(response => {
+            swal(
+              '¡Modificado!',
+              'Los cambios se guardaron con exito.',
+              'success'
+            );
+            this.obtenerequipos();
+          }).catch((e) => {
+            swal(
+              'Oops...',
+              '¡Algo salio mal,puede pruebar despues de un momento!',
+              'error'
+              );
+          });
+
+        });
+    }else {
+      this._equipoService.
+      updateEquipo(this.url + 'equipo/actualizar/' + id, this.edicion_equipo, this.filesToUpload, this.token, 'escudo_equipo')
+      .then(response => {
+        swal(
+          '¡Modificado!',
+          'Los cambios se guardaron con exito.',
+          'success'
+        );
       }).catch((e) => {
         swal(
           'Oops...',
           '¡Algo salio mal,puede pruebar despues de un momento!',
           'error'
-        )
-        console.log("La noticia no pudo ser actualizada, intente nuevamente.");
+          );
       });
+    }
+
+
+
+
+    
+    //Actualizar la Noticia:
+    // console.log("this.categoriaActualId=>"+this.categoriaActualId);    
+    // this._equipoService.updateEquipo(this.url + 'equipo/actualizar/' + id, this.edicion_equipo, this.filesToUpload, this.token, 'escudo_equipo')
+    //   .then(response => {
+    //     if (response) {
+    //       console.log(response);
+    //       // console.log("AcutalID=>"+this.categoriaActualId+"Seleccionada=>"+this.categoriaSeleccionada);        
+    //       if (this.categoriaActualId != this.categoriaSeleccionada && this.categoriaSeleccionada != '' && this.categoriaSeleccionada != undefined) {
+    //         if (this.categoriaActualId != '' && this.categoriaActualId != undefined) {
+    //           this._categoriaService.pullEquipoInToCategoria(this.token, this.categoriaActualId, { codigo_equipo: this.edicion_equipo._id })
+    //             .subscribe(() => {
+    //               console.log("Se ha quitado el equipo de su categoría actual.");
+    //             });
+    //         }
+    //         this._categoriaService.putEquipoInToCategoria(this.token, this.categoriaSeleccionada, { codigo_equipo: this.edicion_equipo._id })
+    //           .subscribe(() => {
+    //             console.log("Se ha añadido al equipo en una nueva categoría.");
+    //           });
+    //       }
+    //       swal(
+    //         '¡Modificado!',
+    //         'Los cambios se guardaron con exito.',
+    //         'success'
+    //       )
+    //       this.obtenerequipos();
+    //       this.edicion_equipo = new Equipo('', '', '', this.a, this.a, '', '', '', null, false, this.a);
+    //     }
+
+    //   }).catch((e) => {
+    //     swal(
+    //       'Oops...',
+    //       '¡Algo salio mal,puede pruebar despues de un momento!',
+    //       'error'
+    //     )
+    //     console.log("La noticia no pudo ser actualizada, intente nuevamente.");
+    //   });
   }
 
   seleccionCategoria() {

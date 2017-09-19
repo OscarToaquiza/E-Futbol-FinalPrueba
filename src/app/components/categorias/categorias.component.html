@@ -3,8 +3,8 @@
     No ha selecionado una temporada.
   </h1>
 </div>
-    <button (click)="a()">PDF</button>
-    <button (click)="b()">Guardar</button>
+<button (click)="a()">PDF</button>
+<button (click)="b()">Guardar</button>
 
 <div class="container jumbotron" *ngIf="mostrar_formulario_inicial">
   <h1 class="text-center">
@@ -14,139 +14,141 @@
 </div>
 
 <div class="collapse" id="collapseExample">
-    <div class="card container">
-      <div class="card-header text-center">
-        <h3>{{titulo}}</h3>
-      </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-6 col-md-5">
-            <!-- <div class="row"> -->
-              <!-- <div class="col-md-6"> -->
-                <div class="form-group">
-                    <small class="text-muted Error">
+  <div class="card container">
+    <div class="card-header text-center">
+      <h3>{{titulo}}</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6 col-md-5">
+          <!-- <div class="row"> -->
+          <!-- <div class="col-md-6"> -->
+          <div class="form-group">
+            <small class="text-muted Error">
                         Nombre de la Categoria
-                    </small> 
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
-                    <input type="text" name="name" class="form-control" placeholder="Nombre de la Categoria" #nombre_categoria="ngModel" [(ngModel)]="categoria.nombre_categoria" required autofocus>
-                  </div>
-                </div>
-              <!-- </div> -->
-  
-            <!-- </div> -->
+                    </small>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
+              <input type="text" name="name" class="form-control" placeholder="Nombre de la Categoria" #nombre_categoria="ngModel" [(ngModel)]="categoria.nombre_categoria"
+                required autofocus>
+            </div>
           </div>
-          <div class="col-lg-3 col-md-3">
-              <!-- <div class="col-md-6"> -->
-                  <div class="form-group">
-                      <small class="text-muted Error">
+          <!-- </div> -->
+
+          <!-- </div> -->
+        </div>
+        <div class="col-lg-3 col-md-3">
+          <!-- <div class="col-md-6"> -->
+          <div class="form-group">
+            <small class="text-muted Error">
                           Número de Equipos Participantes
-                      </small> 
-                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                      <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-                      <input type="number" name="name" class="form-control" placeholder="Número de Equipos Participantes" #n_equipos_categoria="ngModel" [(ngModel)]="categoria.n_equipos_categoria" required>
-                      <div class="invalid-feedback">
-                        Please provide a valid city.
-                      </div>
-                    </div>
-                  </div>
-                <!-- </div> -->
+                      </small>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
+              <input type="number" name="name" class="form-control" placeholder="Número de Equipos Participantes" #n_equipos_categoria="ngModel"
+                [(ngModel)]="categoria.n_equipos_categoria" required>
+              <div class="invalid-feedback">
+                Please provide a valid city.
+              </div>
+            </div>
           </div>
-          <div class="col-lg-3 col-md-4">
-            <small id="activar" class="text-muted">
+          <!-- </div> -->
+        </div>
+        <div class="col-lg-3 col-md-4">
+          <small id="activar" class="text-muted">
               Marcar Segunda Vuelta en la Categoria
            </small>
-            <form id="activar" action="" class="accounttype">
-              <input id="radiouno" type="radio" [checked]="categoria.segunda_vuelta" 
-                  (click)="setProperty($event.target.checked)"
-                  name="segunda_vuelta"><label for="radiouno" class="radio" >SI</label>
-              <input id="radiodos" type="radio" [checked]="!categoria.segunda_vuelta" 
-                  (click)="setProperty(!$event.target.checked)" 
-                  name="segunda_vuelta"><label for="radiodos" class="radio">NO</label>
-          </form> 
-          </div>
-  
+          <form id="activar" action="" class="accounttype">
+            <input id="radiouno" type="radio" [checked]="categoria.segunda_vuelta" (click)="setProperty($event.target.checked)" name="segunda_vuelta">
+            <label
+              for="radiouno" class="radio">SI</label>
+              <input id="radiodos" type="radio" [checked]="!categoria.segunda_vuelta" (click)="setProperty(!$event.target.checked)" name="segunda_vuelta">
+              <label
+                for="radiodos" class="radio">NO</label>
+          </form>
         </div>
-        <div class="row">
-          <div class=" col-lg-12 form-group">
-            <small class="text-muted Error">
+
+      </div>
+      <div class="row">
+        <div class=" col-lg-12 form-group">
+          <small class="text-muted Error">
                 Observación
-            </small> 
+            </small>
           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
             <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-            <input type="text" name="name" class="form-control" placeholder="Observaciones Generales" #observacion_categoria="ngModel" [(ngModel)]="categoria.observacion_categoria" required>
+            <input type="text" name="name" class="form-control" placeholder="Observaciones Generales" #observacion_categoria="ngModel"
+              [(ngModel)]="categoria.observacion_categoria" required>
             <div class="invalid-feedback">
               Please provide a valid city.
             </div>
           </div>
         </div>
-        </div>
-  
       </div>
-      <div class="card-footer">
-        <button *ngIf="titulo == 'Nueva Categoria'" class="btn btn-success pull-left" type="submit" (click)="guardarcategoria()">Guardar Nueva Categoria </button>
-        <button *ngIf="titulo == 'Modificar Categoria'" class="btn btn-success pull-left" type="submit" (click)="ModificarCategoria()">{{titulo}}</button>
-        <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
-        <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample"
-          >Cancelar</a>
-      </div>
+
+    </div>
+    <div class="card-footer">
+      <button *ngIf="titulo == 'Nueva Categoria'" class="btn btn-success pull-left" type="submit" (click)="guardarcategoria()">Guardar Nueva Categoria </button>
+      <button *ngIf="titulo == 'Modificar Categoria'" class="btn btn-success pull-left" type="submit" (click)="ModificarCategoria()">{{titulo}}</button>
+      <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
+      <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">Cancelar</a>
     </div>
   </div>
+</div>
 <!-- CARDS DE LA CATEGORIAS -->
 <div class="container marketing">
-    <div class="row">
-        <div class="col-lg-4 equipo" *ngFor="let categoriaTemporada of arrayCategoria">
-          <div class="card">
-            <div class="card-header">
-              <h3>{{categoriaTemporada.nombre_categoria}}</h3>
+  <div class="row">
+    <div class="col-lg-4 equipo" *ngFor="let categoriaTemporada of arrayCategoria">
+      <div class="card">
+        <div class="card-header">
+          <h3>{{categoriaTemporada.nombre_categoria}}</h3>
+        </div>
+        <div class="card-block">
+          <p class="card-text">
+            Número de Equipos Participantes: {{categoriaTemporada.n_equipos_categoria}} <br> Número de Equipos Registrados
+            : {{categoriaTemporada.codigo_equipo.length}} <br>
+          </p>
+          <h3>Cupos Diponibles: ({{categoriaTemporada.n_equipos_categoria - categoriaTemporada.codigo_equipo.length}})</h3>
+          <i class="fa fa-flag" aria-hidden="true"></i>
+          <p class="card-text">Descripción: {{categoriaTemporada.observacion_categoria}}</p>
+          <p><strong>Equipos Participantes:</strong></p>
+          <div class="row margenes">
+            <div class="col-6" *ngFor="let item of (categoriaTemporada.codigo_equipo)">
+              <div>
+                <a href="">{{item.nombre_equipo}}</a>
+              </div>
             </div>
-            <div class="card-block">
-              <p class="card-text">
-                  Número de Equipos Participantes: {{categoriaTemporada.n_equipos_categoria}} <br>
-                  Número de Equipos Registrados : {{categoriaTemporada.codigo_equipo.length}} <br>
-                </p>
-                  <h3>Cupos Diponibles: ({{categoriaTemporada.n_equipos_categoria - categoriaTemporada.codigo_equipo.length}})</h3> 
-                <i class="fa fa-flag" aria-hidden="true"></i>
-              <p class="card-text">Descripción: {{categoriaTemporada.observacion_categoria}}</p>
-              
-            </div>
-            <div class="card-footer">
-              <a *ngIf="identity" class="btn btn-warning" role="button" 
-              data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"
-              (click)="DatsoModificarCategoria(categoriaTemporada,categoriaTemporada._id)"
-              >Modificar</a>
-              <button  *ngIf="identity"  class="btn btn-success" type="submit" (click)="generarCalendario(categoriaTemporada,categoriaTemporada._id)">Generar Calendario</button>
-              <!-- <a *ngIf="identity" class="btn btn-danger pull-right" href="#" role="button">Eliminar</a> -->
-            </div>
-          </div>
-        </div>        
-
-      <pdf-viewer [src]="pdf" 
-      [original-size]="true"
-      [zoom]="1"
-      ></pdf-viewer>
-      
-      <div class="col-lg-4 equipo" *ngIf="mostrar_formulario_inicial && identity">
-        <div class="card" id="prueba">
-          <div class="card-header">
-            <h3>Agregar una Nueva Categoria o Division</h3>
-          </div>
-          <div class="card-block">
-              <p class="card-text">Click sobre la Imagen para empezar</p>
-              <h2><i class="fa fa-hand-o-down" aria-hidden="true"></i></h2>
-            <a data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
-                                                     <img id="addequipo" class="rounded-circle imgcenter" src="assets/popper/docs/images/nuevo.jpg" alt="Generic placeholder image" width="140" height="140">
-                                                    </a>
-          </div>
-          <br>
-          <div class="card-footer">
-            <small class="text-muted">Todas las categorias creadas perteneceran a la temporada {{temporada_actual.nombre_temporada}}</small>
           </div>
         </div>
+        <div class="card-footer">
+          <a *ngIf="identity" class="btn btn-warning" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
+            aria-controls="collapseExample" (click)="DatsoModificarCategoria(categoriaTemporada,categoriaTemporada._id)">Modificar</a>
+          <button *ngIf="identity" class="btn btn-success" type="submit" (click)="generarCalendario(categoriaTemporada,categoriaTemporada._id)">Generar Calendario</button>
+          <!-- <a *ngIf="identity" class="btn btn-danger pull-right" href="#" role="button">Eliminar</a> -->
+        </div>
       </div>
-      <!-- /.col-lg-4 -->
     </div>
-    <!-- /.row -->
+
+    <pdf-viewer [src]="pdf" [original-size]="true" [zoom]="1"></pdf-viewer>
+
+    <div class="col-lg-4 equipo" *ngIf="mostrar_formulario_inicial && identity">
+      <div class="card" id="prueba">
+        <div class="card-header">
+          <h3>Agregar una Nueva Categoria o Division</h3>
+        </div>
+        <div class="card-block">
+          <p class="card-text">Click sobre la Imagen para empezar</p>
+          <h2><i class="fa fa-hand-o-down" aria-hidden="true"></i></h2>
+          <a data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                                                     <img id="addequipo" class="rounded-circle imgcenter" src="assets/popper/docs/images/nuevo.jpg" alt="Generic placeholder image" width="140" height="140">
+                                                    </a>
+        </div>
+        <br>
+        <div class="card-footer">
+          <small class="text-muted">Todas las categorias creadas perteneceran a la temporada {{temporada_actual.nombre_temporada}}</small>
+        </div>
+      </div>
+    </div>
+    <!-- /.col-lg-4 -->
   </div>
-
-
+  <!-- /.row -->
+</div>

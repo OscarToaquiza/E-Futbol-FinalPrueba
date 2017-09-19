@@ -49,6 +49,7 @@ import { ListaTemporadaComponent } from './components/temporada/lista-temporada/
 import { VerTemporadaComponent } from './components/temporada/ver-temporada/ver-temporada.component';
 import { EditarTemporadaComponent } from './components/temporada/ver-temporada/editar-temporada.component';
 import {DetalleEquipoComponent} from './components/equipos/detalle-equipo/detalle-equipo.component';
+import { CalendarioGeneralComponent } from './components/calendario-general/calendario-general.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import {DetalleEquipoComponent} from './components/equipos/detalle-equipo/detall
     ListaTemporadaComponent,
     VerTemporadaComponent,
     EditarTemporadaComponent,
-    DetalleEquipoComponent
+    DetalleEquipoComponent,
+    CalendarioGeneralComponent
   ],
   imports: [
     BrowserModule,

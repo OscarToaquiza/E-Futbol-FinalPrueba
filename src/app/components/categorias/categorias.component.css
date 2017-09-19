@@ -22,3 +22,11 @@ IMG.imgcenter{
     margin-right: auto;
     border:none;
     }
+
+.margenes{
+    padding-left: 10px;
+    padding-right: 10px;
+}   
+.bg-primary {
+    background-color: #039fed!important;
+} 

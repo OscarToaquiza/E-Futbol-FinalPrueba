@@ -3,7 +3,7 @@ export class Fecha{
       public _id: string,
       public n_fecha:number,
       public estado_fecha:boolean,
-      public fecha:string,
+      public fecha: Date,
       public hora:string,      
       public id_categoria:string,
       public id_estadio:string,      

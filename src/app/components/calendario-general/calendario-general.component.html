@@ -1,0 +1,147 @@
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-lg-8">
+            <select class="form-control" (change)="onChangeCategoria($event)">
+              <option selected>Seleccione la Categoria a la que pertenece</option>
+              <option [ngValue]="categoria._id"  *ngFor="let categoria of arrayCategoria">{{categoria.nombre_categoria}}</option>                        
+            </select>
+        </div>
+        <div class="col-lg-4" *ngIf="VerCalendario && segundaVuelta != ''">
+            <button class="btn btn-primary" (click)="calendarioVuelta('1')">Vuelta 1</button>
+            <button class="btn btn-primary" (click)="calendarioVuelta('2')">Vuelta 2</button>
+        </div>
+        <div class="col-lg4" *ngIf="!VerCalendario">
+            <h3>Calendario de Encuentros</h3>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row jumbotron" *ngIf="!VerCalendario">
+        <h1>
+            Sección Calendarios
+        </h1>
+        <h2>
+            Seleccione una Categoria para ver los partidos jugados con sus respectivos resultados. Ademas podra ver los proximos partidos
+            que se jugarán.
+        </h2>
+    </div>
+
+    <div class="row jumbotron" *ngIf="VerCalendario">
+
+        <div class="col-12" *ngIf="verVuelta == '1'">
+            <div *ngFor="let item of primeraVuelta; let i=index">
+                Fecha Numero: {{item.n_fecha +1 }}
+                <!-- <div>
+                                Fecha Numero: {{item.n_fecha +1 }} 
+                                {{item.id_equipo1.nombre_equipo}} VS {{item.id_equipo2.nombre_equipo}}
+                        </div> -->
+                <div class="row" *ngIf="item.id_equipo1 != null && item.id_equipo2 != null">
+                    <div class="col-2">
+                        <h2 class="centrar">
+                            {{item.id_equipo1.nombre_equipo}}
+                        </h2>
+                    </div>
+                    <div class="col-2">
+                        <img *ngIf="(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo1.escudo_equipo)}}"
+                            alt="Generic placeholder image" width="140" height="140">
+                        <img *ngIf="!(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
+                            alt="Generic placeholder image" width="140" height="140">
+                    </div>
+                    <div class="col-lg-1">
+                        <h1 class="centrar">
+                            <FONT FACE="arial" SIZE=10>0</FONT>
+                        </h1>
+                    </div>
+                    <div class="col-1">
+                        <h1 class="centrar">
+                            <FONT FACE="arial" SIZE=10>-</FONT>
+                        </h1>
+                    </div>
+                    <div class="col-1">
+                        <h1 class="centrar">
+                            <FONT FACE="arial" SIZE=10>0</FONT>
+                        </h1>
+                    </div>
+                    <div class="col-2">
+                        <img *ngIf="(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo2.escudo_equipo)}}"
+                            alt="Generic placeholder image" width="140" height="140">
+                        <img *ngIf="!(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
+                            alt="Generic placeholder image" width="140" height="140">
+                    </div>
+                    <div class="col-2">
+                        <h2 class="centrar">
+                            {{item.id_equipo2.nombre_equipo}}
+                        </h2>
+                    </div>
+                    <div class="col-1">
+                        <p *ngIf="(item.estado_fecha)">
+                            Partido Finalizado
+                        </p>
+                        <p *ngIf="!(item.estado_fecha)">
+                            Partido Por Jugar
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12" *ngIf="verVuelta == '2'">
+                <div *ngFor="let item of segundaVuelta; let i=index">
+                        Fecha Numero: {{item.n_fecha +1 }}
+                        <!-- <div>
+                                        Fecha Numero: {{item.n_fecha +1 }} 
+                                        {{item.id_equipo1.nombre_equipo}} VS {{item.id_equipo2.nombre_equipo}}
+                                </div> -->
+                        <div class="row" *ngIf="item.id_equipo1 != null && item.id_equipo2 != null">
+                            <div class="col-2">
+                                <h2 class="centrar">
+                                    {{item.id_equipo1.nombre_equipo}}
+                                </h2>
+                            </div>
+                            <div class="col-2">
+                                <img *ngIf="(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo1.escudo_equipo)}}"
+                                    alt="Generic placeholder image" width="140" height="140">
+                                <img *ngIf="!(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
+                                    alt="Generic placeholder image" width="140" height="140">
+                            </div>
+                            <div class="col-lg-1">
+                                <h1 class="centrar">
+                                    <FONT FACE="arial" SIZE=10>0</FONT>
+                                </h1>
+                            </div>
+                            <div class="col-1">
+                                <h1 class="centrar">
+                                    <FONT FACE="arial" SIZE=10>-</FONT>
+                                </h1>
+                            </div>
+                            <div class="col-1">
+                                <h1 class="centrar">
+                                    <FONT FACE="arial" SIZE=10>0</FONT>
+                                </h1>
+                            </div>
+                            <div class="col-2">
+                                <img *ngIf="(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo2.escudo_equipo)}}"
+                                    alt="Generic placeholder image" width="140" height="140">
+                                <img *ngIf="!(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
+                                    alt="Generic placeholder image" width="140" height="140">
+                            </div>
+                            <div class="col-2">
+                                <h2 class="centrar">
+                                    {{item.id_equipo2.nombre_equipo}}
+                                </h2>
+                            </div>
+                            <div class="col-1">
+                                <p *ngIf="(item.estado_fecha)">
+                                    Partido Finalizado
+                                </p>
+                                <p *ngIf="!(item.estado_fecha)">
+                                    Partido Por Jugar
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+
+
+    </div>

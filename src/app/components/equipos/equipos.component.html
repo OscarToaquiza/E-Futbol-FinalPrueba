@@ -162,7 +162,7 @@
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                   <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-cog"></i></div>
                   <select class="form-control" [(ngModel)]="categoriaSeleccionada">
-                    <option selected>Seleccione la Categoria a la que pertenece</option>
+                    <option selected >Seleccione la Categoria a la que pertenece</option>
                     <option [ngValue]="categoria._id"  *ngFor="let categoria of categorias">{{categoria.nombre_categoria}}</option>                        
                   </select>
                 </div>
@@ -302,8 +302,13 @@
                   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-cog"></i></div>
                     <select class="form-control" [(ngModel)]="categoriaSeleccionada">
-                        <option selected >Seleccione la Categoria a la que pertenece</option>
-                        <option [ngValue]="categoria._id" [disabled]="categoriaActualId==categoria._id" *ngFor="let categoria of categorias">{{categoria.nombre_categoria}}<span *ngIf="categoriaActualId==categoria._id">(Categoria Actual)</span></option>                        
+                        <option>Seleccione la Categoria a la que pertenece</option>
+                        <option [ngValue]="categoria._id" 
+                        [disabled]="categoriaActualId==categoria._id" *ngFor="let categoria of categorias">
+                             {{categoria.nombre_categoria}}
+                          <span *ngIf="categoriaActualId==categoria._id">(Categoria Actual)
+                          </span>
+                        </option>                        
                       </select>
                   </div>
                 </div>
