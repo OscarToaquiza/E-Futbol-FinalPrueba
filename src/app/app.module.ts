@@ -50,6 +50,9 @@ import { VerTemporadaComponent } from './components/temporada/ver-temporada/ver-
 import { EditarTemporadaComponent } from './components/temporada/ver-temporada/editar-temporada.component';
 import {DetalleEquipoComponent} from './components/equipos/detalle-equipo/detalle-equipo.component';
 
+// PIPES
+import {OrdenVector} from './pipes/orden-vector';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,7 +78,8 @@ import {DetalleEquipoComponent} from './components/equipos/detalle-equipo/detall
     ListaTemporadaComponent,
     VerTemporadaComponent,
     EditarTemporadaComponent,
-    DetalleEquipoComponent
+    DetalleEquipoComponent,
+    OrdenVector
   ],
   imports: [
     BrowserModule,
