@@ -11,6 +11,10 @@ import { Categoria } from '../../models/categoria.model';
 import { Fecha } from './../../models/fecha.model';
 import { Temporada } from '../../models/temporada.models';
 
+import { EstadioService } from '../../services/estadio.service';
+
+import { Estadio } from '../../models/estadio.model';
+
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-calendario',
@@ -34,17 +38,44 @@ export class CalendarioComponent implements OnInit {
   public generarSelectJugadoresTA2: any;
   public generarSelectJugadoresTR2: any;
   public categoriaSeleccionada:any;
+
+  public estadios: Estadio[];
+  public estadioSelec: string;
+
+  public id_Habilitar: String;
+  public partidoJugado= false;
   constructor(
     private _userService: UserService,
     private _temporadaService: TemporadaService,
     private _categoriaService: CategoriaService,
-    private _fechaService: FechaService
+    private _fechaService: FechaService,
+    private _estadioService: EstadioService
   ) {    
     this.token = this._userService.getToken();          
    }
 
    ngOnInit() {
     this.obtenerTemporadas();
+    this.obtenerEstadios();
+  }
+
+  obtenerEstadios(){
+    this._estadioService.getEstadios().subscribe(
+      response =>{
+        if(!response){
+          console.log("Error al traer estadios");
+        }else{
+          this.estadios = response;
+        }
+      },
+      error =>{
+  
+      });
+  }
+
+  selectEstadio(estadioSeleccionado){
+    console.log(estadioSeleccionado);
+    this.estadioSelec=estadioSeleccionado;
   }
 
   obtenerTemporadas() {
@@ -188,23 +219,71 @@ export class CalendarioComponent implements OnInit {
 
   guardarFecha(fechas,r){
     console.log(fechas);
-    fechas.forEach(element => {
-      if(element.primera_segunda==r) 
-      {
-        element.jugado=true;
-        this._fechaService.updateCalendario(this.token,element,element._id)
-        .subscribe((response)=>{
-          console.log(response);      
-        },(err)=>{        
-            swal(
-              'Oops...',
-              '¡Algo salio mal, pruebe despues de un momento!',
-              'error'
-            )                            
-        });
-      }     
+    // fechas.forEach(element => {
+    //   if(element.primera_segunda==r) 
+    //   {
+    //     element.jugado=true;
+    //     this._fechaService.updateCalendario(this.token,element,element._id)
+    //     .subscribe((response)=>{
+    //       console.log(response);      
+    //     },(err)=>{        
+    //         swal(
+    //           'Oops...',
+    //           '¡Algo salio mal, pruebe despues de un momento!',
+    //           'error'
+    //         )                            
+    //     });
+    //   }     
       
-    }); 
+    // }); 
     // this.obtenerCalendario(this.categoriaSeleccionada);   
+  }
+
+  HabilitarResultados(id){
+    this.id_Habilitar = id;
+    this.partidoJugado = true;
+  }
+  DesabilitarResultados(){
+    this.id_Habilitar = '';
+    this.partidoJugado = false;
+  }
+
+  guardarPartido(partido,estadio){
+    if(this.estadioSelec == ''){
+      partido.id_estadio = estadio;
+    }else{
+      partido.id_estadio = this.estadioSelec;
+    }
+    partido.estado_fecha = this.partidoJugado;
+    partido.jugado = this.partidoJugado;
+    console.log(partido);
+    this._fechaService.updateCalendario(this.token,partido,partido._id).subscribe(
+      response =>{
+        if(!response){
+          swal(
+             'Error',
+             '¡El servidor no responde!',
+             'error'
+             );
+        }else{
+            swal(
+              'Guardado',
+              'Exitosamente',
+              'success'
+            );
+            this.partidoJugado = false;
+            this.estadioSelec = '';
+            console.log(response);
+        }
+      },
+      error =>{
+
+      }
+    );
+    // let fechaModificada: Fecha;
+    // fechaModificada = partido;
+    // fechaModificada.estado_fecha = true;
+    // fechaModificada.id_estadio = this.estadioSelec;
+    // console.log(fechaModificada);
   }
 }

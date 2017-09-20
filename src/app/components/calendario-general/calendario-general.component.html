@@ -31,8 +31,21 @@
     <div class="row jumbotron" *ngIf="VerCalendario">
 
         <div class="col-12" *ngIf="verVuelta == '1'">
+            <!-- <div class="card">
+                    <div class="card-header">
+
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+
+                    <div class="card-footer">
+                    </div>
+            </div> -->
             <div *ngFor="let item of primeraVuelta; let i=index">
-                Fecha Numero: {{item.n_fecha +1 }}
+                <!-- Fecha Numero: {{item.n_fecha +1 }} -->
+                Partido Número: {{i+1}}
+                <hr>
                 <!-- <div>
                                 Fecha Numero: {{item.n_fecha +1 }} 
                                 {{item.id_equipo1.nombre_equipo}} VS {{item.id_equipo2.nombre_equipo}}
@@ -51,7 +64,7 @@
                     </div>
                     <div class="col-lg-1">
                         <h1 class="centrar">
-                            <FONT FACE="arial" SIZE=10>0</FONT>
+                            <FONT FACE="arial" SIZE=10>{{item.goles_equipo1.length}}</FONT>
                         </h1>
                     </div>
                     <div class="col-1">
@@ -61,7 +74,7 @@
                     </div>
                     <div class="col-1">
                         <h1 class="centrar">
-                            <FONT FACE="arial" SIZE=10>0</FONT>
+                            <FONT FACE="arial" SIZE=10>{{item.goles_equipo2.length}}</FONT>
                         </h1>
                     </div>
                     <div class="col-2">
@@ -83,16 +96,38 @@
                             Partido Por Jugar
                         </p>
                     </div>
+<!-- Otra Row -->
+                    <div class="col-4">
+                        <p class="text-right" *ngFor="let gol of (item.goles_equipo1)" >
+                                {{gol.nombre_personal}} {{gol.apellido_personal}} <i class="fa fa-futbol-o" aria-hidden="true"></i><br>
+                        </p>
+                    </div>
+                    <div class="col-3 text-center">
+                        <p *ngIf="!(item.fecha)">
+                            <strong>Fecha: </strong> No definida
+                            <strong>Hora: </strong> --:--
+                            <strong>Estadio: </strong> No definido
+                        </p>
+                        <p *ngIf="(item.fecha)"> 
+                        <strong>Fecha: </strong>{{item.fecha | date}}
+                        <strong>Hora: </strong> {{item.hora}}
+                        <strong>Estadio: </strong> <a href="">{{item.id_estadio.nombre_estadio}}</a>
+                    </p>
+                    </div>
+                    <div class="col-4">
+                            <p *ngFor="let gol of (item.goles_equipo2)" >
+                                    <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                                    {{gol.nombre_personal}} {{gol.apellido_personal}}
+                                    <br>
+                            </p>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-12" *ngIf="verVuelta == '2'">
                 <div *ngFor="let item of segundaVuelta; let i=index">
-                        Fecha Numero: {{item.n_fecha +1 }}
-                        <!-- <div>
-                                        Fecha Numero: {{item.n_fecha +1 }} 
-                                        {{item.id_equipo1.nombre_equipo}} VS {{item.id_equipo2.nombre_equipo}}
-                                </div> -->
+                        
+                                <hr>
                         <div class="row" *ngIf="item.id_equipo1 != null && item.id_equipo2 != null">
                             <div class="col-2">
                                 <h2 class="centrar">
@@ -107,7 +142,7 @@
                             </div>
                             <div class="col-lg-1">
                                 <h1 class="centrar">
-                                    <FONT FACE="arial" SIZE=10>0</FONT>
+                                    <FONT FACE="arial" SIZE=10>{{item.goles_equipo1.length}}</FONT>
                                 </h1>
                             </div>
                             <div class="col-1">
@@ -117,7 +152,7 @@
                             </div>
                             <div class="col-1">
                                 <h1 class="centrar">
-                                    <FONT FACE="arial" SIZE=10>0</FONT>
+                                    <FONT FACE="arial" SIZE=10>{{item.goles_equipo2.length}}</FONT>
                                 </h1>
                             </div>
                             <div class="col-2">
@@ -139,7 +174,35 @@
                                     Partido Por Jugar
                                 </p>
                             </div>
+
+                            <!-- Otra Row -->
+                        <div class="col-4">
+                                <p class="text-right" *ngFor="let gol of (item.goles_equipo1)" >
+                                        {{gol.nombre_personal}} {{gol.apellido_personal}} <i class="fa fa-futbol-o" aria-hidden="true"></i><br>
+                                </p>
+                            </div>
+                            <div class="col-3 text-center">
+                                <p *ngIf="!(item.fecha)">
+                                    <strong>Fecha: </strong> No definida
+                                    <strong>Hora: </strong> --:--
+                                    <strong>Estadio: </strong> No definido
+                                </p>
+                                <p *ngIf="(item.fecha)"> 
+                                <strong>Fecha: </strong>{{item.fecha | date}}
+                                <strong>Hora: </strong> {{item.hora}}
+                                <strong>Estadio: </strong> <a href="">{{item.id_estadio.nombre_estadio}}</a>
+                            </p>
+                            </div>
+                            <div class="col-4">
+                                    <p *ngFor="let gol of (item.goles_equipo2)" >
+                                            <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                                            {{gol.nombre_personal}} {{gol.apellido_personal}}
+                                            <br>
+                                    </p>
+                            </div>
                         </div>
+
+                        
                     </div>
         </div>
 

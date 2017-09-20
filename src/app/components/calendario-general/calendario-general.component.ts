@@ -33,7 +33,7 @@ export class CalendarioGeneralComponent implements OnInit {
   public primeraVuelta= new Array();
   public segundaVuelta= new Array();
 
-  public fechasPriemraVuelta: Fecha[];
+  // public fechasPriemraVuelta: Fecha[];
 
   public verVuelta = '1';
 
@@ -134,20 +134,22 @@ export class CalendarioGeneralComponent implements OnInit {
                     // console.log(ele.primera_segunda);
                     if(ele.primera_segunda == 1){
                       // console.log("Si");
-                      this.primeraVuelta[val1] = ele;
-                      val1++;
+                      if(ele.id_equipo1 != null && ele.id_equipo2 !=null){
+                        this.primeraVuelta[val1] = ele;
+                        val1++;
+                      }
                     }else{
                       // console.log("No");
-                      this.segundaVuelta[val2] = ele;
-                      val2++;
+                      if(ele.id_equipo1 != null && ele.id_equipo2 !=null){
+                        this.segundaVuelta[val2] = ele;
+                        val2++;
+                      }
                     }
                   });
                 });
-                this.fechasPriemraVuelta = this.primeraVuelta;
-              console.log('Primera Vuelta: ' + this.fechasPriemraVuelta);
+                // this.fechasPriemraVuelta = this.primeraVuelta;
+              console.log('Primera Vuelta: ' + this.primeraVuelta);
               console.log('Segunda Vuelta: ' + this.segundaVuelta);
-              console.log('valor de equipo 2: ' + this.primeraVuelta[0].id_equipo2);
-              console.log('valor de equipo 1: ' + this.primeraVuelta[0].id_equipo1.nombre_equipo);
               }else{
                 console.log("Un sola vuelta");
                 this.verVuelta = '1';
@@ -160,10 +162,11 @@ export class CalendarioGeneralComponent implements OnInit {
                     val3++;
                   });
                 });
-                this.fechasPriemraVuelta = this.primeraVuelta;
+                // this.fechasPriemraVuelta = this.primeraVuelta;
                 this.segundaVuelta.length = 0;
-                console.log('Primera Vuelta: ' + this.fechasPriemraVuelta);
+                console.log('Primera Vuelta: ' + this.primeraVuelta);
                 console.log('Segunda Vuelta: ' + this.segundaVuelta);
+
               }
               // console.log(this.fechaAgrupada[0].Array[1]);
             }else{
