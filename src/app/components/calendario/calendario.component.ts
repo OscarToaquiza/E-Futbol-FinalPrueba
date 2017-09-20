@@ -22,6 +22,9 @@ import swal from 'sweetalert2';
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent implements OnInit {
+
+  public val= 'Seleccione';
+
   public token;
   public temporada_actual: Temporada;
   public fecha:any;
@@ -44,6 +47,21 @@ export class CalendarioComponent implements OnInit {
 
   public id_Habilitar: String;
   public partidoJugado= false;
+
+  public VerCalendario= false;
+
+  public primeraVuelta= new Array();
+  public segundaVuelta= new Array();
+
+  public primeraVueltaClasificada : any;
+  public fechaAgrupadaSegundaVuelta: any;
+
+  // public primeraVuelta= new Array(new Array());
+  // public segundaVuelta= new Array(new Array());
+
+  public verVuelta = '1';
+  public url: string;
+
   constructor(
     private _userService: UserService,
     private _temporadaService: TemporadaService,
@@ -141,7 +159,7 @@ export class CalendarioComponent implements OnInit {
       {        
         console.log(e.target.selectedIndex);
         let index=e.target.selectedIndex-1;        
-          this._fechaService.getFechaByIdCategoria(this.arrayCategoria[index]._id)
+          this._fechaService.getFechaByIdCategoriaAdministrador(this.arrayCategoria[index]._id)
           .subscribe((res)=>{            
             if(res){
               this.fecha=res;
@@ -157,6 +175,7 @@ export class CalendarioComponent implements OnInit {
               //  console.log("##");
               //  console.log(_.values(_.groupBy(this.fechaAgrupadaT1,'n_fecha')));
               // console.log(this.fecha.fechasEncontradas);
+              console.log(this.fecha.fechasEncontradas);
               this.fechaAgrupada=_.values(_.groupBy(this.fecha.fechasEncontradas,'n_fecha'));
               console.log(this.fechaAgrupada);
               // console.log(a); 
@@ -174,6 +193,48 @@ export class CalendarioComponent implements OnInit {
               // .toPairs()
               // .map(item => _.zipObject(['divisionName','divisionStandings'],item))
               // .value();
+
+              this.VerCalendario = true;
+              // console.log(this.fechaAgrupada);
+              console.log('Hay segunda Vuelta? ' + this.arrayCategoria[index].segunda_vuelta);
+              let val1 = 0;
+              let val2 = 0;
+
+              //Reiniciar los array
+              this.primeraVuelta = new Array();
+              this.segundaVuelta = new Array();
+
+              if( this.arrayCategoria[index].segunda_vuelta == true){
+                this.fechaAgrupada.forEach(element => {
+                  element.forEach(ele => {
+                    if(ele.primera_segunda == 1){
+                      if(ele.id_equipo1 != null && ele.id_equipo2 !=null){
+                        this.primeraVuelta[val1] = ele;
+                        val1++;
+                      }
+                    }else{
+                      if(ele.id_equipo1 != null && ele.id_equipo2 !=null){
+                        this.segundaVuelta[val2] = ele;
+                        val2++;
+                      }
+                    }
+                  });
+                });
+                this.primeraVueltaClasificada = _.values(_.groupBy(this.primeraVuelta, 'n_fecha'));
+                this.fechaAgrupadaSegundaVuelta = _.values(_.groupBy(this.segundaVuelta, 'n_fecha'));
+                console.log(this.primeraVueltaClasificada);
+                console.log(this.fechaAgrupadaSegundaVuelta);
+              this.fechaAgrupada = this.primeraVueltaClasificada;
+              console.log('Primera Vuelta: ' + this.primeraVuelta);
+              console.log('Segunda Vuelta: ' + this.segundaVuelta);
+              }else{
+                console.log("Un sola vuelta");
+                this.verVuelta = '1';
+                console.log('Primera Vuelta: ' + this.primeraVuelta);
+                console.log('Segunda Vuelta: ' + this.segundaVuelta);
+
+              }
+
             }else{
               console.log("Fechas no encontradas");
             }
@@ -248,12 +309,14 @@ export class CalendarioComponent implements OnInit {
     this.partidoJugado = false;
   }
 
-  guardarPartido(partido,estadio){
+  guardarPartido(partido,estadio,fecha){
+    console.log("estadio:" + estadio._id);
     if(this.estadioSelec == ''){
       partido.id_estadio = estadio;
     }else{
       partido.id_estadio = this.estadioSelec;
     }
+    partido.fecha = fecha;
     partido.estado_fecha = this.partidoJugado;
     partido.jugado = this.partidoJugado;
     console.log(partido);
@@ -285,5 +348,9 @@ export class CalendarioComponent implements OnInit {
     // fechaModificada.estado_fecha = true;
     // fechaModificada.id_estadio = this.estadioSelec;
     // console.log(fechaModificada);
+  }
+
+  calendarioVuelta(value: string){
+    this.verVuelta = value;
   }
 }

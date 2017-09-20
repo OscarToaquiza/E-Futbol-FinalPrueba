@@ -118,9 +118,7 @@ export class CalendarioGeneralComponent implements OnInit {
           .subscribe((res)=>{            
             if(res){
               this.fecha=res;
-              
-              console.log(":D");              
-              
+              console.log(":D");
               this.fechaAgrupada = _.values(_.groupBy(this.fecha.fechasEncontradas,'n_fecha'));
               this.VerCalendario = true;
               console.log(this.fechaAgrupada);
@@ -185,9 +183,7 @@ export class CalendarioGeneralComponent implements OnInit {
                 'error'
               )
             }
-                        
-          });                   
-            
+          });
       }else{
         console.log("No se ha seleccionado una categoria.");        
       }
