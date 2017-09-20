@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule} from '@angular/http';
@@ -35,7 +36,7 @@ import {PersonalService} from './services/personal.service';
 import {CategoriaService} from './services/categoria.service';
 import {EstadioService} from './services/estadio.service';
 import {FechaService} from './services/fecha.service';
-
+import { SancionService } from './services/sancion.service';
 //rutas
 import{RoutingModule} from './app.routing';
 import { CategoriasComponent } from './components/categorias/categorias.component';
@@ -50,9 +51,11 @@ import { VerTemporadaComponent } from './components/temporada/ver-temporada/ver-
 import { EditarTemporadaComponent } from './components/temporada/ver-temporada/editar-temporada.component';
 import {DetalleEquipoComponent} from './components/equipos/detalle-equipo/detalle-equipo.component';
 import { CalendarioGeneralComponent } from './components/calendario-general/calendario-general.component';
+import { SancionComponent } from './components/sancion/sancion.component';
 
 // PIPES
 import {OrdenVector} from './pipes/orden-vector';
+
 
 @NgModule({
   declarations: [
@@ -81,7 +84,9 @@ import {OrdenVector} from './pipes/orden-vector';
     EditarTemporadaComponent,
     DetalleEquipoComponent,
     CalendarioGeneralComponent,
-    OrdenVector
+    SancionComponent,
+    OrdenVector,
+    SancionComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +97,7 @@ import {OrdenVector} from './pipes/orden-vector';
   
   ],
   providers: [
-    UserService,NoticiaService,EquipoService,TemporadaService,PersonalService,CategoriaService,EstadioService,FechaService,
+    UserService,NoticiaService,EquipoService,TemporadaService,PersonalService,CategoriaService,EstadioService,FechaService,SancionService,
     //para la fecha en español
     {provide:LOCALE_ID,useValue:'es'}
   ],

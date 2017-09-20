@@ -1,3 +1,4 @@
+
 import{NgModule} from '@angular/core';
 import{RouterModule, Routes} from '@angular/router';
 import{HomeComponent} from './components/home/home.component';
@@ -10,7 +11,7 @@ import{EstadiosComponent} from './components/estadios/estadios.component';
 import{CategoriasComponent} from './components/categorias/categorias.component';
 import{JugadoresComponent} from './components/jugadores/jugadores.component';
 import {DetalleEquipoComponent} from './components/equipos/detalle-equipo/detalle-equipo.component';
-
+import { SancionComponent } from './components/sancion/sancion.component';
 
 
 // import{MainComponent} from './components/main/main.component';
@@ -31,6 +32,7 @@ const adminRoutes:Routes=[
   {path:'jugadores',component:JugadoresComponent},
   {path:'detalle-equipo/:equi',component:DetalleEquipoComponent},
   {path:'calendario-general', component: CalendarioGeneralComponent},
+  {path:'sancion',component:SancionComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},
   {path:'**',component:HomeComponent}
 ];
