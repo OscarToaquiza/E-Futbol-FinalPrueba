@@ -166,11 +166,11 @@
                             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                 <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-free-code-camp" aria-hidden="true"></i></div>
                                 <!-- <label for="exampleFormControlSelect1">Example select</label> -->
-                                <select class="form-control" id="a" 
+                                <select [disabled]="id_Habilitar != encuentros._id" [(ngModel)]="fechaAgrupada[i][k].codigo_sancion_equipo1"    [id]="i"  class="form-control" 
                                 >
-                                    <!-- <option value="undefined" disabled selected hidden>Seleccione el Estadio</option> -->
-                                    <!-- <option value="null" disabled selected hidden>Seleccione el Estadio</option> -->
-                                    <!-- <option *ngFor="let est of estadios" [value]="est._id" >{{est.nombre_estadio}}</option> -->
+                                    <option value="undefined" disabled selected hidden>Seleccione la sancion</option>
+                                    <option  disabled selected hidden>Asignar sanción</option>
+                                    <option *ngFor="let sancion of sanciones" [value]="sancion._id" >{{sancion.nombre_sancion}} ({{sancion.pts_sancion}})</option>
                                 </select>
                                 <!-- <input id=estadio type="date" name="name" class="form-control" placeholder=""
                                 aria-describedby="emailHelp"> -->
@@ -184,7 +184,7 @@
                       <div class="form-group">
                           <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
-                            <textarea type="text" class="form-control" name="" placeholder="Observación del Equipo"
+                            <textarea type="text" class="form-control" [disabled]="id_Habilitar != encuentros._id" name="" placeholder="Observación del Equipo"
                              [(ngModel)]="encuentros.observacion_equipo1">
                             </textarea>
                           </div>
@@ -283,11 +283,12 @@
                             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                                 <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-free-code-camp" aria-hidden="true"></i></div>
                                 <!-- <label for="exampleFormControlSelect1">Example select</label> -->
-                                <select class="form-control" id="a" 
+                                <select [disabled]="id_Habilitar != encuentros._id" [(ngModel)]="fechaAgrupada[i][k].codigo_sancion_equipo2"    [id]="i"  class="form-control" 
                                 >
                                     <!-- <option value="undefined" disabled selected hidden>Seleccione el Estadio</option> -->
-                                    <!-- <option value="null" disabled selected hidden>Seleccione el Estadio</option> -->
-                                    <!-- <option *ngFor="let est of estadios" [value]="est._id" >{{est.nombre_estadio}}</option> -->
+                                    <option value="undefined" disabled selected hidden>Seleccione la sancion</option>
+                                    <option  disabled selected hidden>Asignar sanción</option>
+                                    <option *ngFor="let sancion of sanciones" [value]="sancion._id" >{{sancion.nombre_sancion}} ({{sancion.pts_sancion}})</option>
                                 </select>
                                 <!-- <input id=estadio type="date" name="name" class="form-control" placeholder=""
                                 aria-describedby="emailHelp"> -->
@@ -301,7 +302,7 @@
                         <div class="form-group">
                             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                               <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
-                              <textarea type="text" class="form-control" name="" placeholder="Observación del Equipo"
+                              <textarea type="text" class="form-control" [disabled]="id_Habilitar != encuentros._id" name="" placeholder="Observación del Equipo"
                                [(ngModel)]="encuentros.observacion_equipo2">
                               </textarea>
                             </div>
