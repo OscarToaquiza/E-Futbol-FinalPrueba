@@ -1,7 +1,8 @@
+import { Sancion } from './../../models/sancion.model';
 import { element } from 'protractor';
 import { Personal } from './../../models/personal.model';
 import { Component, OnInit } from '@angular/core';
-
+import { SancionService } from './../../services/sancion.service';
 import { TemporadaService } from '../../services/temporada.service';
 import { UserService } from '../../services/user.service';
 import { CategoriaService } from '../../services/categoria.service';
@@ -62,12 +63,14 @@ export class CalendarioComponent implements OnInit {
   public verVuelta = '1';
   public url: string;
 
+  public sanciones:Sancion;
   constructor(
     private _userService: UserService,
     private _temporadaService: TemporadaService,
     private _categoriaService: CategoriaService,
     private _fechaService: FechaService,
-    private _estadioService: EstadioService
+    private _estadioService: EstadioService,
+    private _sancionService: SancionService
   ) {    
     this.token = this._userService.getToken();          
    }
@@ -75,6 +78,26 @@ export class CalendarioComponent implements OnInit {
    ngOnInit() {
     this.obtenerTemporadas();
     this.obtenerEstadios();
+    this.getSancion();
+  }
+
+  getSancion(){
+    this._sancionService.getSancion()
+    .subscribe((res)=>{
+      console.log(res);
+      this.sanciones=res;
+    },(err)=>{
+      console.log("Error");
+      console.log(err);
+      if(err.status!=404)
+      {              
+        swal(
+          'Oops...',
+          '¡Algo salio mal, pruebe despues de un momento!',
+          'error'
+        )
+      }      
+    });
   }
 
   obtenerEstadios(){

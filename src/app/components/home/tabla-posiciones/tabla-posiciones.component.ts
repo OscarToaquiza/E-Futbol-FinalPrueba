@@ -104,6 +104,7 @@ export class TablaPosicionesComponent implements OnInit {
               this.arrayCategoria[e].codigo_equipo[i]['GC']=0; 
               this.arrayCategoria[e].codigo_equipo[i]['GD']=0; 
               this.arrayCategoria[e].codigo_equipo[i]['P']=0; 
+              this.arrayCategoria[e].codigo_equipo[i]['SC']=0; 
               this.fecha.fechasEncontradas.forEach((fecha,j) => {                                
                 
                 if(fecha.id_equipo1!=null && fecha.id_equipo1!=undefined && fecha.id_equipo2!=null && fecha.id_equipo2!=undefined && fecha.jugado)
@@ -117,32 +118,70 @@ export class TablaPosicionesComponent implements OnInit {
                       this.arrayCategoria[e].codigo_equipo[i]['PG']=this.arrayCategoria[e].codigo_equipo[i]['PG']+1;                       
                       this.arrayCategoria[e].codigo_equipo[i]['GF']=fecha.goles_equipo1.length+this.arrayCategoria[e].codigo_equipo[i]['GF']; 
                       this.arrayCategoria[e].codigo_equipo[i]['GC']=fecha.goles_equipo2.length+this.arrayCategoria[e].codigo_equipo[i]['GC'];
-                      this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+3; 
+                      
+                      if(fecha.codigo_sancion_equipo1!=undefined && fecha.codigo_sancion_equipo1!=null)
+                      {
+                        this.arrayCategoria[e].codigo_equipo[i]['SC']=fecha.codigo_sancion_equipo1.pts_sancion;  
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+3-fecha.codigo_sancion_equipo1.pts_sancion; 
+                      }else{
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+3
+                      }
                     }else if(fecha.id_equipo2._id==this.arrayCategoria[e].codigo_equipo[i]._id && (fecha.goles_equipo2.length>fecha.goles_equipo1.length)){
                       this.arrayCategoria[e].codigo_equipo[i]['PG']=this.arrayCategoria[e].codigo_equipo[i]['PG']+1; 
                       this.arrayCategoria[e].codigo_equipo[i]['GF']=fecha.goles_equipo2.length+this.arrayCategoria[e].codigo_equipo[i]['GF']; 
                       this.arrayCategoria[e].codigo_equipo[i]['GC']=fecha.goles_equipo1.length+this.arrayCategoria[e].codigo_equipo[i]['GC']; 
-                      this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+3;
+                      
+                      if(fecha.codigo_sancion_equipo2!=undefined && fecha.codigo_sancion_equipo2!=null)
+                      {
+                        this.arrayCategoria[e].codigo_equipo[i]['SC']=fecha.codigo_sancion_equipo2.pts_sancion; 
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+3-fecha.codigo_sancion_equipo2.pts_sancion;
+                      }else{
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+3;
+                      }
                     }                    
                     else if(fecha.id_equipo2._id==this.arrayCategoria[e].codigo_equipo[i]._id && (fecha.goles_equipo2.length<fecha.goles_equipo1.length)){
                       this.arrayCategoria[e].codigo_equipo[i]['PP']=this.arrayCategoria[e].codigo_equipo[i]['PP']+1;                      
                       this.arrayCategoria[e].codigo_equipo[i]['GC']=fecha.goles_equipo1.length+this.arrayCategoria[e].codigo_equipo[i]['GC']; 
                       this.arrayCategoria[e].codigo_equipo[i]['GF']=fecha.goles_equipo2.length+this.arrayCategoria[e].codigo_equipo[i]['GF']; 
+                      
+                      if(fecha.codigo_sancion_equipo2!=undefined && fecha.codigo_sancion_equipo2!=null)
+                      {
+                        this.arrayCategoria[e].codigo_equipo[i]['SC']=fecha.codigo_sancion_equipo2.pts_sancion; 
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']-fecha.codigo_sancion_equipo2.pts_sancion;
+                      }
                     }else if(fecha.id_equipo1._id==this.arrayCategoria[e].codigo_equipo[i]._id && (fecha.goles_equipo1.length<fecha.goles_equipo2.length))
                     {
                       this.arrayCategoria[e].codigo_equipo[i]['PP']=this.arrayCategoria[e].codigo_equipo[i]['PP']+1;
                       this.arrayCategoria[e].codigo_equipo[i]['GC']=fecha.goles_equipo2.length+this.arrayCategoria[e].codigo_equipo[i]['GC']; 
-                      this.arrayCategoria[e].codigo_equipo[i]['GF']=fecha.goles_equipo1.length+this.arrayCategoria[e].codigo_equipo[i]['GF'];
+                      this.arrayCategoria[e].codigo_equipo[i]['GF']=fecha.goles_equipo1.length+this.arrayCategoria[e].codigo_equipo[i]['GF'];                      
+                      if(fecha.codigo_sancion_equipo1!=undefined && fecha.codigo_sancion_equipo1!=null)
+                      {
+                        this.arrayCategoria[e].codigo_equipo[i]['SC']=fecha.codigo_sancion_equipo1.pts_sancion; 
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']-fecha.codigo_sancion_equipo1.pts_sancion;
+                      }
                     }else if(fecha.id_equipo1._id==this.arrayCategoria[e].codigo_equipo[i]._id && (fecha.goles_equipo1.length==fecha.goles_equipo2.length)){
                       this.arrayCategoria[e].codigo_equipo[i]['PE']=this.arrayCategoria[e].codigo_equipo[i]['PE']+1;
                       this.arrayCategoria[e].codigo_equipo[i]['GC']=fecha.goles_equipo2.length+this.arrayCategoria[e].codigo_equipo[i]['GC']; 
-                      this.arrayCategoria[e].codigo_equipo[i]['GF']=fecha.goles_equipo1.length+this.arrayCategoria[e].codigo_equipo[i]['GF']; 
-                      this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+1;
+                      this.arrayCategoria[e].codigo_equipo[i]['GF']=fecha.goles_equipo1.length+this.arrayCategoria[e].codigo_equipo[i]['GF'];                       
+                      if(fecha.codigo_sancion_equipo1!=undefined && fecha.codigo_sancion_equipo1!=null)
+                      {
+                        this.arrayCategoria[e].codigo_equipo[i]['SC']=fecha.codigo_sancion_equipo1.pts_sancion; 
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+1-fecha.codigo_sancion_equipo1.pts_sancion;
+                      }else{
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+1;
+                      }
                     }else if(fecha.id_equipo2._id==this.arrayCategoria[e].codigo_equipo[i]._id && (fecha.goles_equipo1.length==fecha.goles_equipo2.length)){
                       this.arrayCategoria[e].codigo_equipo[i]['PE']=this.arrayCategoria[e].codigo_equipo[i]['PE']+1;
                       this.arrayCategoria[e].codigo_equipo[i]['GC']=fecha.goles_equipo1.length+this.arrayCategoria[e].codigo_equipo[i]['GC']; 
                       this.arrayCategoria[e].codigo_equipo[i]['GF']=fecha.goles_equipo2.length+this.arrayCategoria[e].codigo_equipo[i]['GF'];
-                      this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+1;
+                      
+                      if(fecha.codigo_sancion_equipo2!=undefined && fecha.codigo_sancion_equipo2!=null)
+                      {
+                        this.arrayCategoria[e].codigo_equipo[i]['SC']=fecha.codigo_sancion_equipo2.pts_sancion; 
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+1-fecha.codigo_sancion_equipo2.pts_sancion;
+                      }else{
+                        this.arrayCategoria[e].codigo_equipo[i]['P']=this.arrayCategoria[e].codigo_equipo[i]['P']+1;
+                      }                     
                     }                 
                   }
                 }  
@@ -154,7 +193,9 @@ export class TablaPosicionesComponent implements OnInit {
             //   console.log(equipo._id);
               // console.log(_.chain(this.fecha.fechasEncontradas).groupBy('id_equipo1._id').value());
             //  fechasPorEquipo[i]= _.find(this.fecha.fechasEncontradas, function(o:any) { if(o.id_equipo1!=null || o.id_equipo1!=undefined) return o.id_equipo1._id==equipo._id; });
-            });  
+            });
+            
+            this.arrayCategoria[e].codigo_equipo=_.orderBy(this.arrayCategoria[e].codigo_equipo, ['P','GD'], ['desc','desc']);
             console.log("Fechas por equipo");          
             console.log(fechasPorEquipo);
           }
