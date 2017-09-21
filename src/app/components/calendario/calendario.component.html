@@ -1,21 +1,31 @@
 <div class="container">
+  <br>
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-8">
         <select class="form-control"   (change)="onChangeCategoria($event)" >
             <option selected>Seleccione la Categoria a la que pertenece</option>
             <option [ngValue]="categoria._id"  *ngFor="let categoria of arrayCategoria">{{categoria.nombre_categoria}}</option>                        
           </select>
     </div>
+    <div class="col-4" *ngIf="VerCalendario && segundaVuelta != ''" >
+      <button class="btn btn-primary" (click)="calendarioVuelta('1')">Vuelta 1</button>
+      <button class="btn btn-primary" (click)="calendarioVuelta('2')">Vuelta 2</button>
+    </div>
+    <div class="col-4" *ngIf="segundaVuelta == ''">
+      <div class="p-3 mb-2 bg-info text-white">Tabla de Calendarios</div>
+    </div>
   </div>
-  <div class="row" *ngFor="let fec of fechaAgrupada;let i=index">
-    <div class="col-lg-12">
+
+
+  <div class="row" *ngIf="verVuelta == '1'" >
+    <div class="col-lg-12" *ngFor="let fec of fechaAgrupada;let i=index">
       <div class="card">
         <div class="card-header">
-          <h2 class="text-center ">Fecha Numero:{{i+1}} </h2>
+          <h2 class="text-center ">Fecha Numero: {{i+1}} </h2>
       </div>
     <div class="card-body" *ngFor="let encuentros of fec;let k=index">
-        <div *ngIf="encuentros.primera_segunda==1">Primera Vuelta</div>
-        <div *ngIf="encuentros.primera_segunda==2">Segunda Vuelta</div>
+        <!-- <div *ngIf="encuentros.primera_segunda==1">Primera Vuelta</div> -->
+        <!-- <div *ngIf="encuentros.primera_segunda==2">Segunda Vuelta</div> -->
         <div class="row" *ngIf="encuentros.id_equipo1!=null && encuentros.id_equipo2!=null">
           <div class="col-lg-3" >
               <div class="form-group">
@@ -24,8 +34,8 @@
                       <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
                       <input id="fecha_referencia" type="date" name="name" class="form-control" placeholder=""
                       aria-describedby="emailHelp"
-                      
-                      [(ngModel)]="encuentros.fecha"
+                      [ngModel]="encuentros.fecha | date:'yyyy-MM-dd'"
+                      (ngModelChange)="encuentros.fecha = $event"
                       >
                       <!-- <input  *ngIf="encuentros.fecha" id="fecha_referencia" type="date" name="name" class="form-control" placeholder=""
                       aria-describedby="emailHelp"
@@ -42,9 +52,11 @@
                   <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                       <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
                       <!-- <label for="exampleFormControlSelect1">Example select</label> -->
-                      <select class="form-control" id="SelectEstadio" (change)="selectEstadio($event.target.value)" [(ngModel)]="encuentros.id_estadio">
-                          <option selected>Seleccione el Estadio</option>
-                          <option [value]="est._id" *ngFor="let est of estadios">{{est.nombre_estadio}}</option>
+                      <select class="form-control" id="SelectEstadio1" (change)="selectEstadio($event.target.value)" 
+                      [(ngModel)]="encuentros.id_estadio">
+                          <option value="undefined" disabled selected hidden>Seleccione el Estadio</option>
+                          <option value="null" disabled selected hidden>Seleccione el Estadio</option>
+                          <option *ngFor="let est of estadios" [value]="est._id" >{{est.nombre_estadio}}</option>
                       </select>
                       <!-- <input id=estadio type="date" name="name" class="form-control" placeholder=""
                       aria-describedby="emailHelp"> -->
@@ -52,19 +64,23 @@
                   <small id="emailHelp" class="form-text text-muted">Estadio donde se jugara toda la fecha</small>
                 </div> 
           </div>
-          <div class="col-lg-5">
-            <div id="botones">
-                <button *ngIf="id_Habilitar != encuentros._id" class="btn btn-info" (click)="HabilitarResultados(encuentros._id)" >Habilitar Resultados</button>
-                <button *ngIf="id_Habilitar == encuentros._id" class="btn btn-danger" (click)="DesabilitarResultados()" >Desabilitar Resultados</button>
+          <div class="col-xs-5 col-md-5 col-lg-5 d-flex align-items-center">
+            <div class="row text-center">
+              <div class="col-6">
+                  <button  class="btn btn-outline-success btn-sm btn-block" (click)="guardarPartido(encuentros,encuentros.id_estadio,encuentros.fecha)">Guardar Partido</button>
+                  <button *ngIf="id_Habilitar != encuentros._id" class="btn btn-sm btn-outline-info btn-block" (click)="HabilitarResultados(encuentros._id)" >Habilitar Resultados</button>
+                  <button *ngIf="id_Habilitar == encuentros._id" class="btn btn-sm btn-outline-danger btn-block" (click)="DesabilitarResultados()" >Desabilitar Resultados</button>
+                     
+              </div>                
+              <div class="col-6">
+                  <small *ngIf="id_Habilitar != encuentros._id" class="form-text text-muted">Al momento de <strong>Habilitar Resultados </strong> el partido se marcara como <strong>JUGADO</strong></small>
+                  <small *ngIf="id_Habilitar == encuentros._id" class="form-text text-muted">Al momento de <strong>Desabilitar Resultados </strong> el partido se marcara como <strong>NO JUGADO</strong></small>
+              </div>                
             </div>
-            <div>
-                <small *ngIf="id_Habilitar != encuentros._id" class="form-text text-muted">Al momento de <strong>Habilitar Resultados </strong> el partido se marcara como <strong>JUGADO</strong></small>
-                <small *ngIf="id_Habilitar == encuentros._id" class="form-text text-muted">Al momento de <strong>Desabilitar Resultados </strong> el partido se marcara como <strong>NO JUGADO</strong></small>
-            </div>
+              
           </div>
 
         </div>
-        <hr>
         <div class="row text-center">
           <div class="col-lg-4">
             <h3 *ngIf="encuentros.id_equipo1!=null">{{encuentros.id_equipo1.nombre_equipo}}</h3>
@@ -139,6 +155,39 @@
                                   <option selected value="">Seleccione jugador</option> 
                               <option [ngValue]="personal._id" [disabled]="personal.rol_personal!='jugador'" *ngFor="let personal of encuentros.id_equipo1.personal_equipo">{{personal.nombre_personal}} {{personal.apellido_personal}} <span>{{personal.rol_personal}}</span></option> 
                           </select>
+                        </div>
+                  </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="SelectEstadio">Sanción</label>
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-free-code-camp" aria-hidden="true"></i></div>
+                                <!-- <label for="exampleFormControlSelect1">Example select</label> -->
+                                <select [disabled]="id_Habilitar != encuentros._id" [(ngModel)]="fechaAgrupada[i][k].codigo_sancion_equipo1"    [id]="i"  class="form-control" 
+                                >
+                                    <option value="undefined" disabled selected hidden>Seleccione la sancion</option>
+                                    <option  disabled selected hidden>Asignar sanción</option>
+                                    <option *ngFor="let sancion of sanciones" [value]="sancion._id" >{{sancion.nombre_sancion}} ({{sancion.pts_sancion}})</option>
+                                </select>
+                                <!-- <input id=estadio type="date" name="name" class="form-control" placeholder=""
+                                aria-describedby="emailHelp"> -->
+                              </div>
+                            <!-- <small id="emailHelp" class="form-text text-muted">Sancón cha</small> -->
+                          </div> 
+                    </div>
+                  </div>
+                <div class="row">
+                  <div class="col-12">
+                      <div class="form-group">
+                          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                            <textarea type="text" class="form-control" [disabled]="id_Habilitar != encuentros._id" name="" placeholder="Observación del Equipo"
+                             [(ngModel)]="encuentros.observacion_equipo1">
+                            </textarea>
+                          </div>
                         </div>
                   </div>
                 </div>
@@ -226,6 +275,40 @@
                           </div>
                     </div>
                   </div>
+                  <br>
+                  <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="SelectEstadio">Sanción</label>
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-free-code-camp" aria-hidden="true"></i></div>
+                                <!-- <label for="exampleFormControlSelect1">Example select</label> -->
+                                <select [disabled]="id_Habilitar != encuentros._id" [(ngModel)]="fechaAgrupada[i][k].codigo_sancion_equipo2"    [id]="i"  class="form-control" 
+                                >
+                                    <!-- <option value="undefined" disabled selected hidden>Seleccione el Estadio</option> -->
+                                    <option value="undefined" disabled selected hidden>Seleccione la sancion</option>
+                                    <option  disabled selected hidden>Asignar sanción</option>
+                                    <option *ngFor="let sancion of sanciones" [value]="sancion._id" >{{sancion.nombre_sancion}} ({{sancion.pts_sancion}})</option>
+                                </select>
+                                <!-- <input id=estadio type="date" name="name" class="form-control" placeholder=""
+                                aria-describedby="emailHelp"> -->
+                              </div>
+                            <!-- <small id="emailHelp" class="form-text text-muted">Sancón cha</small> -->
+                          </div> 
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                              <textarea type="text" class="form-control" [disabled]="id_Habilitar != encuentros._id" name="" placeholder="Observación del Equipo"
+                               [(ngModel)]="encuentros.observacion_equipo2">
+                              </textarea>
+                            </div>
+                          </div>
+                    </div>
+                  </div>
           </div>
           <div class="col-lg-2" *ngIf="encuentros.id_equipo1!=null && encuentros.id_equipo2!=null">
                   <h3>HORA</h3>
@@ -238,11 +321,12 @@
                   <!-- <small id="emailHelp" class="form-text text-muted">La fecha en al que se jugará</small> -->
           </div>
         </div>
-        <button  class="btn btn-success" (click)="guardarPartido(encuentros,encuentros.id_estadio)">Guardar fecha ronda 1</button>   
-    </div>
+        <hr>
+      </div>
+    
     <div class="card-footer">
-      <button  class="btn btn-success" (click)="guardarFecha(fec,1)">Guardar fecha ronda 1</button>   
-      <button  class="btn btn-success" (click)="guardarFecha(fec,2)">Guardar fecha ronda 2</button>   
+      <!-- <button  class="btn btn-success" (click)="guardarFecha(fec,1)">Guardar fecha ronda 1</button>    -->
+      <!-- <button  class="btn btn-success" (click)="guardarFecha(fec,2)">Guardar fecha ronda 2</button>    -->
       <!-- <div>
           <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
           <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
@@ -252,4 +336,333 @@
       </div>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+  <!-- Segunda Vuelta.. -->
+  <div class="row" *ngIf="verVuelta == '2'">
+      <div class="col-lg-12" *ngFor="let fec of fechaAgrupadaSegundaVuelta;let i=index">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="text-center ">Fecha Numero: {{i+1}} </h2>
+        </div>
+      <div class="card-body" *ngFor="let encuentros of fec;let k=index">
+          <!-- <div *ngIf="encuentros.primera_segunda==1">Primera Vuelta</div> -->
+          <!-- <div *ngIf="encuentros.primera_segunda==2">Segunda Vuelta</div> -->
+          <div class="row" *ngIf="encuentros.id_equipo1!=null && encuentros.id_equipo2!=null">
+            <div class="col-lg-3" >
+                <div class="form-group">
+                    <label for="fecha_referencia">Fecha de Juego</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
+                        <input id="fecha_referencia" type="date" name="name" class="form-control" placeholder=""
+                        aria-describedby="emailHelp"
+                        [ngModel]="encuentros.fecha | date:'yyyy-MM-dd'"
+                        (ngModelChange)="encuentros.fecha = $event"
+                        >
+                        <!-- <input  *ngIf="encuentros.fecha" id="fecha_referencia" type="date" name="name" class="form-control" placeholder=""
+                        aria-describedby="emailHelp"
+                        [ngModel]="encuentros.fecha | date:'yyyy-MM-dd'"
+                        > -->
+                      </div>
+                    <small id="emailHelp" class="form-text text-muted">La fecha en al que se jugará</small>
+                  </div> 
+              </div>
+  
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label for="SelectEstadio">Estadio</label>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
+                        <!-- <label for="exampleFormControlSelect1">Example select</label> -->
+                        <select class="form-control" id="SelectEstadio1" (change)="selectEstadio($event.target.value)" 
+                        [(ngModel)]="encuentros.id_estadio">
+                            <option value="undefined" disabled selected hidden>Seleccione el Estadio</option>
+                            <option value="null" disabled selected hidden>Seleccione el Estadio</option>
+                            <option *ngFor="let est of estadios" [value]="est._id" >{{est.nombre_estadio}}</option>
+                        </select>
+                        <!-- <input id=estadio type="date" name="name" class="form-control" placeholder=""
+                        aria-describedby="emailHelp"> -->
+                      </div>
+                    <small id="emailHelp" class="form-text text-muted">Estadio donde se jugara toda la fecha</small>
+                  </div> 
+            </div>
+            <div class="col-xs-5 col-md-5 col-lg-5 d-flex align-items-center">
+              <div class="row text-center">
+                <div class="col-6">
+                    <button  class="btn btn-outline-success btn-sm btn-block" (click)="guardarPartido(encuentros,encuentros.id_estadio,encuentros.fecha)">Guardar Partido</button>
+                    <button *ngIf="id_Habilitar != encuentros._id" class="btn btn-sm btn-outline-info btn-block" (click)="HabilitarResultados(encuentros._id)" >Habilitar Resultados</button>
+                    <button *ngIf="id_Habilitar == encuentros._id" class="btn btn-sm btn-outline-danger btn-block" (click)="DesabilitarResultados()" >Desabilitar Resultados</button>
+                       
+                </div>                
+                <div class="col-6">
+                    <small *ngIf="id_Habilitar != encuentros._id" class="form-text text-muted">Al momento de <strong>Habilitar Resultados </strong> el partido se marcara como <strong>JUGADO</strong></small>
+                    <small *ngIf="id_Habilitar == encuentros._id" class="form-text text-muted">Al momento de <strong>Desabilitar Resultados </strong> el partido se marcara como <strong>NO JUGADO</strong></small>
+                </div>                
+              </div>
+                
+            </div>
+  
+          </div>
+          <div class="row text-center">
+            <div class="col-lg-4">
+              <h3 *ngIf="encuentros.id_equipo1!=null">{{encuentros.id_equipo1.nombre_equipo}}</h3>
+              <h3 *ngIf="encuentros.id_equipo1==null">ESTE EQUIPO ESTA EN DESCANSO</h3>
+              <div class="row" *ngIf="encuentros.id_equipo1!=null && encuentros.id_equipo2!=null">
+                <div class="col-7">
+                      <label for="inputPassword" class="col-form-label">Goles: </label>
+                    </div>
+                  <div class="col-5">
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <input [(ngModel)] = "encuentros.goles_equipo1.length" id="" type="number" name="name" class="form-control" placeholder=""
+                          [disabled]="id_Habilitar != encuentros._id"
+                          >
+                          <div  (click) = "generarGoles1(encuentros.goles_equipo1.length,encuentros)"class="input-group-addon frm-addon" style="width: 2.6rem"
+                          
+                          ><i class="fa fa-futbol-o"></i></div>
+                        </div>
+                        
+                  </div>
+                  <div *ngFor="let item of encuentros.goles_equipo1;let j=index" class="col-12">                                            
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user" aria-hidden="true"></i></div>                        
+                        <!-- <h1>{{fechaAgrupada[i][k].goles_equipo2[j]}}</h1> -->
+                        <select [disabled]="id_Habilitar != encuentros._id" class="form-control" [(ngModel)]="fechaAgrupada[i][k].goles_equipo1[j]"    [id]="i">
+                                <option selected value="">Seleccione jugador</option> 
+                            <option [ngValue]="personal._id" [disabled]="personal.rol_personal!='jugador'" *ngFor="let personal of encuentros.id_equipo1.personal_equipo">{{personal.nombre_personal}} {{personal.apellido_personal}} <span>{{personal.rol_personal}}</span></option> 
+                        </select>
+                      </div>
+                </div>
+                  
+              </div>
+              <div class="row" *ngIf="encuentros.id_equipo2!=null && encuentros.id_equipo1!=null">
+                    <div class="col-8">
+                        <label for="inputPassword" class="col-form-label">Tarjetas Amarillas: </label>
+                      </div>
+                      <div class="col-4">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <input [(ngModel)]="encuentros.tarjetas_amarilla_equipo1.length" id="" type="number" name="name" class="form-control" placeholder=""
+                            [disabled]="id_Habilitar != encuentros._id"
+                            >
+                            <div  (click) = "generarTA1(encuentros.tarjetas_amarilla_equipo1.length,encuentros)"id="tarjetaAmarilla" class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-clone" aria-hidden="true"></i></div>
+                          </div>
+                    </div>
+                    <div *ngFor="let item of encuentros.tarjetas_amarilla_equipo1;let j=index" class="col-12">                                            
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user" aria-hidden="true"></i></div>                        
+                          <!-- <h1>{{fechaAgrupada[i][k].goles_equipo2[j]}}</h1> -->
+                          <select [disabled]="id_Habilitar != encuentros._id" class="form-control" [(ngModel)]="fechaAgrupada[i][k].tarjetas_amarilla_equipo1[j]"    [id]="i">
+                                  <option selected value="">Seleccione jugador</option> 
+                              <option [ngValue]="personal._id" [disabled]="personal.rol_personal!='jugador'" *ngFor="let personal of encuentros.id_equipo1.personal_equipo">{{personal.nombre_personal}} {{personal.apellido_personal}} <span>{{personal.rol_personal}}</span></option> 
+                          </select>
+                        </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="encuentros.id_equipo2!=null && encuentros.id_equipo1!=null">
+                    <div class="col-8">
+                          <label for="inputPassword" class="col-form-label">Tarjetas Rojas: </label>
+                        </div>
+                        <div class="col-4">
+                          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <input [(ngModel)]="encuentros.tarjetas_roja_equipo1.length" id="" type="number" name="name" class="form-control" placeholder=""
+                              [disabled]="id_Habilitar != encuentros._id"
+                              >
+                              <div  (click) = "generarTR1(encuentros.tarjetas_roja_equipo1.length,encuentros)"id="tarjetaRoja" class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-clone" aria-hidden="true"></i></div>
+                            </div>
+                      </div>
+                      <div *ngFor="let item of encuentros.tarjetas_roja_equipo1;let j=index" class="col-12">                                            
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user" aria-hidden="true"></i></div>                        
+                            <!-- <h1>{{fechaAgrupada[i][k].goles_equipo2[j]}}</h1> -->
+                            <select [disabled]="id_Habilitar != encuentros._id" class="form-control" [(ngModel)]="fechaAgrupada[i][k].tarjetas_roja_equipo1[j]"    [id]="i">
+                                    <option selected value="">Seleccione jugador</option> 
+                                <option [ngValue]="personal._id" [disabled]="personal.rol_personal!='jugador'" *ngFor="let personal of encuentros.id_equipo1.personal_equipo">{{personal.nombre_personal}} {{personal.apellido_personal}} <span>{{personal.rol_personal}}</span></option> 
+                            </select>
+                          </div>
+                    </div>
+                  </div>
+                  <br>
+                  <div class="row">
+                      <div class="col-12">
+                          <div class="form-group">
+                              <label for="SelectEstadio">Sanción</label>
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-free-code-camp" aria-hidden="true"></i></div>
+                                  <!-- <label for="exampleFormControlSelect1">Example select</label> -->
+                                  <select class="form-control" id="a" 
+                                  >
+                                      <!-- <option value="undefined" disabled selected hidden>Seleccione el Estadio</option> -->
+                                      <!-- <option value="null" disabled selected hidden>Seleccione el Estadio</option> -->
+                                      <!-- <option *ngFor="let est of estadios" [value]="est._id" >{{est.nombre_estadio}}</option> -->
+                                  </select>
+                                  <!-- <input id=estadio type="date" name="name" class="form-control" placeholder=""
+                                  aria-describedby="emailHelp"> -->
+                                </div>
+                              <!-- <small id="emailHelp" class="form-text text-muted">Sancón cha</small> -->
+                            </div> 
+                      </div>
+                    </div>
+                  <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                              <textarea type="text" class="form-control" name="" placeholder="Observación del Equipo"
+                               [(ngModel)]="encuentros.observacion_equipo1">
+                              </textarea>
+                            </div>
+                          </div>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-1">
+              <h1 class="centrar">
+                  <FONT FACE="arial" SIZE=10 >{{encuentros.goles_equipo1.length}}</FONT>
+              </h1>
+            </div>
+            <div class="col-lg-1">
+              <h1 class="centrar">
+                  <FONT FACE="arial" SIZE=10 >{{encuentros.goles_equipo2.length}}</FONT>
+              </h1>
+            </div>
+            <div class="col-lg-4 text-center">
+              <h3 *ngIf="encuentros.id_equipo2!=null">{{encuentros.id_equipo2.nombre_equipo}}</h3>
+              <h3 *ngIf="encuentros.id_equipo2==null">ESTE EQUIPO ESTA EN DESCANSO</h3>
+              <div class="row" *ngIf="encuentros.id_equipo2!=null && encuentros.id_equipo1!=null">
+                  <div class="col-7">
+                        <label for="inputPassword" class="col-form-label">Goles: </label>
+                      </div>
+                    <div class="col-5">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <input [(ngModel)]="encuentros.goles_equipo2.length" id="" type="number" name="name" class="form-control" placeholder=""
+                            [disabled]="id_Habilitar != encuentros._id"
+                            >
+                            <div (click)="generarGoles2(encuentros.goles_equipo2.length,encuentros)" class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
+                          </div>
+                    </div>
+                    <!-- {{fechaAgrupadaT1}} -->
+                    <div *ngFor="let item of encuentros.goles_equipo2;let j=index" class="col-12">                                            
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user" aria-hidden="true"></i></div>                        
+                          <!-- <h1>{{fechaAgrupada[i][k].goles_equipo2[j]}}</h1> -->
+                          <select [disabled]="id_Habilitar != encuentros._id" class="form-control" [(ngModel)]="fechaAgrupada[i][k].goles_equipo2[j]"    [id]="i">
+                                  <option selected value="">Seleccione jugador</option> 
+                              <option [ngValue]="personal._id" [disabled]="personal.rol_personal!='jugador'" *ngFor="let personal of encuentros.id_equipo2.personal_equipo">{{personal.nombre_personal}} {{personal.apellido_personal}} <span>{{personal.rol_personal}}</span></option> 
+                          </select>
+                        </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="encuentros.id_equipo2!=null && encuentros.id_equipo1!=null">
+                      <div class="col-8">
+                          <label for="inputPassword" class="col-form-label">Tarjetas Amarillas: </label>
+                        </div>
+                      <div class="col-4">
+                          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <input [(ngModel)]="encuentros.tarjetas_amarilla_equipo2.length" id="" type="number" name="name" class="form-control" placeholder=""
+                              [disabled]="id_Habilitar != encuentros._id"
+                              >
+                              <div  (click) = "generarTA2(encuentros.tarjetas_amarilla_equipo2.length,encuentros)"id="tarjetaAmarilla" class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-clone" aria-hidden="true"></i></div>
+                            </div>
+                      </div>
+                      <div *ngFor="let item of encuentros.tarjetas_amarilla_equipo2;let j=index" class="col-12">                                            
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user" aria-hidden="true"></i></div>                        
+                            <!-- <h1>{{fechaAgrupada[i][k].goles_equipo2[j]}}</h1> -->
+                            <select [disabled]="id_Habilitar != encuentros._id" class="form-control" [(ngModel)]="fechaAgrupada[i][k].tarjetas_amarilla_equipo2[j]"    [id]="i">
+                                    <option selected value="">Seleccione jugador</option> 
+                                <option [ngValue]="personal._id" [disabled]="personal.rol_personal!='jugador'" *ngFor="let personal of encuentros.id_equipo2.personal_equipo">{{personal.nombre_personal}} {{personal.apellido_personal}} <span>{{personal.rol_personal}}</span></option> 
+                            </select>
+                          </div>
+                    </div>
+                  </div>
+                  <div class="row" *ngIf="encuentros.id_equipo2!=null && encuentros.id_equipo1!=null">
+                      <div class="col-8">
+                            <label for="inputPassword" class="col-form-label">Tarjetas Rojas: </label>
+                          </div>
+                          <div class="col-4">
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <input [(ngModel)]="encuentros.tarjetas_roja_equipo2.length" id="" type="number" name="name" class="form-control" placeholder=""
+                                [disabled]="id_Habilitar != encuentros._id"
+                                >
+                                <div  (click) = "generarTR2(encuentros.tarjetas_roja_equipo2.length,encuentros)"id="tarjetaRoja" class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-clone" aria-hidden="true"></i></div>
+                              </div>
+                        </div>
+                        <div *ngFor="let item of encuentros.tarjetas_roja_equipo2;let j=index" class="col-12">                                            
+                          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user" aria-hidden="true"></i></div>                        
+                              <!-- <h1>{{fechaAgrupada[i][k].goles_equipo2[j]}}</h1> -->
+                              <select [disabled]="id_Habilitar != encuentros._id" class="form-control" [(ngModel)]="fechaAgrupada[i][k].tarjetas_roja_equipo2[j]"    [id]="i">
+                                      <option selected value="">Seleccione jugador</option> 
+                                  <option [ngValue]="personal._id" [disabled]="personal.rol_personal!='jugador'" *ngFor="let personal of encuentros.id_equipo2.personal_equipo">{{personal.nombre_personal}} {{personal.apellido_personal}} <span>{{personal.rol_personal}}</span></option> 
+                              </select>
+                            </div>
+                      </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="SelectEstadio">Sanción</label>
+                                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-free-code-camp" aria-hidden="true"></i></div>
+                                    <!-- <label for="exampleFormControlSelect1">Example select</label> -->
+                                    <select class="form-control" id="a" 
+                                    >
+                                        <!-- <option value="undefined" disabled selected hidden>Seleccione el Estadio</option> -->
+                                        <!-- <option value="null" disabled selected hidden>Seleccione el Estadio</option> -->
+                                        <!-- <option *ngFor="let est of estadios" [value]="est._id" >{{est.nombre_estadio}}</option> -->
+                                    </select>
+                                    <!-- <input id=estadio type="date" name="name" class="form-control" placeholder=""
+                                    aria-describedby="emailHelp"> -->
+                                  </div>
+                                <!-- <small id="emailHelp" class="form-text text-muted">Sancón cha</small> -->
+                              </div> 
+                        </div>
+                      </div>
+                    <div class="row">
+                      <div class="col-12">
+                          <div class="form-group">
+                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                                <textarea type="text" class="form-control" name="" placeholder="Observación del Equipo"
+                                 [(ngModel)]="encuentros.observacion_equipo2">
+                                </textarea>
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+            </div>
+            <div class="col-lg-2" *ngIf="encuentros.id_equipo1!=null && encuentros.id_equipo2!=null">
+                    <h3>HORA</h3>
+                    <div class="input-group mb-2 mr-sm-2 mb-sm-0 centrar">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
+                        <input id="hora" type="time" name="name" class="form-control" placeholder=""
+                        [(ngModel)]="encuentros.hora"
+                        >
+                      </div>
+                    <!-- <small id="emailHelp" class="form-text text-muted">La fecha en al que se jugará</small> -->
+            </div>
+          </div>
+          <hr>
+        </div>
+      
+      <div class="card-footer">
+        <!-- <button  class="btn btn-success" (click)="guardarFecha(fec,1)">Guardar fecha ronda 1</button>    -->
+        <!-- <button  class="btn btn-success" (click)="guardarFecha(fec,2)">Guardar fecha ronda 2</button>    -->
+        <!-- <div>
+            <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+            <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+        </div> -->
+        <!-- <button  class="btn btn-danger float-right">Eliminar</button> -->
+      </div> 
+        </div>
+      </div>
+    </div>
 </div>

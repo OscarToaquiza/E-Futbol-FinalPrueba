@@ -33,6 +33,14 @@ export class FechaService {
       .map(res => res.json())      
   }
 
+  getFechaByIdCategoriaAdministrador(idCategoria){    
+    let headers = new Headers({
+      'Content-Type': 'application/json'
+    });
+    return this._http.get(this.url + 'fecha/by/categoriaAdministrador/'+idCategoria, { headers: headers })
+      .map(res => res.json())      
+  }
+
   updateCalendario(token,param,id) {
     let params = JSON.stringify(param);
     let headers = new Headers({
