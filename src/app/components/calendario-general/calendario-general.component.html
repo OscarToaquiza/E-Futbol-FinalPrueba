@@ -31,179 +31,194 @@
     <div class="row jumbotron" *ngIf="VerCalendario">
 
         <div class="col-12" *ngIf="verVuelta == '1'">
-            <!-- <div class="card">
+            <div class="card" *ngFor="let fec of fechaAgrupada;let i=index" >
                     <div class="card-header">
-
-                    </div>
+                            <h2 class="text-center ">Fecha Numero: {{i+1}} </h2>
+                        </div>
                     <div class="card-body">
+                            <div *ngFor="let item of fec; let k=index">
+                                    Partido Número: {{k+1}}
+                                    <div class="row" *ngIf="item.id_equipo1 != null && item.id_equipo2 != null">
+                                        <div class="col-4 col-sm-4 col-md-2">
+                                            <h2 class="centrar">
+                                                {{item.id_equipo1.nombre_equipo}}
+                                            </h2>
+                                        </div>
+                                        <div class="d-none d-sm-none col-md-2 d-md-block ">
+                                            <img *ngIf="(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo1.escudo_equipo)}}"
+                                                alt="Generic placeholder image" width="140" height="140">
+                                            <img *ngIf="!(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
+                                                alt="Generic placeholder image" width="140" height="140">
+                                        </div>
+                                        <div class="col-1 col-sm-1 col-md-1">
+                                            <h1 class="centrar">
+                                                <FONT FACE="arial" SIZE=10>{{item.goles_equipo1.length}}</FONT>
+                                            </h1>
+                                        </div>
+                                        <div class="col-1 col-sm-1 col-md-1">
+                                            <h1 class="centrar">
+                                                <FONT FACE="arial" SIZE=10>-</FONT>
+                                            </h1>
+                                        </div>
+                                        <div class="col-1 col-sm-1 col-md-1">
+                                            <h1 class="centrar">
+                                                <FONT FACE="arial" SIZE=10>{{item.goles_equipo2.length}}</FONT>
+                                            </h1>
+                                        </div>
+                                        <div class="d-none d-sm-none col-md-2 d-md-block ">
+                                            <img *ngIf="(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo2.escudo_equipo)}}"
+                                                alt="Generic placeholder image" width="140" height="140">
+                                            <img *ngIf="!(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
+                                                alt="Generic placeholder image" width="140" height="140">
+                                        </div>
+                                        <div class="col-4 col-sm-4 col-md-2">
+                                            <h2 class="centrar">
+                                                {{item.id_equipo2.nombre_equipo}}
+                                            </h2>
+                                        </div>
+                                        <div class="col-1">
+                                            <p *ngIf="(item.estado_fecha)">
+                                                Partido Finalizado
+                                            </p>
+                                            <p *ngIf="!(item.estado_fecha)">
+                                                Partido Por Jugar
+                                            </p>
+                                        </div>
+                    <!-- Otra Row -->
+                                        <div class="col-4">
+                                            <p class="text-right" *ngFor="let gol of (item.goles_equipo1)" >
+                                                    {{gol.nombre_personal}} {{gol.apellido_personal}} <i class="fa fa-futbol-o" aria-hidden="true"></i><br>
+                                            </p>
+                                        </div>
+                                        <div class="col-3 text-center">
+                                            <p *ngIf="!(item.fecha)">
+                                                <strong>Estadio: </strong> No definido <br>
+                                                <strong>Fecha: </strong> No definida <br>
+                                                <strong>Hora: </strong> --:-- 
+                                            </p>
+                                            <p *ngIf="(item.fecha)"> 
+                                            <strong>Estadio: </strong> <a href="">{{item.id_estadio.nombre_estadio}}</a> <br>
+                                            <strong>Fecha: </strong>{{item.fecha | date}} <br>
+                                            <strong>Hora: </strong> {{item.hora}}
+                                        </p>
+                                        </div>
+                                        <div class="col-4">
+                                                <p *ngFor="let gol of (item.goles_equipo2)" >
+                                                        <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                                                        {{gol.nombre_personal}} {{gol.apellido_personal}}
+                                                        <br>
+                                                </p>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+            </div>
 
-                    </div>
 
-                    <div class="card-footer">
-                    </div>
-            </div> -->
-            <div *ngFor="let item of primeraVuelta; let i=index">
-                <!-- Fecha Numero: {{item.n_fecha +1 }} -->
-                Partido Número: {{i+1}}
-                <hr>
-                <!-- <div>
-                                Fecha Numero: {{item.n_fecha +1 }} 
-                                {{item.id_equipo1.nombre_equipo}} VS {{item.id_equipo2.nombre_equipo}}
-                        </div> -->
-                <div class="row" *ngIf="item.id_equipo1 != null && item.id_equipo2 != null">
-                    <div class="col-2">
-                        <h2 class="centrar">
-                            {{item.id_equipo1.nombre_equipo}}
-                        </h2>
-                    </div>
-                    <div class="col-2">
-                        <img *ngIf="(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo1.escudo_equipo)}}"
-                            alt="Generic placeholder image" width="140" height="140">
-                        <img *ngIf="!(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
-                            alt="Generic placeholder image" width="140" height="140">
-                    </div>
-                    <div class="col-lg-1">
-                        <h1 class="centrar">
-                            <FONT FACE="arial" SIZE=10>{{item.goles_equipo1.length}}</FONT>
-                        </h1>
-                    </div>
-                    <div class="col-1">
-                        <h1 class="centrar">
-                            <FONT FACE="arial" SIZE=10>-</FONT>
-                        </h1>
-                    </div>
-                    <div class="col-1">
-                        <h1 class="centrar">
-                            <FONT FACE="arial" SIZE=10>{{item.goles_equipo2.length}}</FONT>
-                        </h1>
-                    </div>
-                    <div class="col-2">
-                        <img *ngIf="(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo2.escudo_equipo)}}"
-                            alt="Generic placeholder image" width="140" height="140">
-                        <img *ngIf="!(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
-                            alt="Generic placeholder image" width="140" height="140">
-                    </div>
-                    <div class="col-2">
-                        <h2 class="centrar">
-                            {{item.id_equipo2.nombre_equipo}}
-                        </h2>
-                    </div>
-                    <div class="col-1">
-                        <p *ngIf="(item.estado_fecha)">
-                            Partido Finalizado
-                        </p>
-                        <p *ngIf="!(item.estado_fecha)">
-                            Partido Por Jugar
-                        </p>
-                    </div>
-<!-- Otra Row -->
-                    <div class="col-4">
-                        <p class="text-right" *ngFor="let gol of (item.goles_equipo1)" >
-                                {{gol.nombre_personal}} {{gol.apellido_personal}} <i class="fa fa-futbol-o" aria-hidden="true"></i><br>
-                        </p>
-                    </div>
-                    <div class="col-3 text-center">
-                        <p *ngIf="!(item.fecha)">
-                            <strong>Fecha: </strong> No definida
-                            <strong>Hora: </strong> --:--
-                            <strong>Estadio: </strong> No definido
-                        </p>
-                        <p *ngIf="(item.fecha)"> 
-                        <strong>Fecha: </strong>{{item.fecha | date}}
-                        <strong>Hora: </strong> {{item.hora}}
-                        <strong>Estadio: </strong> <a href="">{{item.id_estadio.nombre_estadio}}</a>
-                    </p>
-                    </div>
-                    <div class="col-4">
-                            <p *ngFor="let gol of (item.goles_equipo2)" >
-                                    <i class="fa fa-futbol-o" aria-hidden="true"></i>
-                                    {{gol.nombre_personal}} {{gol.apellido_personal}}
-                                    <br>
-                            </p>
-                    </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="col-12" *ngIf="verVuelta == '2'">
+
+            <div class="card" *ngFor="let fec of fechaAgrupadaSegundaVuelta;let i=index">
+                    <div class="card-header">
+                            <h2 class="text-center ">Fecha Numero: {{i+1}} </h2>
+                        </div>
+                <div class="body">
+                        <div *ngFor="let item of fec; let j=index">
+                                Partido Número: {{j+1}}
+                                <div class="row" *ngIf="item.id_equipo1 != null && item.id_equipo2 != null">
+                                    <div class="col-2">
+                                        <h2 class="centrar">
+                                            {{item.id_equipo1.nombre_equipo}}
+                                        </h2>
+                                    </div>
+                                    <div class="col-2">
+                                        <img *ngIf="(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo1.escudo_equipo)}}"
+                                            alt="Generic placeholder image" width="140" height="140">
+                                        <img *ngIf="!(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
+                                            alt="Generic placeholder image" width="140" height="140">
+                                    </div>
+                                    <div class="col-lg-1">
+                                        <h1 class="centrar">
+                                            <FONT FACE="arial" SIZE=10>{{item.goles_equipo1.length}}</FONT>
+                                        </h1>
+                                    </div>
+                                    <div class="col-1">
+                                        <h1 class="centrar">
+                                            <FONT FACE="arial" SIZE=10>-</FONT>
+                                        </h1>
+                                    </div>
+                                    <div class="col-1">
+                                        <h1 class="centrar">
+                                            <FONT FACE="arial" SIZE=10>{{item.goles_equipo2.length}}</FONT>
+                                        </h1>
+                                    </div>
+                                    <div class="col-2">
+                                        <img *ngIf="(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo2.escudo_equipo)}}"
+                                            alt="Generic placeholder image" width="140" height="140">
+                                        <img *ngIf="!(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
+                                            alt="Generic placeholder image" width="140" height="140">
+                                    </div>
+                                    <div class="col-2">
+                                        <h2 class="centrar">
+                                            {{item.id_equipo2.nombre_equipo}}
+                                        </h2>
+                                    </div>
+                                    <div class="col-1">
+                                        <p *ngIf="(item.estado_fecha)">
+                                            Partido Finalizado
+                                        </p>
+                                        <p *ngIf="!(item.estado_fecha)">
+                                            Partido Por Jugar
+                                        </p>
+                                    </div>
+        
+                                    <!-- Otra Row -->
+                                <div class="col-4">
+                                        <p class="text-right" *ngFor="let gol of (item.goles_equipo1)" >
+                                                {{gol.nombre_personal}} {{gol.apellido_personal}} <i class="fa fa-futbol-o" aria-hidden="true"></i><br>
+                                        </p>
+                                    </div>
+                                    <div class="col-3 text-center">
+                                        <p *ngIf="!(item.fecha)">
+                                            <strong>Fecha: </strong> No definida
+                                            <strong>Hora: </strong> --:--
+                                            <strong>Estadio: </strong> No definido
+                                        </p>
+                                        <p *ngIf="(item.fecha)"> 
+                                        <strong>Fecha: </strong>{{item.fecha | date}}
+                                        <strong>Hora: </strong> {{item.hora}}
+                                        <strong>Estadio: </strong> <a href="">{{item.id_estadio.nombre_estadio}}</a>
+                                    </p>
+                                    </div>
+                                    <div class="col-4">
+                                            <p *ngFor="let gol of (item.goles_equipo2)" >
+                                                    <i class="fa fa-futbol-o" aria-hidden="true"></i>
+                                                    {{gol.nombre_personal}} {{gol.apellido_personal}}
+                                                    <br>
+                                            </p>
+                                    </div>
+                                </div>
+        
+                                
+                            </div>
                 </div>
             </div>
-        </div>
-        <div class="col-12" *ngIf="verVuelta == '2'">
-                <div *ngFor="let item of segundaVuelta; let i=index">
-                        
-                                <hr>
-                        <div class="row" *ngIf="item.id_equipo1 != null && item.id_equipo2 != null">
-                            <div class="col-2">
-                                <h2 class="centrar">
-                                    {{item.id_equipo1.nombre_equipo}}
-                                </h2>
-                            </div>
-                            <div class="col-2">
-                                <img *ngIf="(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo1.escudo_equipo)}}"
-                                    alt="Generic placeholder image" width="140" height="140">
-                                <img *ngIf="!(item.id_equipo1.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
-                                    alt="Generic placeholder image" width="140" height="140">
-                            </div>
-                            <div class="col-lg-1">
-                                <h1 class="centrar">
-                                    <FONT FACE="arial" SIZE=10>{{item.goles_equipo1.length}}</FONT>
-                                </h1>
-                            </div>
-                            <div class="col-1">
-                                <h1 class="centrar">
-                                    <FONT FACE="arial" SIZE=10>-</FONT>
-                                </h1>
-                            </div>
-                            <div class="col-1">
-                                <h1 class="centrar">
-                                    <FONT FACE="arial" SIZE=10>{{item.goles_equipo2.length}}</FONT>
-                                </h1>
-                            </div>
-                            <div class="col-2">
-                                <img *ngIf="(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + (item.id_equipo2.escudo_equipo)}}"
-                                    alt="Generic placeholder image" width="140" height="140">
-                                <img *ngIf="!(item.id_equipo2.escudo_equipo)" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}"
-                                    alt="Generic placeholder image" width="140" height="140">
-                            </div>
-                            <div class="col-2">
-                                <h2 class="centrar">
-                                    {{item.id_equipo2.nombre_equipo}}
-                                </h2>
-                            </div>
-                            <div class="col-1">
-                                <p *ngIf="(item.estado_fecha)">
-                                    Partido Finalizado
-                                </p>
-                                <p *ngIf="!(item.estado_fecha)">
-                                    Partido Por Jugar
-                                </p>
-                            </div>
 
-                            <!-- Otra Row -->
-                        <div class="col-4">
-                                <p class="text-right" *ngFor="let gol of (item.goles_equipo1)" >
-                                        {{gol.nombre_personal}} {{gol.apellido_personal}} <i class="fa fa-futbol-o" aria-hidden="true"></i><br>
-                                </p>
-                            </div>
-                            <div class="col-3 text-center">
-                                <p *ngIf="!(item.fecha)">
-                                    <strong>Fecha: </strong> No definida
-                                    <strong>Hora: </strong> --:--
-                                    <strong>Estadio: </strong> No definido
-                                </p>
-                                <p *ngIf="(item.fecha)"> 
-                                <strong>Fecha: </strong>{{item.fecha | date}}
-                                <strong>Hora: </strong> {{item.hora}}
-                                <strong>Estadio: </strong> <a href="">{{item.id_estadio.nombre_estadio}}</a>
-                            </p>
-                            </div>
-                            <div class="col-4">
-                                    <p *ngFor="let gol of (item.goles_equipo2)" >
-                                            <i class="fa fa-futbol-o" aria-hidden="true"></i>
-                                            {{gol.nombre_personal}} {{gol.apellido_personal}}
-                                            <br>
-                                    </p>
-                            </div>
-                        </div>
-
-                        
-                    </div>
         </div>
 
 
