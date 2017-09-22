@@ -31,9 +31,14 @@
     <div class="row jumbotron" *ngIf="VerCalendario">
 
         <div class="col-12" *ngIf="verVuelta == '1'">
-            <div class="card" *ngFor="let fec of fechaAgrupada;let i=index" >
+             <div class="row text-center">
+                 <div class="col-12">
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                 </div>
+            </div>   
+            <div class="card" *ngFor="let fec of fechaAgrupada | paginate: { itemsPerPage: 1, currentPage: p }" >
                     <div class="card-header">
-                            <h2 class="text-center ">Fecha Numero: {{i+1}} </h2>
+                            <h2 class="text-center ">Fecha {{p}} </h2>
                         </div>
                     <div class="card-body">
                             <div *ngFor="let item of fec; let k=index">
@@ -132,10 +137,15 @@
 
 
         <div class="col-12" *ngIf="verVuelta == '2'">
+                <div class="row text-center">
+                        <div class="col-12">
+                               <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                        </div>
+                   </div>
 
-            <div class="card" *ngFor="let fec of fechaAgrupadaSegundaVuelta;let i=index">
+            <div class="card" *ngFor="let fec of fechaAgrupadaSegundaVuelta | paginate: { itemsPerPage: 1, currentPage: p }">
                     <div class="card-header">
-                            <h2 class="text-center ">Fecha Numero: {{i+1}} </h2>
+                            <h2 class="text-center ">Fecha {{p}} </h2>
                         </div>
                 <div class="body">
                         <div *ngFor="let item of fec; let j=index">

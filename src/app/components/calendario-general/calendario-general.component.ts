@@ -22,6 +22,8 @@ import swal from 'sweetalert2';
 })
 export class CalendarioGeneralComponent implements OnInit {
 
+  p: number = 1;
+
   public temporada_actual: Temporada;
   public arrayCategoria = new Array();
   public categoriaSeleccionada:any;
@@ -108,6 +110,7 @@ export class CalendarioGeneralComponent implements OnInit {
   onChangeCategoria(e){
     this.categoriaSeleccionada=e;
     this.obtenerCalendario(e);
+    this.p = 1;
   }
   
   // *ngFor="let fec of fechaAgrupada"
@@ -191,6 +194,7 @@ export class CalendarioGeneralComponent implements OnInit {
 
   calendarioVuelta(value: string){
     this.verVuelta = value;
+    this.p = 1;
   }
 
 }

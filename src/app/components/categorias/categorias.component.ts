@@ -8,9 +8,9 @@ import { GLOBAL } from '../../services/global';
 
 import { Categoria } from '../../models/categoria.model';
 import { Temporada } from '../../models/temporada.models';
-import * as jsPDF from  'jspdf'
+import * as jsPDF from  'jspdf';
 import * as $ from 'jquery';
-import * as html2canvas from 'html2canvas'
+import * as html2canvas from 'html2canvas';
 import swal from 'sweetalert2';
 
 @Component({

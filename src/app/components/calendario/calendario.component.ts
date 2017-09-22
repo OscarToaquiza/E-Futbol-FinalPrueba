@@ -16,6 +16,12 @@ import { EstadioService } from '../../services/estadio.service';
 
 import { Estadio } from '../../models/estadio.model';
 
+import { GLOBAL } from '../../services/global';
+
+import * as jsPDF from  'jspdf';
+import * as $ from 'jquery';
+import * as html2canvas from 'html2canvas';
+
 import swal from 'sweetalert2';
 @Component({
   selector: 'app-calendario',
@@ -24,7 +30,16 @@ import swal from 'sweetalert2';
 })
 export class CalendarioComponent implements OnInit {
 
-  public val= 'Seleccione';
+  public Vocalia = false;
+
+  public arrayPersonal1 = new Array(25);
+  public arrayPersonal2= new Array(25);
+
+  public datosVocalia : any;
+  public categoriaActual: string;
+
+  public p: number = 1;
+
 
   public token;
   public temporada_actual: Temporada;
@@ -72,7 +87,8 @@ export class CalendarioComponent implements OnInit {
     private _estadioService: EstadioService,
     private _sancionService: SancionService
   ) {    
-    this.token = this._userService.getToken();          
+    this.token = this._userService.getToken();
+    this.url = GLOBAL.url;
    }
 
    ngOnInit() {
@@ -114,8 +130,9 @@ export class CalendarioComponent implements OnInit {
       });
   }
 
-  selectEstadio(estadioSeleccionado){
+  selectEstadio(estadioSeleccionado,e){
     console.log(estadioSeleccionado);
+    console.log(e);
     this.estadioSelec=estadioSeleccionado;
   }
 
@@ -172,7 +189,9 @@ export class CalendarioComponent implements OnInit {
         });
   }
   onChangeCategoria(e){
-    this.categoriaSeleccionada=e;
+    this.categoriaActual = e.target.value;
+    this.p = 1;
+    this.categoriaSeleccionada = e;
     this.obtenerCalendario(e);
   }
   
@@ -375,5 +394,54 @@ export class CalendarioComponent implements OnInit {
 
   calendarioVuelta(value: string){
     this.verVuelta = value;
+    this.p = 1;
+  }
+
+  b(){
+    // let ctx=this;
+    html2canvas($('#hojaVocalia')[0]).then(function(canvas) {
+      console.log(":D");
+     var img=canvas.toDataURL("image/png");
+     let doc = new jsPDF()        
+    //  doc.fromHTML($('#prueba')[0],35, 25)           
+    doc.addImage(img,'JPEG',5,5);     
+    // ctx.pdf = doc.output('datauristring')
+    //  console.log(doc.output('datauristring'));
+    doc.save('file.pdf');
+  });
+  }
+
+  datos(data){
+    let i = 0;
+    let j = 0;
+    this.Vocalia = true;
+    this.datosVocalia = data;
+    this.datosVocalia.estadio = 'NO ASIGNADO';
+    this.datosVocalia.categoria = this.categoriaActual;
+    console.log(data);
+    for (var index = 0; index < this.estadios.length; index++) {
+      if(this.estadios[index]._id === data.id_estadio){
+        console.log('Si hay estadio');
+        this.datosVocalia.estadio = this.estadios[index].nombre_estadio;
+        break;
+      }
+    }
+    data.id_equipo1.personal_equipo.forEach(element => {
+      if(element.rol_personal === 'jugador'){
+        this.arrayPersonal1[i] = element;
+        i++;
+      }
+    });
+    
+    this.arrayPersonal1 = _.orderBy(this.arrayPersonal1,['nombre_personal'],['asc']);
+    data.id_equipo2.personal_equipo.forEach(element => {
+      if(element.rol_personal === 'jugador'){
+        this.arrayPersonal2[j] = element;
+        j++;
+      }
+    });
+    this.arrayPersonal2 = _.orderBy(this.arrayPersonal2,['nombre_personal'],['asc']);
+    
+  
   }
 }
