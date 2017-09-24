@@ -35,13 +35,17 @@ export class SancionComponent implements OnInit {
 
   ngOnInit() {
     this.getSancion();
-    //para formulario
+
+    //--para formulario
     this.forma=new FormGroup({
-      'nombre_sancion':new FormControl(''),
-      'pts_sancion': new FormControl(''),
-      
+      '_id':new FormControl(''),
+      'nombre_sancion':new FormControl('',Validators.required),
+      'estado_sancion':new FormControl(''),
+      'pts_sancion': new FormControl('',Validators.required),
+      'observacion_sancion':new FormControl('',Validators.required)
     });
-    //
+    // this.forma.setValue(this.sancion);
+    //--
   }
   getSancion(){
     this._sancionService.getSancion()
@@ -70,7 +74,9 @@ export class SancionComponent implements OnInit {
 
 
   guardarSancion(){        
-    this._sancionService.saveSancion(this.token,this.sancion)
+    console.log(this.sancion);
+    console.log(this.forma.value);
+    this._sancionService.saveSancion(this.token,this.forma.value)
     .subscribe(
       response => {
         console.log(response);        
@@ -80,6 +86,13 @@ export class SancionComponent implements OnInit {
             'success'
             );
             this.sancion = new Sancion('', '',true,0, '');
+            //reseteo del formulario
+            // this.forma.reset({
+            //   nombre_sancion:"",
+            //   pts_sancion:0,
+            //   observacion_sancion:""
+            // });
+            
             this.getSancion();        
       },
       error => {        
@@ -96,6 +109,9 @@ export class SancionComponent implements OnInit {
     this.titulo = 'Modificar Sanción';
     this.sancion = sancionModificar;
     this.idModificar = id;
+    //pasar datos al formulario
+    // this.forma.setValue(this.sancion);
+    
   }
   ModificarSancion(){
     this._sancionService.updateSancion(this.token, this.idModificar ,this.sancion).subscribe(

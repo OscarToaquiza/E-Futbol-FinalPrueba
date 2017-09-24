@@ -10,68 +10,73 @@
     <div class="card-header text-center">
       <h3>{{titulo}}</h3>
     </div>
-    <form>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-lg-6 col-md-5">
-          <div class="row">
-          <div class="col-md-6">
-          <div class="form-group">
-            <small class="text-muted Error">
-              Nombre de la Sanción
-            </small>
-            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
-              <input type="text" name="name" class="form-control" placeholder="Nombre de la Sanción" #nombre_sancion="ngModel" 
-                [(ngModel)]="sancion.nombre_sancion"
-                required autofocus>
+    <form [formGroup]="forma" (ngSubmit)="guardarSancion()">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6 col-md-5">
+            <div class="row">
+            <div class="col-md-6">
+            <div class="form-group">
+              <small class="text-muted Error">
+                Nombre de la Sanción
+              </small>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon sfrm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
+                <input type="text" class="form-control" placeholder="Nombre de la Sanción" formControlName="nombre_sancion"
+                [ngClass]="{'is-valid': forma.get('nombre_sancion').valid && !forma.get('nombre_sancion').pristine ,
+                            'is-invalid':forma.get('nombre_sancion').invalid && forma.get('nombre_sancion').touched }">
+                <div *ngIf="forma.controls['nombre_sancion'].errors?.required && forma.controls['nombre_sancion'].touched" class="" >
+                  El nombre es necesario
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-          <div class="col-md-6">
-        
-          <div class="form-group">
-            <small class="text-muted Error">
-              Puntos de la Sanción
-            </small>
-            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
-              <input type="number" min="0" max="3"  step="1" name="name" class="form-control" placeholder="PTS" #pst_sancion="ngModel" [(ngModel)]="sancion.pts_sancion"
-                required autofocus>               
+            <div class="col-md-6">
+          
+            <div class="form-group">
+              <small class="text-muted Error">
+                Puntos de la Sanción
+              </small>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
+                <input type="number" min="0" max="3"  step="1" name="name" class="form-control" placeholder="PTS"
+                 formControlName="pts_sancion">
+                              
+              </div>
+              <small class="text-muted Error">
+                  Estos puntos serán restados de los puntos obtenidos por los equipos en las fechas jugadas.
+              </small>
             </div>
-            <small class="text-muted Error">
-                Estos puntos serán restados de los puntos obtenidos por los equipos en las fechas jugadas.
-             </small>
-          </div>
+            </div>
+
+            </div>
           </div>
 
+        </div>
+        <div class="row">
+          <div class=" col-lg-12 form-group">
+            <small class="text-muted Error">
+                  Observación
+              </small>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
+              <input type="text"  class="form-control" placeholder="Observaciones Generales" 
+                 formControlName="observacion_sancion">
+              <div class="invalid-feedback">
+                Please provide a valid city.
+              </div>
+            </div>
           </div>
         </div>
 
       </div>
-      <div class="row">
-        <div class=" col-lg-12 form-group">
-          <small class="text-muted Error">
-                Observación
-            </small>
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-            <input type="text" name="name" class="form-control" placeholder="Observaciones Generales" #observacion_sancion="ngModel"
-              [(ngModel)]="sancion.observacion_sancion" required>
-            <div class="invalid-feedback">
-              Please provide a valid city.
-            </div>
-          </div>
-        </div>
+      <div class="card-footer">
+        <button *ngIf="titulo == 'Nueva Sanción'" class="btn btn-success pull-left" type="submit" (click)="guardarSancion()">Guardar Nueva Sanción </button>
+        <button *ngIf="titulo == 'Modificar Sanción'" class="btn btn-success pull-left" type="submit" (click)="ModificarSancion()">{{titulo}}</button>
+        <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
+        <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">Cancelar</a>
       </div>
-
-    </div>
-    <div class="card-footer">
-      <button *ngIf="titulo == 'Nueva Sanción'" class="btn btn-success pull-left" type="submit" (click)="guardarSancion()">Guardar Nueva Sanción </button>
-      <button *ngIf="titulo == 'Modificar Sanción'" class="btn btn-success pull-left" type="submit" (click)="ModificarSancion()">{{titulo}}</button>
-      <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
-      <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">Cancelar</a>
-    </div>
+      {{forma.valid}}
     </form>
   </div>
 </div>
@@ -86,6 +91,8 @@
         <div class="card-block">
           <h3>PTS que resta</h3>
               <h1>{{sancion.pts_sancion}}</h1>
+              <h2>{{sancion._id}}</h2>
+              
         </div>
         <div class="card-footer">
           <a *ngIf="identity" class="btn btn-warning" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
