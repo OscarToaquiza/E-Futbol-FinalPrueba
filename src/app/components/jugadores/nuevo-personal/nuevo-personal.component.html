@@ -88,9 +88,10 @@
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
           <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-arrows-alt" aria-hidden="true"></i></div>
           <select id="inputState" class="form-control"  name="personal.rol_personal" required #rol="ngModel"
-          [ngClass]="{'is-valid': rol?.valid ,'is-invalid':rol?.invalid && rol.touched}"
-            [(ngModel)]="personal.rol_personal">elelija
-            <option disabled hidden [value]="selectUndefinedOptionValue">Elija un rol</option>
+            [ngClass]="{'is-valid': rol?.valid ,'is-invalid':rol?.invalid && rol.touched}"
+            [(ngModel)]="personal.rol_personal">
+            <option disabled hidden [value]="selectUndefinedOptionValue2">Elija un rol</option>
+            
             <option [ngValue]="'jugador'">Jugador</option>
             <option [ngValue]="'presidente'">Presidente</option>
             <option [ngValue]="'ambos'">Ambos</option>

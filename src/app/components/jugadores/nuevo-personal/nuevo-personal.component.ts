@@ -14,6 +14,8 @@ import swal from 'sweetalert2';
   styleUrls: ['./nuevo-personal.component.css']
 })
 export class NuevoPersonalComponent implements OnInit, OnChanges {
+  private selectUndefinedOptionValue2:any;
+  
   public personal: Personal;
   public fileSuccess: Boolean;
   public url: string;

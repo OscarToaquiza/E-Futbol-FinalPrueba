@@ -10,6 +10,7 @@
     <div class="card-header text-center">
       <h3>{{titulo}}</h3>
     </div>
+    <form>
     <div class="card-body">
       <div class="row">
         <div class="col-lg-6 col-md-5">
@@ -17,11 +18,12 @@
           <div class="col-md-6">
           <div class="form-group">
             <small class="text-muted Error">
-                        Nombre de la Sanción
-                    </small>
+              Nombre de la Sanción
+            </small>
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
               <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
-              <input type="text" name="name" class="form-control" placeholder="Nombre de la Sanción" #nombre_sancion="ngModel" [(ngModel)]="sancion.nombre_sancion"
+              <input type="text" name="name" class="form-control" placeholder="Nombre de la Sanción" #nombre_sancion="ngModel" 
+                [(ngModel)]="sancion.nombre_sancion"
                 required autofocus>
             </div>
           </div>
@@ -30,8 +32,8 @@
         
           <div class="form-group">
             <small class="text-muted Error">
-                        Puntos de la Sanción
-                    </small>
+              Puntos de la Sanción
+            </small>
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
               <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
               <input type="number" min="0" max="3"  step="1" name="name" class="form-control" placeholder="PTS" #pst_sancion="ngModel" [(ngModel)]="sancion.pts_sancion"
@@ -70,6 +72,7 @@
       <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
       <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">Cancelar</a>
     </div>
+    </form>
   </div>
 </div>
 <!-- CARDS DE LA SANCIONES -->
