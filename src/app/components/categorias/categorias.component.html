@@ -1,10 +1,9 @@
+<br>
 <div class="container jumbotron" *ngIf="!mostrar_formulario_inicial">
   <h1 class="text-center">
     No ha selecionado una temporada.
   </h1>
 </div>
-<button (click)="a()">PDF</button>
-<button (click)="b()">Guardar</button>
 
 <div class="container jumbotron" *ngIf="mostrar_formulario_inicial">
   <h1 class="text-center">
@@ -134,7 +133,7 @@
       </div>
     </div>
 
-    <pdf-viewer [src]="pdf" [original-size]="true" [zoom]="1"></pdf-viewer>
+    <!-- <pdf-viewer [src]="pdf" [original-size]="true" [zoom]="1"></pdf-viewer> -->
 
     <div class="col-lg-4 equipo" *ngIf="mostrar_formulario_inicial && identity">
       <div class="card" id="prueba">

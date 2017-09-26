@@ -19,21 +19,24 @@ export class ReglamentoComponent implements OnInit {
 
   constructor(private _temporadaService: TemporadaService,private domSanitizer:DomSanitizer) {
     this.url = GLOBAL.url;
+    this.temporada_actual = JSON.parse(localStorage.getItem('Temporada_Actual'));
    }
 
   ngOnInit() {
     this.obtenerTemporadas();
+    console.log('La Temporada Actual es:');
+    console.log(JSON.parse(localStorage.getItem('Temporada_Actual')));
   }
 
   obtenerTemporadas() {
-    this._temporadaService.getTemporadas().subscribe(
-      response => {
-        if (!response) {
+    // this._temporadaService.getTemporadas().subscribe(
+      // response => {
+        // if (!response) {
         
-        } else {
-          response.forEach(element => {
-            if(element.estado_temporada){
-              this.temporada_actual = element;
+        // } else {
+          // response.forEach(element => {
+            // if(element.estado_temporada){
+              // this.temporada_actual = element;
               if(this.temporada_actual.url_reglamento_temporada == undefined){
                 this.pdf = this.url + "temporada/get-pdf-temporada/REGLAMENTO.pdf";
                 this.pdfIframe= this.domSanitizer.bypassSecurityTrustResourceUrl(this.pdf);
@@ -41,17 +44,17 @@ export class ReglamentoComponent implements OnInit {
                 this.pdf = this.url + "temporada/get-pdf-temporada/" + this.temporada_actual.url_reglamento_temporada;
                 this.pdfIframe= this.domSanitizer.bypassSecurityTrustResourceUrl(this.pdf);
               }    
-            }
-          });
-        }
-      },
-      error => {
-        var errorMessage = <any>error;
-        if (errorMessage != null) {
-          var body = JSON.parse(error._body);
-          console.log(body);
-        }
-      }
-    );
+            // }
+          // });
+        // }
+      // },
+      // error => {
+        // var errorMessage = <any>error;
+        // if (errorMessage != null) {
+          // var body = JSON.parse(error._body);
+          // console.log(body);
+        // }
+      // }
+    // );
   }
 }

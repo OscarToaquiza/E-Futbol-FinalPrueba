@@ -8,9 +8,9 @@ import { GLOBAL } from '../../services/global';
 
 import { Categoria } from '../../models/categoria.model';
 import { Temporada } from '../../models/temporada.models';
-import * as jsPDF from  'jspdf';
-import * as $ from 'jquery';
-import * as html2canvas from 'html2canvas';
+// import * as jsPDF from  'jspdf';
+// import * as $ from 'jquery';
+// import * as html2canvas from 'html2canvas';
 import swal from 'sweetalert2';
 
 @Component({
@@ -213,27 +213,27 @@ export class CategoriasComponent implements OnInit {
 
 
 
-  a(){
-    let ctx=this;
-    html2canvas($('#prueba')[0]).then(function(canvas) {
-      console.log(":D");
-     var img=canvas.toDataURL("image/png");
-     let doc = new jsPDF()        
-    //  doc.fromHTML($('#prueba')[0],35, 25)           
-    doc.addImage(img,'JPEG',20,20);     
-    ctx.pdf=doc.output('datauristring')
-     console.log(doc.output('datauristring'));
-    // doc.save('file.pdf');     
+  // a(){
+  //   let ctx=this;
+  //   html2canvas($('#prueba')[0]).then(function(canvas) {
+  //     console.log(":D");
+  //    var img=canvas.toDataURL("image/png");
+  //    let doc = new jsPDF()        
+  //   //  doc.fromHTML($('#prueba')[0],35, 25)           
+  //   doc.addImage(img,'JPEG',20,20);     
+  //   ctx.pdf=doc.output('datauristring')
+  //    console.log(doc.output('datauristring'));
+  //   // doc.save('file.pdf');     
 
-  });          
-  }  
+  // });          
+  // }  
   
-  b()
-  {
-    let doc = new jsPDF()
+  // b()
+  // {
+  //   let doc = new jsPDF()
         
-    doc.fromHTML($('#prueba')[0],35, 25,{'background-color':'red'})             
-    doc.save('file.pdf');     
-  }
+  //   doc.fromHTML($('#prueba')[0],35, 25,{'background-color':'red'})             
+  //   doc.save('file.pdf');     
+  // }
 
 }

@@ -82,30 +82,37 @@ export class EditarTemporadaComponent implements OnInit {
   }
 
   obtenerTemporadas() {
-    this._temporadaService.getTemporadas().subscribe(
-      response => {
-        if (!response) {
-          this.validarTemporadas = false;
-        } else {
-          this.validarTemporadas = true;
-          response.forEach(element => {
-            if (element.estado_temporada) {
-              this.temporada_actual = element;
-              this.id_temporada_actual = element._id;
-              //console.log(element._id);
-              //console.log(this.temporada_actual);
-            }
-          });
-        }
-      },
-      error => {
-        var errorMessage = <any>error;
-        if (errorMessage != null) {
-          var body = JSON.parse(error._body);
-          console.log(body);
-        }
-      }
-    );
+    this.temporada_actual = JSON.parse(localStorage.getItem('Temporada_Actual'));
+    if (this.temporada_actual == null) {
+      this.validarTemporadas = false;
+    } else {
+      this.validarTemporadas = true;
+    }
+    console.log(this.temporada_actual);
+    // this._temporadaService.getTemporadas().subscribe(
+    //   response => {
+    //     if (!response) {
+    //       this.validarTemporadas = false;
+    //     } else {
+    //       this.validarTemporadas = true;
+    //       response.forEach(element => {
+    //         if (element.estado_temporada) {
+    //           this.temporada_actual = element;
+    //           this.id_temporada_actual = element._id;
+    //           //console.log(element._id);
+    //           //console.log(this.temporada_actual);
+    //         }
+    //       });
+    //     }
+    //   },
+    //   error => {
+    //     var errorMessage = <any>error;
+    //     if (errorMessage != null) {
+    //       var body = JSON.parse(error._body);
+    //       console.log(body);
+    //     }
+    //   }
+    // );
   }
 
   rolSelect(estado) {
@@ -121,20 +128,23 @@ export class EditarTemporadaComponent implements OnInit {
     console.log(this.temporada_nueva);
     if (this.temporada_nueva.estado_temporada == true) {
       console.log("actualizar la temporada actual cambiando el estado a false y despues guardar");
-      console.log("id de la temporada actual: " + this.id_temporada_actual);
+      console.log("id de la temporada actual: " + this.temporada_actual._id);
       console.log("id de la temporada nueva: " + this.idEditar);
       //this.temporada_nueva = new Temporada('',this.a,this.a,'','',this.a);
       this.temporada_actual.estado_temporada = false;
-      this._temporadaService.editTemporadaSoloEstado(this.token, this.id_temporada_actual, this.temporada_actual)
+      this._temporadaService.editTemporadaSoloEstado(this.token, this.temporada_actual._id, this.temporada_actual)
         .subscribe(
         response => {
           if (!response.temporada) {
             console.log("No se ha actualizado la TEMPORADA anterior ERROR");
           } else {
+            localStorage.removeItem('Temporada_Actual');
             console.log(response.temporada);
             console.log("El estado de la temporada actual a cambiado a false +++++++++ ");
             this.ActualizarNormalmente(this.idEditar);
             console.log("La temporada +" + this.idEditar + " el al actual");
+            localStorage.setItem('Temporada_Actual', JSON.stringify(this.temporada_nueva));
+            //Cambiar el localStotage de la temporada Actual.
             this.obtenerTemporadas();
           }
         },
@@ -149,7 +159,7 @@ export class EditarTemporadaComponent implements OnInit {
   }
 
   setProperty(inChecked: boolean) {
-    this.temporada_nueva.estado_temporada= inChecked;
+    this.temporada_nueva.estado_temporada = inChecked;
     if (inChecked == true) {
       swal({
         title: '¿Está seguro?',

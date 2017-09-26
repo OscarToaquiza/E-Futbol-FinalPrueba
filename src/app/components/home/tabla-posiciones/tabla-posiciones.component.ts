@@ -54,29 +54,31 @@ export class TablaPosicionesComponent implements OnInit {
   }
 
   obtenerTemporadas() {
-    this._temporadaService.getTemporadas().subscribe(
-      response => {
-        if (!response) {
-          // this.validarTemporadas = false;
-        } else {
-          response.forEach(element => {
-            if ( element.estado_temporada ) {
-              this.temporada_actual = element;
-              console.log(this.temporada_actual);              
-            }
-          });
-         this.CategoriasTemporada(this.temporada_actual._id);
+    this.temporada_actual = this.temporada_actual = JSON.parse(localStorage.getItem('Temporada_Actual'));
+    this.CategoriasTemporada(this.temporada_actual._id);
+    // this._temporadaService.getTemporadas().subscribe(
+    //   response => {
+    //     if (!response) {
+    //       // this.validarTemporadas = false;
+    //     } else {
+    //       response.forEach(element => {
+    //         if ( element.estado_temporada ) {
+    //           this.temporada_actual = element;
+    //           console.log(this.temporada_actual);              
+    //         }
+    //       });
+    //      this.CategoriasTemporada(this.temporada_actual._id);
               
-        }
-      },
-      error => {
-        var errorMessage = <any>error;
-        if (errorMessage != null) {
-          var body = JSON.parse(error._body);
-          console.log(body);
-        }
-      }
-    );
+    //     }
+    //   },
+    //   error => {
+    //     var errorMessage = <any>error;
+    //     if (errorMessage != null) {
+    //       var body = JSON.parse(error._body);
+    //       console.log(body);
+    //     }
+    //   }
+    // );
   }
   onClass(i){    
     this.cClass.fill(false);    
