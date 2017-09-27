@@ -1,23 +1,34 @@
 <div class="container">
     <br>
-    <div class="row">
-        <div class="col-lg-8">
-            <select class="form-control" (change)="onChangeCategoria($event)">
-              <option selected>Seleccione la Categoria a la que pertenece</option>
-              <option [ngValue]="categoria._id"  *ngFor="let categoria of arrayCategoria">{{categoria.nombre_categoria}}</option>                        
-            </select>
-        </div>
-        <div class="col-lg-4" *ngIf="VerCalendario && segundaVuelta != ''">
-            <button class="btn btn-primary" (click)="calendarioVuelta('1')">Vuelta 1</button>
-            <button class="btn btn-primary" (click)="calendarioVuelta('2')">Vuelta 2</button>
-        </div>
-        <div class="col-lg4" *ngIf="segundaVuelta == ''">
+    <div class="row jumbotron">
+        <div class="col-12 text-center">
             <h3>Calendario de Encuentros</h3>
         </div>
+        <hr>
+        <div class="col-5 text-center">
+            <h5>Temporada:</h5>
+            <h5>{{temporada_actual.nombre_temporada}}</h5>
+        </div>
+        <div class="col-4 text-center">
+            <h5>Categoria:</h5>
+            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar-check-o" aria-hidden="true"></i></div>
+                    <select class="form-control" (change)="onChangeCategoria($event)">
+                      <option selected>Seleccione una Categoria ...</option>
+                      <option [ngValue]="categoria._id"  *ngFor="let categoria of arrayCategoria">{{categoria.nombre_categoria}}</option>                        
+                    </select>
+            </div>
+        </div>
+        <div class="col-3 text-center" *ngIf="VerCalendario && segundaVuelta != ''">
+            <div class="centrar">
+                    <button class="btn btn-primary btn-block" (click)="calendarioVuelta('1')">Vuelta 1</button>
+                    <button class="btn btn-primary btn-block" (click)="calendarioVuelta('2')">Vuelta 2</button>
+            </div>
+        </div>
+        <div class="col-3" *ngIf="segundaVuelta == ''">
+            <!-- <h3></h3> -->
+        </div>
     </div>
-
-    <hr>
-
     <div class="row jumbotron" *ngIf="!VerCalendario">
         <h1>
             Sección Calendarios
@@ -32,6 +43,9 @@
 
         <div class="col-12" *ngIf="verVuelta == '1'">
              <div class="row text-center">
+                 <div class="col-12">
+                     <h5>Seleccione la Fecha</h5>
+                 </div>
                  <div class="col-12">
                         <pagination-controls (pageChange)="p = $event"></pagination-controls>
                  </div>
