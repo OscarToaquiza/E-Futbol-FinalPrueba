@@ -278,3 +278,11 @@ input[type="radio"] {
   -ms-transform: scale(1.2);
   transform: scale(1.2);
 }
+
+/* clase de error para div de formularios */
+.error-campo {
+   /* display: none;  */
+   margin-top: .25rem !important;
+   font-size: .875rem !important; 
+   color: #dc3545 !important;
+}
