@@ -33,26 +33,32 @@ export class DetalleEquipoComponent implements OnInit {
   ngOnInit() {
        
     this.obtenerTemporadas();    
-    this.edicion_equipo=JSON.parse(localStorage.getItem('equipoSeleccionado'));
+    this.edicion_equipo=JSON.parse(localStorage.getItem('equipoSeleccionado')); 
+    $('#escu').attr('crossOrigin', 'anonymous');   
     $('#escu').attr('src',this.url+'equipo/imagen/'+this.edicion_equipo.escudo_equipo);           
     this.escudo=this.getBase64Image(document.getElementById("escu"));    
     this.personalEquipo=this.edicion_equipo.personal_equipo;       
     this.personalEquipo.forEach((element,i) => {            
+      var img=new Image();
+
       if(element.url_foto_personal!=undefined)
-      {
+      { 
+        $('#ju'+(i)).attr('crossOrigin', 'anonymous');
         $('#ju'+(i)).attr('src',this.url+'personal/imagen/'+element.url_foto_personal); 
         // element.url_foto_personal=this.getBase64Image(document.getElementById('ju'+(i+1)));                                      
 
       }else{
-        $('#ju'+(i)).attr('src','assets/img/noticia-default.png');
+        $('#ju'+(i)).attr('crossOrigin', 'anonymous');
+        $('#ju'+(i)).attr('src','assets/img/noticia-default.png');        
       }   
+      this.personalEquipo[i].url_foto_personal=this.getBase64Image(document.getElementById('ju'+(i)));                                      
     });
     this.personalEquipo.forEach((element,i) => {
       console.log("##");
       console.log(element);
 
         // $('#ju'+(i+1)).attr('src',this.url+'personal/imagen/'+element.url_foto_personal); 
-        this.personalEquipo[i].url_foto_personal=this.getBase64Image(document.getElementById('ju'+(i)));                                      
+        
 
              
     });
@@ -291,13 +297,13 @@ export class DetalleEquipoComponent implements OnInit {
   }
 
   getBase64Image(img) {
-    if(img!=undefined){
+    if(img!=undefined){           
       var canvas = document.createElement("canvas");
       canvas.width = img.width;
       canvas.height = img.height;
       var ctx = canvas.getContext("2d");
       ctx.drawImage(img, 0, 0);
-      var dataURL = canvas.toDataURL();
+      var dataURL = $(canvas).get(0).toDataURL();
       return dataURL;
     }else{
       return null;

@@ -14,3 +14,22 @@
     width: 150px;
     height: 180px;
 }
+
+.crn>img{
+ padding: 2px;
+ margin: 5px;
+ border: 1px solid #ccc;
+ width: 150px !important;
+ height: 180px !important;
+}
+
+#carouselPersonal > .carousel-inner,#carouselPersonal .carousel-item
+{
+ padding: 2px; 
+ height:auto !important;
+}
+
+.crControl
+{    
+    height:150px !important;
+}
