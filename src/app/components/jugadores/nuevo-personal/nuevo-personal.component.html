@@ -24,7 +24,7 @@
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
           <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user-o" aria-hidden="true"></i></div>
           <input type="text" class="form-control" name="personal.apellido_personal" #apellido="ngModel" pattern="[a-zA-Z_áéíóúñàèìòùç\s]*"
-          [ngClass]="{'is-valid': apellido?.valid ,'is-invalid':apellido?.invalid && apellido.touched}"
+           [ngClass]="{'is-valid': apellido?.valid ,'is-invalid':apellido?.invalid && apellido.touched}"
            required [(ngModel)]="personal.apellido_personal" placeholder="Ingrese apellido">
            <div class="invalid-feedback" *ngIf="apellido.errors?.required && nombre.touched">
             El apellido es obligatorio
@@ -57,7 +57,6 @@
                   No es un formato valido
               </div>
              
-         
         </div>
       
     </div>
@@ -165,5 +164,8 @@
     </div> 
   </div>
   <button [disabled]="!forma.valid" type="submit" class="btn btn-success">Guardar</button>
+  
+  <button  type="button" class="btn btn-warning" >Cancelar</button>
+  
 </form>
 </div>

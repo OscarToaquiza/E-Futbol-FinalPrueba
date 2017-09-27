@@ -1,7 +1,10 @@
 import { Component, OnInit,Input,OnChanges } from '@angular/core';
 import {NoticiaService} from '../../../services/noticia.service'
 import {Noticia} from '../../../models/noticia.model';
-import{GLOBAL} from '../../../services/global';
+import {GLOBAL} from '../../../services/global';
+
+import {EquipoService} from '../../../services/equipo.service';
+import { Equipo } from '../../../models/equipo.model';
 
 @Component({
   selector: 'app-slider',
@@ -16,8 +19,13 @@ export class SliderComponent implements OnInit,OnChanges {
   public pagina=1;
   public srcItem:Array<String>;
   public url:string;
+
+  public equipos: Equipo[];
   
-  constructor(private _noticiaservice:NoticiaService) { 
+  constructor(
+    private _noticiaservice:NoticiaService,
+    private _equipoService:EquipoService
+  ) { 
     this.pagina=1;
     this.next_page=1;
     this.prev_page=1; 
@@ -28,6 +36,7 @@ export class SliderComponent implements OnInit,OnChanges {
   }
 
   ngOnInit() {
+
     this.pagina=1;
     this.next_page=1;
     this.prev_page=1; 
@@ -36,7 +45,7 @@ export class SliderComponent implements OnInit,OnChanges {
     // this.token = _US.getToken();  
     this.srcItem=new Array();    
     this.traerTresNoticias(this.pagina); 
-    
+    this.obtenerequipos();
     console.log(this.noticia); 
        
   }
@@ -88,6 +97,28 @@ export class SliderComponent implements OnInit,OnChanges {
                   }
               }
       )
+  }
+
+  obtenerequipos() {
+    this._equipoService.getEquipos().subscribe(
+      response => {
+        if (!response.equiposEncontrados) {
+          console.log(" La categoria no tiene Equipos ");
+        } else {
+          this.equipos = response.equiposEncontrados;
+          console.log(this.equipos);
+        }
+      },
+      error => {
+        var errorMessage = <any>error;
+
+        if (errorMessage != null) {
+          var body = JSON.parse(error._body);
+          //this.alertMessage = body.message;
+          console.log(error);
+        }
+
+      });
   }
 
 

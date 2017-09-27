@@ -22,6 +22,8 @@ import swal from 'sweetalert2';
 })
 export class CalendarioGeneralComponent implements OnInit {
 
+  p: number = 1;
+
   public temporada_actual: Temporada;
   public arrayCategoria = new Array();
   public categoriaSeleccionada:any;
@@ -33,6 +35,8 @@ export class CalendarioGeneralComponent implements OnInit {
   public primeraVuelta= new Array();
   public segundaVuelta= new Array();
 
+  public primeraVueltaClasificada : any;
+  public fechaAgrupadaSegundaVuelta: any;
   // public fechasPriemraVuelta: Fecha[];
 
   public verVuelta = '1';
@@ -52,28 +56,30 @@ export class CalendarioGeneralComponent implements OnInit {
   }
 
   obtenerTemporadas() {
-    this._temporadaService.getTemporadas().subscribe(
-      response => {
-        if (!response) {
-          // this.validarTemporadas = false;
-        } else {
-          response.forEach(element => {
-            if ( element.estado_temporada ) {
-              this.temporada_actual = element;
-              console.log(this.temporada_actual);              
-            }
-          });
-        this.CategoriasTemporada(this.temporada_actual._id);
-        }
-      },
-      error => {
-        var errorMessage = <any>error;
-        if (errorMessage != null) {
-          var body = JSON.parse(error._body);
-          console.log(body);
-        }
-      }
-    );
+    this.temporada_actual = this.temporada_actual = JSON.parse(localStorage.getItem('Temporada_Actual'));
+    this.CategoriasTemporada(this.temporada_actual._id);
+    // this._temporadaService.getTemporadas().subscribe(
+    //   response => {
+    //     if (!response) {
+    //       // this.validarTemporadas = false;
+    //     } else {
+    //       response.forEach(element => {
+    //         if ( element.estado_temporada ) {
+    //           this.temporada_actual = element;
+    //           console.log(this.temporada_actual);              
+    //         }
+    //       });
+    //     this.CategoriasTemporada(this.temporada_actual._id);
+    //     }
+    //   },
+    //   error => {
+    //     var errorMessage = <any>error;
+    //     if (errorMessage != null) {
+    //       var body = JSON.parse(error._body);
+    //       console.log(body);
+    //     }
+    //   }
+    // );
   }
 
   CategoriasTemporada(id:string){
@@ -106,6 +112,7 @@ export class CalendarioGeneralComponent implements OnInit {
   onChangeCategoria(e){
     this.categoriaSeleccionada=e;
     this.obtenerCalendario(e);
+    this.p = 1;
   }
   
   // *ngFor="let fec of fechaAgrupada"
@@ -125,6 +132,9 @@ export class CalendarioGeneralComponent implements OnInit {
               console.log('Hay segunda Vuelta? ' + this.arrayCategoria[index].segunda_vuelta);
               let val1 = 0;
               let val2 = 0;
+              //Reiniciar los array
+              this.primeraVuelta = new Array();
+              this.segundaVuelta = new Array();
               if( this.arrayCategoria[index].segunda_vuelta == true){
                 this.primeraVuelta.length = 0;
                 this.fechaAgrupada.forEach(element => {
@@ -145,23 +155,17 @@ export class CalendarioGeneralComponent implements OnInit {
                     }
                   });
                 });
+                this.primeraVueltaClasificada = _.values(_.groupBy(this.primeraVuelta, 'n_fecha'));
+                this.fechaAgrupadaSegundaVuelta = _.values(_.groupBy(this.segundaVuelta, 'n_fecha'));
+                console.log(this.primeraVueltaClasificada);
+                console.log(this.fechaAgrupadaSegundaVuelta);
+              this.fechaAgrupada = this.primeraVueltaClasificada;
                 // this.fechasPriemraVuelta = this.primeraVuelta;
               console.log('Primera Vuelta: ' + this.primeraVuelta);
               console.log('Segunda Vuelta: ' + this.segundaVuelta);
               }else{
                 console.log("Un sola vuelta");
                 this.verVuelta = '1';
-                //Vaciar e Array
-                this.primeraVuelta.length = 0;
-                let val3 = 0;
-                this.fechaAgrupada.forEach(element => {
-                  element.forEach(ele => {
-                    this.primeraVuelta[val3] = ele;
-                    val3++;
-                  });
-                });
-                // this.fechasPriemraVuelta = this.primeraVuelta;
-                this.segundaVuelta.length = 0;
                 console.log('Primera Vuelta: ' + this.primeraVuelta);
                 console.log('Segunda Vuelta: ' + this.segundaVuelta);
 
@@ -192,6 +196,7 @@ export class CalendarioGeneralComponent implements OnInit {
 
   calendarioVuelta(value: string){
     this.verVuelta = value;
+    this.p = 1;
   }
 
 }

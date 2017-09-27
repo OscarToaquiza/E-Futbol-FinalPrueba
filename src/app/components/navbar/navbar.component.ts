@@ -31,7 +31,9 @@ export class NavbarComponent implements OnInit, DoCheck {
     this.identity = this._US.getIdentity();
   }
   logout() {
-    localStorage.clear();
+    localStorage.removeItem('identity');
+    localStorage.removeItem('token');
+    // localStorage.clear();
     this.identity = null;
     location.reload();
     // this._router.navigate(['/']);

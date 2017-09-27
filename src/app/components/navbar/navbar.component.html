@@ -1,126 +1,166 @@
+<!-- <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+    <h1>LOGO</h1>
+    <button class="navbar-toggler navbar-toggler-right align-self-center my-2" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+      <div class="container">
+          <div class="collapse navbar-collapse flex-column ml-lg-0 ml-3" id="navbarCollapse">
+              <h5>
+                  Campeonato Rumipamba de Espinozas
+              </h5>
+              <ul class="navbar-nav mb-2">
+                  <li class="nav-item active">
+                      <a class="nav-link" href="#">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Product</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Shop</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#">Events</a>
+                  </li>
+              </ul>
+          </div>
+      </div>
+  </nav> -->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-  <a class="navbar-brand" href="#">E-FUTFOL</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['home']">Inicio <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['temporada']">Temporada</a>
-      </li>
-      <li class="nav-item ">
-          <!-- dropdown -->
-        <a class="nav-link" [routerLink]="['categorias']">Categorias</a>
-        <!-- dropdown-toggle data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"-->
-        <!-- <div class="dropdown-menu"> -->
-          <!-- <a class="dropdown-item" href="#">Maxima</a> -->
-          <!-- <a class="dropdown-item" href="#">Primera A</a> -->
-          <!-- <a class="dropdown-item" href="#">Primera B</a> -->
-          <!-- <div class="dropdown-divider"></div> -->
-          <!-- <a class="dropdown-item" href="#">Separated link</a> -->
-        <!-- </div> -->
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['equipos']">Equipos</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['estadios']">Estadios</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['calendario']">Calendario</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" [routerLink]="['calendario-general']">Calendario</a>
-        </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['reglamento']">Reglamento</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['jugadores']">Personal</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['sancion']">Sanción</a>
-      </li>
-    </ul>
-    <form class="form-inline mt-2 mt-md-0">
-      
-      <button type="button" *ngIf="!identity"  class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modal-login">
-        Iniciar Sesión
-      </button>
-      <button class="btn btn-outline-danger my-2 my-sm-0" *ngIf="identity" (click)="logout()" type="submit"><i class="fa fa-sign-in" aria-hidden="true"></i> 
-        Cerrar Sesión
-      </button>        
-    </form>
-    
-  </div>
+  <img src="assets/img/logo_liga.svg" alt="Logo" width="70">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+    aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+     </button>
+  <!-- <div class=" container"> -->
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <div class="d-flex flex-column" style="width:100%"> 
+        <div class="d-flex justify-content-start">
+          <div class="ml-3 mt-2">
+            <h5 style="color:white;font-family: 'Lobster', cursive;">
+                <i class="fa fa-trophy" aria-hidden="true"></i>
+              Campeonato Rumipamba de Espinozas
+            </h5>
+          </div>
+          <div class="ml-auto p-2">
+            <form>
+              <button type="button" *ngIf="!identity" class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#modal-login">
+          Iniciar Sesión
+        </button>
+              <button class="btn btn-outline-danger my-2 my-sm-0 d-none d-sm-none d-md-none d-lg-block" *ngIf="identity" (click)="logout()" type="submit"> 
+          Cerrar Sesión
+        </button>
+        <button class="btn btn-outline-danger my-2 my-sm-0 d-lg-none" *ngIf="identity" (click)="logout()" type="submit"><i class="fa fa-sign-in" aria-hidden="true"></i> 
+        </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="p-2" style="margin-top:-30px;">
+          <ul class="navbar-nav ">
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['home']">Inicio</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['temporada']">Temporada</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['categorias']">Categorias</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['equipos']">Equipos</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['estadios']">Estadios</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active" *ngIf="identity">
+              <a class="nav-link" [routerLink]="['calendario']">Calendario</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['calendario-general']">Calendario</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['reglamento']">Reglamento</a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['jugadores']">Personal</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['sancion']">Sanción</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
 </nav>
 
 <div class="modal fade " id="modal-login" tabindex="-1" role="dialog" aria-labelledby="modal-login" aria-hidden="true">
   <div class="modal-dialog " role="document">
-      <div class="modal-content frm-login">
-          <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-content frm-login">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Iniciar Sesión</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
-          </div>
-          <div class="modal-body ">
-              <form class="form-horizontal" role="form" method="POST" action="/register"> 
-                <div class="row">
-                      <div class="col-md-3 field-label-responsive">
-                          <label for="name">N° Cédula</label>
-                      </div>
-                      <div class="col-md-6">
-                          <div class="form-group">
-                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
-                                  <input type="text" name="cedula" #cedula="ngModel" [(ngModel)]="user.cedula" class="form-control" id="cedula" placeholder="Cédula de identidad" aria-describedby="cedula" required autofocus>
-                                </div>
-                                <small id="cedula" class="text-muted Error">
+      </div>
+      <div class="modal-body ">
+        <form class="form-horizontal" role="form" method="POST" action="/register">
+          <div class="row">
+            <div class="col-md-3 field-label-responsive">
+              <label for="name">N° Cédula</label>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user"></i></div>
+                  <input type="text" name="cedula" #cedula="ngModel" [(ngModel)]="user.cedula" class="form-control" id="cedula" placeholder="Cédula de identidad"
+                    aria-describedby="cedula" required autofocus>
+                </div>
+                <small id="cedula" class="text-muted Error">
                                     10 Dígitos, sin espacios y guion
                                 </small>
 
-                          </div>
-                      </div>
-                      <div class="col-md-3">
-                        <div *ngIf="identity" class="alert alert-danger Error" role="alert">
-                            {{mensajeError}}
-                        </div>
-                      </div>
-                  </div>                        
-                  <div class="row">
-                      <div class="col-md-3 field-label-responsive">
-                          <label for="password">Password</label>
-                      </div>
-                      <div class="col-md-6">
-                          <div class="form-group has-danger">
-                              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
-                                  <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" id="password" placeholder="Password" required>
-                              </div>
-                              <small id="password" class="text-muted">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div *ngIf="identity" class="alert alert-danger Error" role="alert">
+                {{mensajeError}}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3 field-label-responsive">
+              <label for="password">Password</label>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group has-danger">
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                  <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                  <input type="password" name="password" #password="ngModel" [(ngModel)]="user.password" class="form-control" id="password"
+                    placeholder="Password" required>
+                </div>
+                <small id="password" class="text-muted">
                                 Contraseña Encriptada
-                            </small>                              
-                          </div>
-                      </div>
-                      <div class="col-md-3">
-                          <div class="form-control-feedback">
-                              <span class="text-danger align-middle">
+                            </small>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-control-feedback">
+                <span class="text-danger align-middle">
                       <!--<i class="fa fa-close"> Example Error Message</i>-->
                   </span>
-                          </div>
-                      </div>
-                  </div>                                                
-              </form>
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
-              <button type="submit" (click)="onSubmit()" class="btn btn-success pull-right">Iniciar </button>
-          </div>
+        </form>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cancelar</button>
+        <button type="submit" (click)="onSubmit()" class="btn btn-success pull-right">Iniciar </button>
+      </div>
+    </div>
   </div>
 </div>
-

@@ -59,30 +59,39 @@ export class VerTemporadaComponent implements OnInit {
   }
 
   obtenerTemporadas() {
-    this._temporadaService.getTemporadas().subscribe(
-      response => {
-        if (!response) {
-          this.validarTemporadas = false;
-        } else {
-          this.validarTemporadas = true;
-          this.temporadas = response;
-          console.log(this.temporadas);
-          this.temporadas.forEach(element => {
-            if(element.estado_temporada){
-              this.temporada_actual = element;
-              console.log(this.temporada_actual);
-            }
-          });
-        }
-      },
-      error => {
-        var errorMessage = <any>error;
-        if (errorMessage != null) {
-          var body = JSON.parse(error._body);
-          console.log(body);
-        }
-      }
-    );
+    // localStorage.removeItem('Temporada_Actual');
+    this.temporada_actual = JSON.parse(localStorage.getItem('Temporada_Actual'));
+    if(this.temporada_actual == null){
+            this.validarTemporadas = false;
+    }else{
+            this.validarTemporadas = true;
+    }
+    console.log('Tempordada Actual: '+ this.temporada_actual);
+
+    // this._temporadaService.getTemporadas().subscribe(
+    //   response => {
+    //     if (!response) {
+    //       this.validarTemporadas = false;
+    //     } else {
+    //       this.validarTemporadas = true;
+    //       this.temporadas = response;
+    //       console.log(this.temporadas);
+    //       this.temporadas.forEach(element => {
+    //         if(element.estado_temporada){
+    //           this.temporada_actual = element;
+    //           console.log(this.temporada_actual);
+    //         }
+    //       });
+    //     }
+    //   },
+    //   error => {
+    //     var errorMessage = <any>error;
+    //     if (errorMessage != null) {
+    //       var body = JSON.parse(error._body);
+    //       console.log(body);
+    //     }
+    //   }
+    // );
   }
 
   imagen(fileInput: any) {

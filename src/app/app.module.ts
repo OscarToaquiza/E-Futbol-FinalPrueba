@@ -5,6 +5,7 @@ import { HttpModule} from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
+import {NgxPaginationModule} from 'ngx-pagination';
 //para fecha es español
 import{LOCALE_ID} from '@angular/core';
 
@@ -93,7 +94,8 @@ import {OrdenVector} from './pipes/orden-vector';
     HttpModule,  
     FormsModule,  
     // SharedModule,
-    RoutingModule
+    RoutingModule,
+    NgxPaginationModule
   
   ],
   providers: [

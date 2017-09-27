@@ -38,10 +38,13 @@
           <div class="form-group col-lg-12">
               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-newspaper-o"></i></div>
-                <input type="text" name="name" class="form-control" placeholder="Nombre de la Temporada" #nombre_temporada="ngModel" [(ngModel)]="temporada_nueva.nombre_temporada" required autofocus>
-                <div class="invalid-feedback">
-                  Please provide a valid city.
-                </div>
+                <input type="text" name="name" class="form-control" placeholder="Nombre de la Temporada" 
+                  [ngClass]="{'is-valid': nombre?.valid ,'is-invalid':nombre?.invalid && nombre.touched}"
+                  #nombre="ngModel" [(ngModel)]="temporada_nueva.nombre_temporada" required autofocus/>
+                
+              </div>
+              <div *ngIf="nombre.errors?.required && nombre.touched" class="alert alert-danger" role="alert">
+                 El nombre es obligatorio
               </div>
             </div>
       </div>
@@ -53,11 +56,14 @@
                 </small>  
               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                   <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-                  <input type="date" name="name" class="form-control" placeholder="today" #fecha_inicio="ngModel" [(ngModel)]="temporada_nueva.fecha_inicio" required>
-                  <div class="invalid-feedback">
-                    Please provide a valid city.
-                  </div>
+                  <input type="date" name="name" class="form-control" placeholder="today" #inicio="ngModel"
+                  [ngClass]="{'is-valid': inicio?.valid ,'is-invalid':inicio?.invalid && inicio.touched}" 
+                  [(ngModel)]="temporada_nueva.fecha_inicio" required/>
+                  
                 </div>
+                <div *ngIf="inicio.errors?.required && inicio.touched" class="alert alert-danger" role="alert">
+                    La fecha de inicio es obligatoria
+                 </div>
               </div> 
         </div>
         <div class="col-lg-6">
@@ -67,11 +73,16 @@
                 </small> 
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                   <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-                  <input type="date" name="name" class="form-control" placeholder="" #fecha_fin="ngModel" [(ngModel)]="temporada_nueva.fecha_fin">
-                  <div class="invalid-feedback">
+                  <input type="date" name="name" class="form-control" placeholder=""  required
+                   [ngClass]="{'is-valid': fin?.valid ,'is-invalid':fin?.invalid && fin.touched}"
+                    #fin="ngModel" [(ngModel)]="temporada_nueva.fecha_fin"/>
+                  <!-- <div class="invalid-feedback">
                     Please provide a valid city.
-                  </div>
+                  </div> -->
                 </div>
+                <div *ngIf="fin.errors?.required && fin.touched" class="alert alert-danger" role="alert">
+                    La fecha de clausura es obligatorio
+                 </div>
               </div>
         </div> 
       </div>
