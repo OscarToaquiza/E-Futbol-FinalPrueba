@@ -67,7 +67,6 @@ export class SancionComponent implements OnInit {
 
   //---
 
-
   ngOnInit() {
    
     this.getSancion();
@@ -100,8 +99,7 @@ export class SancionComponent implements OnInit {
 
 
 
-  guardarSancion(){        
-    console.log(this.sancion);
+  guardarSancion(){   
     this.sancion=this.prepareSaveHero();
      this._sancionService.saveSancion(this.token,this.sancion)
     .subscribe(
@@ -134,7 +132,7 @@ export class SancionComponent implements OnInit {
     this.idModificar = id;
 
     //pasar datos al formulario
-    this.createForm();
+    this.resetForm();
     
   }
 
