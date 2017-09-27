@@ -1,0 +1,16 @@
+#carnets
+{
+    background-color: red;
+    width:1000px;        
+}
+
+.card-carnets
+{    
+    width: 500px;
+    height: 400px;
+}
+.carnet-img,.carnet-img-content{
+    background: white;
+    width: 150px;
+    height: 180px;
+}
