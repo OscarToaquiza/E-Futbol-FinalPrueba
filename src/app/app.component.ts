@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
               localStorage.setItem('Temporada_Actual',JSON.stringify(this.temporada_actual));
             }
           });
-        this.CategoriasTemporada(this.temporada_actual._id);
+        // this.CategoriasTemporada(this.temporada_actual._id);
         }
       },
       error => {
@@ -46,33 +46,33 @@ export class AppComponent implements OnInit {
     );
   }
 
-  CategoriasTemporada(id:string){
-    this._categoriaService.getCategorias().subscribe(
-      response => {
-        if (!response){
-          console.log("No existen categorias");
-        }else{
-          let i=0;
-          for (var index = 0; index < response.length; index++) {
-            // console.log("alo 1 "+ response[index].id_temporada + "id: "+ id) ;
-            if( response[index].id_temporada == id){
-              console.log(" Id de la temporada en categoria "+response[index].id_temporada);
-              this.arrayCategoria[i] = response[index];
-              i++
-            }
-          }
-          console.log(response);          
-          console.log(this.arrayCategoria);
-        }
-      },
-      error => {
-        var errorMessage = <any>error;
-        if (errorMessage != null) {
-          var body = JSON.parse(error._body);
-          console.log(body);
-        }
-        });
-  }
+  // CategoriasTemporada(id:string){
+  //   this._categoriaService.getCategorias().subscribe(
+  //     response => {
+  //       if (!response){
+  //         console.log("No existen categorias");
+  //       }else{
+  //         let i=0;
+  //         for (var index = 0; index < response.length; index++) {
+  //           // console.log("alo 1 "+ response[index].id_temporada + "id: "+ id) ;
+  //           if( response[index].id_temporada == id){
+  //             console.log(" Id de la temporada en categoria "+response[index].id_temporada);
+  //             this.arrayCategoria[i] = response[index];
+  //             i++
+  //           }
+  //         }
+  //         console.log(response);          
+  //         console.log(this.arrayCategoria);
+  //       }
+  //     },
+  //     error => {
+  //       var errorMessage = <any>error;
+  //       if (errorMessage != null) {
+  //         var body = JSON.parse(error._body);
+  //         console.log(body);
+  //       }
+  //       });
+  // }
 
 }
 

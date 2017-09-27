@@ -37,3 +37,19 @@ body{
 .Error{
     height: 10px;
 }
+    
+  .link-1 {
+    transition: 0.3s ease;
+    color: #ffffff;
+    text-decoration: none;
+    border-top: 1px solid #292b2c;
+    border-bottom: 1px solid #292b2c;
+    /* padding: 10px 0; */
+    /* margin: 0 10px; */
+  }
+  .link-1:hover {
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    /* padding: 2px 0;  */
+  }
+  
