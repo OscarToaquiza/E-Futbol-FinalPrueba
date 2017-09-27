@@ -88,6 +88,388 @@
         </div>
   
       </div>
+      <div>
+        <button (click)="descargarCarnets()">DESCARGAR CARNETS</button>
+      </div>      
+    </div>
+    <!-- ---------------------------------------------------------------------------------------------------- -->
+    <div>
+      <img id="escu" src="" alt="">
+      <img src="" id="ju0" alt="">
+      <img src="" id="ju1" alt="">
+      <img src="" id="ju2" alt="">
+      <img src="" id="ju3" alt="">
+      <img src="" id="ju4" alt="">
+      <img src="" id="ju5" alt="">
+      <img src="" id="ju6" alt="">
+      <img src="" id="ju7" alt="">
+      <img src="" id="ju8" alt="">
+      <img src="" id="ju9" alt="">
+      <img src="" id="ju10" alt="">
+      <img src="" id="ju11" alt="">
+      <img src="" id="ju12" alt="">
+      <img src="" id="ju13" alt="">
+      <img src="" id="ju14" alt="">
+      <img src="" id="ju15" alt="">
+      <img src="" id="ju16" alt="">
+      <img src="" id="ju17" alt="">
+      <img src="" id="ju18" alt="">
+      <img src="" id="ju19" alt="">
+      <img src="" id="ju20" alt="">
+      <img src="" id="ju21" alt="">
+      <img src="" id="ju22" alt="">
+      <img src="" id="ju23" alt="">
+      <img src="" id="ju24" alt="">      
+    </div>
+
+    <!--  -->
+    <!-- <div *ngFor="let carnetGroup of carnets" class="carnets" id="carnets"> -->
+      <div id="carnets">
+      <h2>Equipo: {{edicion_equipo.nombre_equipo}}</h2>
+      <table *ngFor="let jugador of personalEquipo;let i = index;" id="carnets{{i}}">
+        <tr >          
+          <td> 
+              <div class="card card-carnets" *ngIf="jugador[0]!=undefined" >
+                  <div class="card-header row">
+                  <div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div><div class="col-8 text-center" >{{temporada_actual.nombre_temporada}}<br>COTOPAXI-ECUADOR</div><div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div>
+                  </div>
+                  <div class="card-block">
+                    <p class="card-text">                                         
+                    </p>                    
+                    <div class=" row" >
+                      <div class="col-4">
+                          <div class="carnet-img-content">
+                              {{jugador[0].url_foto_personal}}
+                              <img class="carnet-img"  src="{{jugador[0].url_foto_personal}}" alt="FOTO">
+                          </div>                          
+                      </div>
+                      
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>{{edicion_equipo.nombre_equipo}}</h2>
+                            </div>                      
+                          </div>
+                          <div class="row">
+                            <div class="col-8">
+                                <h5>{{jugador[0].apellido_personal}}</h5>
+                                <h5>{{jugador[0].nombre_personal}}</h5>                                
+                                <h5>{{jugador[0].cedula_personal}}</h5>
+                                <hr>
+                                                                
+                            </div>                  
+                            <div class="col-4">
+                                <div id="o"></div>
+                                <img src="{{escudo}}" width="70" alt="FOTO">
+                            </div>      
+                          </div>
+                          <div class="row">
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA JUGADOR</small>
+                              </div>  
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA LIGA</small>
+                              </div>  
+                            </div>
+                    </div>
+                    
+                    </div>                                        
+                  </div>                  
+                  <div class="card-footer">                                
+                  </div>
+                </div>           
+          </td>
+          <td> 
+              <div class="card card-carnets" *ngIf="jugador[1]!=undefined" >
+                  <div class="card-header row">
+                  <div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div><div class="col-8 text-center" >{{temporada_actual.nombre_temporada}}<br>COTOPAXI-ECUADOR</div><div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div>
+                  </div>
+                  <div class="card-block">
+                    <p class="card-text">                                         
+                    </p>                    
+                    <div class=" row" >
+                      <div class="col-4">
+                          <div class="carnet-img-content">
+                              
+                              <img class="carnet-img"  src="{{jugador[1].url_foto_personal}}"  alt="FOTO">                    
+                          </div>                          
+                      </div>
+                      
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>{{edicion_equipo.nombre_equipo}}</h2>
+                            </div>                      
+                          </div>
+                          <div class="row">
+                            <div class="col-8">
+                                <h5>{{jugador[1].apellido_personal}}</h5>
+                                <h5>{{jugador[1].nombre_personal}}</h5>                                
+                                <h5>{{jugador[1].cedula_personal}}</h5>
+                                <hr>
+                                                                
+                            </div>                  
+                            <div class="col-4" >
+                                <img src="{{escudo}}" width="70" alt="">
+                            </div>      
+                          </div>
+                          <div class="row">
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA JUGADOR</small>
+                              </div>  
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA LIGA</small>
+                              </div>  
+                            </div>
+                    </div>
+                    
+                    </div>                                        
+                  </div>                  
+                  <div class="card-footer">                                
+                  </div>
+                </div>           
+          </td>
+        </tr>
+
+        
+        <!-- 2 FILA DE CARNETS -->
+        <tr >          
+          <td> 
+              <div class="card card-carnets" *ngIf="jugador[2]!=undefined" >
+                  <div class="card-header row">
+                  <div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div><div class="col-8 text-center" >{{temporada_actual.nombre_temporada}}<br>COTOPAXI-ECUADOR</div><div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div>
+                  </div>
+                  <div class="card-block">
+                    <p class="card-text">                                         
+                    </p>                    
+                    <div class=" row" >
+                      <div class="col-4">
+                          <div class="carnet-img-content">
+                              {{jugador[2].url_foto_personal}}
+                              <img class="carnet-img"  src="{{jugador[2].url_foto_personal}}" alt="FOTO">
+                          </div>                          
+                      </div>
+                      
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>{{edicion_equipo.nombre_equipo}}</h2>
+                            </div>                      
+                          </div>
+                          <div class="row">
+                            <div class="col-8">
+                                <h5>{{jugador[2].apellido_personal}}</h5>
+                                <h5>{{jugador[2].nombre_personal}}</h5>                                
+                                <h5>{{jugador[2].cedula_personal}}</h5>
+                                <hr>
+                                                                
+                            </div>                  
+                            <div class="col-4">
+                                <div id="o"></div>
+                                <img src="{{escudo}}" width="70" alt="FOTO">
+                            </div>      
+                          </div>
+                          <div class="row">
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA JUGADOR</small>
+                              </div>  
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA LIGA</small>
+                              </div>  
+                            </div>
+                    </div>
+                    
+                    </div>                                        
+                  </div>                  
+                  <div class="card-footer">                                
+                  </div>
+                </div>           
+          </td>
+          <td> 
+              <div class="card card-carnets" *ngIf="jugador[3]!=undefined" >
+                  <div class="card-header row">
+                  <div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div><div class="col-8 text-center" >{{temporada_actual.nombre_temporada}}<br>COTOPAXI-ECUADOR</div><div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div>
+                  </div>
+                  <div class="card-block">
+                    <p class="card-text">                                         
+                    </p>                    
+                    <div class=" row" >
+                      <div class="col-4">
+                          <div class="carnet-img-content">
+                              
+                              <img class="carnet-img"  src="{{jugador[3].url_foto_personal}}"  alt="FOTO">                    
+                          </div>                          
+                      </div>
+                      
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>{{edicion_equipo.nombre_equipo}}</h2>
+                            </div>                      
+                          </div>
+                          <div class="row">
+                            <div class="col-8">
+                                <h5>{{jugador[3].apellido_personal}}</h5>
+                                <h5>{{jugador[3].nombre_personal}}</h5>                                
+                                <h5>{{jugador[3].cedula_personal}}</h5>
+                                <hr>
+                                                                
+                            </div>                  
+                            <div class="col-4" >
+                                <img src="{{escudo}}" width="70" alt="">
+                            </div>      
+                          </div>
+                          <div class="row">
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA JUGADOR</small>
+                              </div>  
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA LIGA</small>
+                              </div>  
+                            </div>
+                    </div>
+                    
+                    </div>                                        
+                  </div>                  
+                  <div class="card-footer">                                
+                  </div>
+                </div>           
+          </td>
+        </tr>
+
+        <!-- 3 FILA CARNETS -->
+        <tr >          
+          <td> 
+              <div class="card card-carnets" *ngIf="jugador[4]!=undefined" >
+                  <div class="card-header row">
+                  <div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div><div class="col-8 text-center" >{{temporada_actual.nombre_temporada}}<br>COTOPAXI-ECUADOR</div><div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div>
+                  </div>
+                  <div class="card-block">
+                    <p class="card-text">                                         
+                    </p>                    
+                    <div class=" row" >
+                      <div class="col-4">
+                          <div class="carnet-img-content">
+                              {{jugador[4].url_foto_personal}}
+                              <img class="carnet-img"  src="{{jugador[4].url_foto_personal}}" alt="FOTO">
+                          </div>                          
+                      </div>
+                      
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>{{edicion_equipo.nombre_equipo}}</h2>
+                            </div>                      
+                          </div>
+                          <div class="row">
+                            <div class="col-8">
+                                <h5>{{jugador[4].apellido_personal}}</h5>
+                                <h5>{{jugador[4].nombre_personal}}</h5>                                
+                                <h5>{{jugador[4].cedula_personal}}</h5>
+                                <hr>
+                                                                
+                            </div>                  
+                            <div class="col-4">
+                                <div id="o"></div>
+                                <img src="{{escudo}}" width="70" alt="FOTO">
+                            </div>      
+                          </div>
+                          <div class="row">
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA JUGADOR</small>
+                              </div>  
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA LIGA</small>
+                              </div>  
+                            </div>
+                    </div>
+                    
+                    </div>                                        
+                  </div>                  
+                  <div class="card-footer">                                
+                  </div>
+                </div>           
+          </td>
+          <td> 
+              <div class="card card-carnets" *ngIf="jugador[5]!=undefined" >
+                  <div class="card-header row">
+                  <div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div><div class="col-8 text-center" >{{temporada_actual.nombre_temporada}}<br>COTOPAXI-ECUADOR</div><div class="col-2"><img src="assets/img/logoRumipamba.jpg" width="60"></div>
+                  </div>
+                  <div class="card-block">
+                    <p class="card-text">                                         
+                    </p>                    
+                    <div class=" row" >
+                      <div class="col-4">
+                          <div class="carnet-img-content">
+                              
+                              <img class="carnet-img"  src="{{jugador[5].url_foto_personal}}"  alt="FOTO">                    
+                          </div>                          
+                      </div>
+                      
+                    <div class="col-8">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2>{{edicion_equipo.nombre_equipo}}</h2>
+                            </div>                      
+                          </div>
+                          <div class="row">
+                            <div class="col-8">
+                                <h5>{{jugador[5].apellido_personal}}</h5>
+                                <h5>{{jugador[5].nombre_personal}}</h5>                                
+                                <h5>{{jugador[5].cedula_personal}}</h5>
+                                <hr>
+                                                                
+                            </div>                  
+                            <div class="col-4" >
+                                <img src="{{escudo}}" width="70" alt="">
+                            </div>      
+                          </div>
+                          <div class="row">
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA JUGADOR</small>
+                              </div>  
+                              <div class="col-6">
+                              <br>                                  
+                              <hr>
+                              <small>FIRMA LIGA</small>
+                              </div>  
+                            </div>
+                    </div>
+                    
+                    </div>                                        
+                  </div>                  
+                  <div class="card-footer">                                
+                  </div>
+                </div>           
+          </td>
+        </tr>
+      </table>
+                            
     </div>
   </div>
   
+  <img id="formatoCarnet" src="assets/img/carnet.png" alt="">
+  <img id="formatoCarnet2" src="assets/img/carnet2.png" alt="">
+
