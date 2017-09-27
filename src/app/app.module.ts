@@ -37,6 +37,8 @@ import {CategoriaService} from './services/categoria.service';
 import {EstadioService} from './services/estadio.service';
 import {FechaService} from './services/fecha.service';
 import { SancionService } from './services/sancion.service';
+
+import{AuthService} from './services/auth.service';
 //rutas
 import{RoutingModule} from './app.routing';
 import { CategoriasComponent } from './components/categorias/categorias.component';
@@ -105,7 +107,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
   
   ],
   providers: [
-    UserService,NoticiaService,EquipoService,TemporadaService,PersonalService,CategoriaService,EstadioService,FechaService,SancionService,
+    UserService,NoticiaService,EquipoService,TemporadaService,PersonalService,
+    CategoriaService,EstadioService,FechaService,SancionService,AuthService,
     //para la fecha en español
     {provide:LOCALE_ID,useValue:'es'}
   ],
