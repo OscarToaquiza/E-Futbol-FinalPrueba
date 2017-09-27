@@ -10,7 +10,8 @@
     <div class="card-header text-center">
       <h3>{{titulo}}</h3>
     </div>
-    <form [formGroup]="forma" (ngSubmit)="guardarSancion()">
+    <form [formGroup]="SancionForm" (ngSubmit)="guardarSancion()" novalidate>
+
       <div class="card-body">
         <div class="row">
           <div class="col-lg-6 col-md-5">
@@ -23,12 +24,16 @@
               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon sfrm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
                 <input type="text" class="form-control" placeholder="Nombre de la Sanción" formControlName="nombre_sancion"
-                [ngClass]="{'is-valid': forma.get('nombre_sancion').valid && !forma.get('nombre_sancion').pristine ,
-                            'is-invalid':forma.get('nombre_sancion').invalid && forma.get('nombre_sancion').touched }">
-                <div *ngIf="forma.controls['nombre_sancion'].errors?.required && forma.controls['nombre_sancion'].touched" class="" >
-                  El nombre es necesario
-                </div>
+                  [ngClass]="{'is-valid': SancionForm.get('nombre_sancion').valid && !SancionForm.get('nombre_sancion').pristine ,
+                            'is-invalid':SancionForm.get('nombre_sancion').invalid && SancionForm.get('nombre_sancion').touched }">
+                <!-- <div *ngIf="SancionForm.controls['nombre_sancion'].errors?.required  && SancionForm.controls['nombre_sancion'].touched" class="" >
+                  El nombre es obligatorio
+                </div> -->
+                
               </div>
+              <small class="">
+                  Estos puntos serán restados de los puntos obtenidos por los equipos en las fechas jugadas.
+              </small>
             </div>
           </div>
             <div class="col-md-6">
@@ -76,7 +81,7 @@
         <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
         <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">Cancelar</a>
       </div>
-      {{forma.valid}}
+      {{SancionForm.valid}}
     </form>
   </div>
 </div>

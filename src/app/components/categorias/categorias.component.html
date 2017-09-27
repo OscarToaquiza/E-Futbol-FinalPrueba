@@ -14,91 +14,93 @@
 </div>
 
 <div class="collapse" id="collapseExample">
-  <div class="card container">
-    <div class="card-header text-center">
-      <h3>{{titulo}}</h3>
-    </div>
-    <div class="card-body">
-      <div class="row">
-        <div class="col-lg-6 col-md-5">
-          <!-- <div class="row"> -->
-          <!-- <div class="col-md-6"> -->
-          <div class="form-group">
-            <small class="text-muted Error">
-                        Nombre de la Categoria
-                    </small>
-            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
-              <input type="text" name="name" class="form-control" placeholder="Nombre de la Categoria" #nombre="ngModel" 
-               [(ngModel)]="categoria.nombre_categoria" required autofocus
-               [ngClass]="{'is-valid': nombre?.valid ,'is-invalid':nombre?.invalid && nombre.touched}"/>
-               <div *ngIf="nombre.errors?.required && nombre.touched"  class="invalid-feedback">
-                  El nombre es obligatorio
-                </div>
+  <form>
+    <div class="card container">
+      <div class="card-header text-center">
+        <h3>{{titulo}}</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-lg-6 col-md-5">
+            <!-- <div class="row"> -->
+            <!-- <div class="col-md-6"> -->
+            <div class="form-group">
+              <small class="text-muted Error">
+                Nombre de la Categoria
+              </small>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
+                <input type="text" name="name" class="form-control" placeholder="Nombre de la Categoria" #nombre="ngModel" 
+                  [(ngModel)]="categoria.nombre_categoria" required autofocus
+                  [ngClass]="{'is-valid': nombre?.valid ,'is-invalid':nombre?.invalid && nombre.touched}"/>
+                <div *ngIf="nombre.errors?.required && nombre.touched"  class="invalid-feedback">
+                    El nombre es obligatorio
+                  </div>
+              </div>
             </div>
-          </div>
-          <!-- </div> -->
+            <!-- </div> -->
 
-          <!-- </div> -->
+            <!-- </div> -->
+          </div>
+          <div class="col-lg-3 col-md-3">
+            <!-- <div class="col-md-6"> -->
+            <div class="form-group">
+              <small class="text-muted Error">
+                Número de Equipos Participantes
+              </small>
+              <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
+                <input type="number" min="1" max="100" name="name" class="form-control" placeholder="Número de Equipos Participantes" #numero="ngModel"
+                [ngClass]="{'is-valid': numero?.valid ,'is-invalid':numero?.invalid && numero.touched}" 
+                [(ngModel)]="categoria.n_equipos_categoria" required/>
+                <div class="invalid-feedback" *ngIf="numero.errors?.required && numero.touched">
+                  Este campo es obligatorio
+                
+                </div>
+              </div>
+            </div>
+            <!-- </div> -->
+          </div>
+          <div class="col-lg-3 col-md-4">
+            <small id="activar" class="text-muted">
+                Marcar Segunda Vuelta en la Categoria
+            </small>
+            <form id="activar" action="" class="accounttype">
+              <input id="radiouno" type="radio" [checked]="categoria.segunda_vuelta" (click)="setProperty($event.target.checked)" name="segunda_vuelta">
+              <label
+                for="radiouno" class="radio">SI</label>
+                <input id="radiodos" type="radio" [checked]="!categoria.segunda_vuelta" (click)="setProperty(!$event.target.checked)" name="segunda_vuelta">
+                <label
+                  for="radiodos" class="radio">NO</label>
+            </form>
+          </div>
+
         </div>
-        <div class="col-lg-3 col-md-3">
-          <!-- <div class="col-md-6"> -->
-          <div class="form-group">
+        <div class="row">
+          <div class=" col-lg-12 form-group">
             <small class="text-muted Error">
-              Número de Equipos Participantes
+                  Observación
             </small>
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
               <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-              <input type="number" min="1" max="100" name="name" class="form-control" placeholder="Número de Equipos Participantes" #numero="ngModel"
-               [ngClass]="{'is-valid': numero?.valid ,'is-invalid':numero?.invalid && numero.touched}" 
-               [(ngModel)]="categoria.n_equipos_categoria" required/>
-              <div class="invalid-feedback" *ngIf="numero.errors?.required && numero.touched">
-                Este campo es obligatorio
-               
+              <input type="text" name="name" class="form-control" placeholder="Observaciones Generales" #observacion_categoria="ngModel"
+                [(ngModel)]="categoria.observacion_categoria" required>
+              <div class="invalid-feedback">
+                Please provide a valid city.
               </div>
             </div>
           </div>
-          <!-- </div> -->
-        </div>
-        <div class="col-lg-3 col-md-4">
-          <small id="activar" class="text-muted">
-              Marcar Segunda Vuelta en la Categoria
-           </small>
-          <form id="activar" action="" class="accounttype">
-            <input id="radiouno" type="radio" [checked]="categoria.segunda_vuelta" (click)="setProperty($event.target.checked)" name="segunda_vuelta">
-            <label
-              for="radiouno" class="radio">SI</label>
-              <input id="radiodos" type="radio" [checked]="!categoria.segunda_vuelta" (click)="setProperty(!$event.target.checked)" name="segunda_vuelta">
-              <label
-                for="radiodos" class="radio">NO</label>
-          </form>
         </div>
 
       </div>
-      <div class="row">
-        <div class=" col-lg-12 form-group">
-          <small class="text-muted Error">
-                Observación
-          </small>
-          <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-            <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-            <input type="text" name="name" class="form-control" placeholder="Observaciones Generales" #observacion_categoria="ngModel"
-              [(ngModel)]="categoria.observacion_categoria" required>
-            <div class="invalid-feedback">
-              Please provide a valid city.
-            </div>
-          </div>
-        </div>
+      <div class="card-footer">
+        <button *ngIf="titulo == 'Nueva Categoria'" class="btn btn-success pull-left" type="submit" (click)="guardarcategoria()">Guardar Nueva Categoria </button>
+        <button *ngIf="titulo == 'Modificar Categoria'" class="btn btn-success pull-left" type="submit" (click)="ModificarCategoria()">{{titulo}}</button>
+        <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
+        <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">Cancelar</a>
       </div>
-
     </div>
-    <div class="card-footer">
-      <button *ngIf="titulo == 'Nueva Categoria'" class="btn btn-success pull-left" type="submit" (click)="guardarcategoria()">Guardar Nueva Categoria </button>
-      <button *ngIf="titulo == 'Modificar Categoria'" class="btn btn-success pull-left" type="submit" (click)="ModificarCategoria()">{{titulo}}</button>
-      <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
-      <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">Cancelar</a>
-    </div>
-  </div>
+  </form>
 </div>
 <!-- CARDS DE LA CATEGORIAS -->
 <div class="container marketing">

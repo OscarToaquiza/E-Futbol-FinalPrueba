@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { Sancion } from '../../models/sancion.model';
 import swal from 'sweetalert2';
 //para formularios
-import {FormGroup,FormControl,Validators} from '@angular/forms';
+import {FormGroup,FormBuilder,FormControl,Validators} from '@angular/forms';
 @Component({
   selector: 'app-sancion',
   templateUrl: './sancion.component.html',
@@ -21,29 +21,44 @@ export class SancionComponent implements OnInit {
   public mostrar_formulario_inicial = true;
 
   //manejo del formulario
-  forma:FormGroup;
-  //
+  SancionForm:FormGroup;
+  //---
 
   constructor(
-    private _userService: UserService,    
-    private _sancionService: SancionService,    
-  ) {    
-    this.token = this._userService.getToken();             
-    this.identity = this._userService.getIdentity();    
-    this.sancion = new Sancion('', '',true,0, '');           
+    private _userService: UserService, private fb:FormBuilder, private _sancionService: SancionService,    
+  ) {   
+      //
+      this.createForm();
+      //
+      this.token = this._userService.getToken();             
+      this.identity = this._userService.getIdentity();    
+      this.sancion = new Sancion('', '',true,0, '');           
    }
+
+   createForm() {
+    this.SancionForm = this.fb.group({
+      // '_id':new FormControl(''),
+      nombre_sancion:['',Validators.required],
+      estado_sancion:['',Validators.required],
+      pts_sancion: ['',Validators.required],
+      observacion_sancion:['',Validators.required],
+
+    });
+  }
+
 
   ngOnInit() {
     this.getSancion();
 
     //--para formulario
-    this.forma=new FormGroup({
-      '_id':new FormControl(''),
-      'nombre_sancion':new FormControl('',Validators.required),
-      'estado_sancion':new FormControl(''),
-      'pts_sancion': new FormControl('',Validators.required),
-      'observacion_sancion':new FormControl('',Validators.required)
-    });
+    // this.forma=new FormGroup({
+    //   '_id':new FormControl(''),
+    //   'nombre_sancion':new FormControl('',Validators.required),
+    //   'estado_sancion':new FormControl(''),
+    //   'pts_sancion': new FormControl('',Validators.required),
+    //   'observacion_sancion':new FormControl('',Validators.required)
+    // });
+
     // this.forma.setValue(this.sancion);
     //--
   }
@@ -75,8 +90,8 @@ export class SancionComponent implements OnInit {
 
   guardarSancion(){        
     console.log(this.sancion);
-    console.log(this.forma.value);
-    this._sancionService.saveSancion(this.token,this.forma.value)
+    // console.log(this.forma.value);
+     this._sancionService.saveSancion(this.token,this.sancion)
     .subscribe(
       response => {
         console.log(response);        
