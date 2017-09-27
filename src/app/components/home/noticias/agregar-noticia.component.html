@@ -11,25 +11,26 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar-o"></i></div> 
                             <input type="text" class="form-control" name="noticia_nueva.titulo" required
-                                [ngClass]="{'is-valid': titulo?.valid ,'is-invalid':titulo?.invalid && titulo.touched}"
+                                [ngClass]="{'is-valid': titulo?.valid && !titulo.pristine ,'is-invalid':titulo?.invalid && titulo.touched }"
                                 #titulo="ngModel" [(ngModel)]="noticia_nueva.titulo" 
                                 id="txt_titulo_noticia" aria-describedby="txt_titulo_noticia_help" placeholder="Titulo de la noticia."/>                        
-                                <small *ngIf="titulo.touched && titulo.errors?.required" id="txt_titulo_noticia_help" class="form-text invalid-feedback">
-                                        El título es obligatorio
-                                </small>
-                        </div>
+                                
+                        </div> 
+                        <small style="color:#dc3545" *ngIf="titulo.touched && titulo.errors?.required" id="txt_titulo_noticia_help" >
+                            El título es obligatorio
+                        </small>
                         
                     </div>
                     <div class="form-group">                            
-                        <input type="file" (change)="subirFileNoticia($event)" name="noticia_nueva.image" type="file"                             
-                            id="txt_imagen_noticia"  class="inputfile inputfile-4" />
+                        <input type="file" (change)="subirFileNoticia($event)" name="noticia_nueva.image" type="file"                              
+                            id="txt_imagen_noticia"  class="inputfile inputfile-4"  />
                         <label for="txt_imagen_noticia"><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span>Choose a file&hellip;</span></label>                    
                     </div>
 
                     <div class="form-group">
                         <label for="txt_descripcion_noticia">Descripción</label>
                         <textarea type="text" class="form-control" name="noticia_nueva.descripcion" #descripcion="ngModel" required
-                            [ngClass]="{'is-valid': descripcion?.valid ,'is-invalid':descripcion?.invalid && descripcion.touched}"
+                            [ngClass]="{'is-valid': descripcion?.valid && !descripcion.pristine ,'is-invalid':descripcion?.invalid && descripcion.touched}"
                             [(ngModel)]="noticia_nueva.descripcion" id="txt_descripcion_noticia" aria-describedby="txt_descripcion_noticia_help">
                         </textarea>
                        
@@ -42,7 +43,8 @@
                         <label for="txt_observacion_noticia">Observación</label>                        
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-eye"></i></div> 
-                            <input type="text" class="form-control" name="noticia_nueva.observacion" #noticia_nueva.observacion="ngModel"
+                            <input type="text" class="form-control" name="noticia_nueva.observacion" #observacion="ngModel"
+                             [ngClass]="{'is-valid': !observacion.pristine}"
                              [(ngModel)]="noticia_nueva.observacion" id="txt_observacion_noticia" aria-describedby="txt_observacion_noticia_help" placeholder="Contenido secundario.">                            
                         </div>
                         <small id="txt_observacion_noticia_help"  class="form-text text-muted">Esta será el contenido secundario que se verá en la publicación.</small>
@@ -51,7 +53,9 @@
                     <input type="hidden" id="idNoticia" name="noticia_nueva._id" #noticia_nueva._id="ngModel"  [(ngModel)]="noticia_nueva._id" >
                     <div *ngIf="identity">
                         <button [disabled]="!forma.valid" class="btn btn-primary" *ngIf="btnGuardarNoticia" id="btn_guardar_noticia" type="submit" >Guardar</button>
-                        <button class="btn btn-success" *ngIf="btnUpdateNoticia" (click)="updateNoticia()">Editar</button>
+                        <button [disabled]=" (titulo?.pristine && descripcion?.pristine) && observacion?.pristine " 
+                            class="btn btn-success" *ngIf="btnUpdateNoticia" (click)="updateNoticia()">Editar
+                        </button>
                         
                         <!-- <button  class="btn btn-primary" id="btn_modificar_noticia">Modificar</button> -->
                         <button class="btn btn-primary" (click)="cancelar()" id="btn_cancelar_noticia">Cancelar</button>

@@ -45,9 +45,11 @@
           <h3>Crear Nuevo Equipo</h3>
         </div>
         <div class="card-block">
-          <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample" (click)="ver_registro_equipo($event)">
-                                                   <img id="addequipo" class="rounded-circle imgcenter" src="assets/popper/docs/images/nuevo.jpg" alt="Generic placeholder image" width="140" height="140">
-                                                  </a>
+          <a scrollTo="aqui" duration="2500" data-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample" 
+            (click)="ver_registro_equipo($event)">
+            <img id="addequipo" class="rounded-circle imgcenter" src="assets/popper/docs/images/nuevo.jpg" 
+              alt="Generic placeholder image" width="140" height="140"  >
+          </a>
           <br>
           <h2><i class="fa fa-hand-o-up" aria-hidden="true"></i></h2>
           <p class="card-text">Click sobre la Imagen para empezar</p>
@@ -71,10 +73,10 @@
     Button with data-target
   </button>
 </p> -->
-<div class="collapse" id="collapseExample">
+<div class="collapse " id="collapseExample">
   <div class="card container">
     <div class="card-header text-center">
-      <h3>Crear Nuevo Equipo</h3>
+      <h3 [id]="aqui">Crear Nuevo Equipo</h3>
     </div>
     <div class="card-body">
       <div class="row">
@@ -84,8 +86,8 @@
               <div class="form-group">
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                   <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
-  <!-- <input  name="cedula" #cedula="ngModel" [(ngModel)]="user.cedula" class="form-control" id="cedula" placeholder="Cédula de identidad" aria-describedby="cedula" required autofocus> -->
-                  <input type="text" name="name" class="form-control" placeholder="Nombre del Equipo" #nombre_equipo="ngModel" [(ngModel)]="nuevo_equipo.nombre_equipo" required autofocus>
+                  <input type="text" name="name" class="form-control" placeholder="Nombre del Equipo" #nombre_equipo="ngModel"
+                   [(ngModel)]="nuevo_equipo.nombre_equipo" required autofocus>
                   <div class="invalid-feedback">                    
                   </div>
                 </div>
@@ -205,7 +207,8 @@
     <div class="card-footer">
       <button class="btn btn-success pull-left" type="submit" (click)="guardarEquipo()">Guardar Equipo </button>
       <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
-      <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample"
+      <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample"
+       aria-expanded="true" aria-controls="collapseExample"
         (click)="cancelar_registro_equipo($event)">Cancelar</a>
     </div>
   </div>

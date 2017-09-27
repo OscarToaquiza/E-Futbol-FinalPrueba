@@ -2,7 +2,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule} from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 import { PdfViewerComponent } from 'ng2-pdf-viewer';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -38,6 +38,8 @@ import {CategoriaService} from './services/categoria.service';
 import {EstadioService} from './services/estadio.service';
 import {FechaService} from './services/fecha.service';
 import { SancionService } from './services/sancion.service';
+
+import{AuthService} from './services/auth.service';
 //rutas
 import{RoutingModule} from './app.routing';
 import { CategoriasComponent } from './components/categorias/categorias.component';
@@ -56,6 +58,11 @@ import { SancionComponent } from './components/sancion/sancion.component';
 
 // PIPES
 import {OrdenVector} from './pipes/orden-vector';
+
+
+//scroll
+import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scroll";
+
 
 
 @NgModule({
@@ -87,19 +94,23 @@ import {OrdenVector} from './pipes/orden-vector';
     CalendarioGeneralComponent,
     SancionComponent,
     OrdenVector,
-    SancionComponent
+    SancionComponent,
+    SmoothScrollToDirective,
+    SmoothScrollDirective
   ],
   imports: [
     BrowserModule,
     HttpModule,  
-    FormsModule,  
+    FormsModule, 
+    ReactiveFormsModule, 
     // SharedModule,
     RoutingModule,
     NgxPaginationModule
   
   ],
   providers: [
-    UserService,NoticiaService,EquipoService,TemporadaService,PersonalService,CategoriaService,EstadioService,FechaService,SancionService,
+    UserService,NoticiaService,EquipoService,TemporadaService,PersonalService,
+    CategoriaService,EstadioService,FechaService,SancionService,AuthService,
     //para la fecha en español
     {provide:LOCALE_ID,useValue:'es'}
   ],
