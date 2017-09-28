@@ -1,7 +1,7 @@
 <div class="jumbotron">
-  <h2>Nuevo Personal</h2>
+  <h2>{{title}}</h2>
   <hr>
-<form (ngSubmit)="guardarPersonal(forma)" #forma="ngForm"  novalidate="">
+<form (ngSubmit)="guardarPersonal()" #forma="ngForm"  novalidate="">
   <div class="form-row">
     <div class="form-group col-md-6 ">
       <label for="name" class="col-form-label">Nombres</label>
@@ -65,10 +65,14 @@
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
           <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar" aria-hidden="true"></i></div>
           <input type="date" class="form-control" [ngClass]="{'is-valid': fecha?.valid ,'is-invalid':fecha?.invalid && fecha.touched}"
-          name="personal.fecha_nacimiento_personal" [(ngModel)]="personal.fecha_nacimiento_personal" required #fecha="ngModel">
+          [ngModel]="personal.fecha_nacimiento_personal | date: 'yyyy-MM-dd'"
+          name="personal.fecha_nacimiento_personal" required #fecha="ngModel">
+
             <div class="invalid-feedback" *ngIf="fecha.errors?.required && fecha.touched">
                 La fecha de nacimiento es obligatoria
             </div>
+            <!-- <input type="date" [ngModel] ="dt | date:'yyyy-MM-dd'" (ngModelChange)="dt = $event" [value]="datee | date:'yyyy-MM-dd'"> -->
+            
         </div>
       
     </div>
@@ -165,7 +169,7 @@
     </div> 
   </div>
   <button [disabled]="!forma.valid" type="submit" class="btn btn-success">Guardar</button>
-  
+  <button [disabled]="!forma.valid || forma.pristine" type="button" class="btn btn-success" (click)="updatePersonal()">Editar</button>
   <button  type="button" class="btn btn-warning" >Cancelar</button>
   
 </form>

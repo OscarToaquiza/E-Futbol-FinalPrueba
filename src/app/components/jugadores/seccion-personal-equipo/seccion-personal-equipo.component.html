@@ -11,7 +11,7 @@
           </h5>
           <i *ngIf="persona.rol_personal === 'ambos'" class="fa fa-universal-access" aria-hidden="true"></i>
           <i *ngIf="persona.rol_personal === 'presidente'"  class="fa fa-handshake-o" aria-hidden="true"></i>
-          <button class="btn btn-success pull-right"   ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+          <button class="btn btn-success pull-right" (click)="emitirEvento(persona)"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
         </div>
         <div id="{{persona._id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">

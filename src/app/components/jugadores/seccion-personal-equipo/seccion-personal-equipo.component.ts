@@ -25,9 +25,10 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
    
   }
 
-  emitirEvento(){
+  emitirEvento(personal){
     this.emitir.emit({
-      'mostrarAgregarPersonal':true
+      'mostrarAgregarPersonal':true,
+      'personal':personal
       }
     );
   }
