@@ -12,7 +12,7 @@ import swal from 'sweetalert2';
   selector: 'app-editar-personal',
   templateUrl: './nuevo-personal.component.html'
 })
-export class NuevoPersonalComponent implements OnInit, OnChanges {
+export class EditarPersonalComponent implements OnInit, OnChanges {
   private selectUndefinedOptionValue2:any;
   
   public personal: Personal;
@@ -32,7 +32,7 @@ export class NuevoPersonalComponent implements OnInit, OnChanges {
   // public btnUpdateNoticia:boolean=false;
 
   constructor(private _PS: PersonalService, private _US: UserService, private _ES: EquipoService) {
-    this.personal = new Personal('', '', '', this.aux, '', 0, 0, 0, this.aux, '', '', true);
+    this.personal = new Personal('','','', '', this.aux, '', 0, 0, 0, this.aux, '', '', true);
     console.log(this.personal.fecha_nacimiento_personal);
 
     this.url = GLOBAL.url;
@@ -58,60 +58,7 @@ export class NuevoPersonalComponent implements OnInit, OnChanges {
     console.log(fileInput);
   }
 
-  guardarPersonal(persona:NgForm ) {
-    console.log(persona.value);
-    console.log(persona);
-    
-    console.log("Personal a Guardar");
-    console.log(this.personal);
-    // console.log("Cedula de ciudadani valida ======> " + this.verificarCedula(this.personal.cedula_personal));
-    this._PS.addPersonal(this.url+'personal/guardar',this.personal,this.filesToUpload,this.token,'url_foto_personal')
-      .then(response=>{
-
-        if(!response){
-          console.log(response);
-          // alert("algo salio muy mal :(");
-          
-          // alert("personal creado");
-          // this._ES.addPersonalAEquipo(this.personal,this.personal);
-        }else{
-          console.log(response);
-          // alert(JSON.stringify(response));
-          this.personalCreado = response;
-          // console.log(response.personal);
-          // console.log(this.ab.personal._id);
-          // alert(this.ab.personal._id);
-          // this.personal=response;
-           this._ES.addPersonalAEquipo(this.personalCreado.personal._id,this.IdEquipo)
-                  .subscribe(response=>{
-                    if(response){
-                      swal(
-                        'El ' + this.personalCreado.personal.rol_personal + ' ' +  this.personalCreado.personal.nombre_personal,
-                        'ha sido regisrtrado y agregado al equipo de manera exitosa',
-                        'success'
-                      );
-                      // alert("asignado al equipo"+this.IdEquipo);
-                    }else{
-                      console.log("error");                      
-                    }
-                  },error=>{
-                    alert("este es el ide del personal"+this.personalCreado.personal._id);
-
-                    alert("este es el ide del equipo "+this.IdEquipo);
-                    console.log(error);
-
-                  });
-        }
-      }).catch((e) => {
-    let body = JSON.parse(e);
-    // console.log(body.mensaje);
-    swal(
-      '¡' + body.mensaje + '!',
-      '',
-      'error'
-    );
-  });
-  }
+  
 
 
 }

@@ -47,9 +47,9 @@ export class NuevoPersonalComponent implements OnInit, OnChanges {
   ngOnChanges() {
     //  alert("darwin es el mejor");
     console.log("darwin es el mejor y siempre lo sera");
-    if(this.PersonaRecibida!=null && this.PersonaRecibida != undefined){
-      this.personal=this.PersonaRecibida;
-    }
+    // if(this.PersonaRecibida!=null && this.PersonaRecibida != undefined){
+    //   this.personal=this.PersonaRecibida;
+    // }
   }
 
   ngOnInit() {
