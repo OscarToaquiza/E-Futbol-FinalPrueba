@@ -25,7 +25,7 @@ export class SancionComponent implements OnInit {
   //---
 
   constructor(
-    private _userService: UserService, private fb:FormBuilder, private _sancionService: SancionService,    
+    private _userService: UserService, private fb:FormBuilder, private _sancionService: SancionService
   ) {   
       
       this.token = this._userService.getToken();             
@@ -135,6 +135,10 @@ export class SancionComponent implements OnInit {
     this.resetForm();
     
   }
+  cancelar(){
+    this.sancion = new Sancion('', '',true,0, '');
+    this.resetForm();
+  }
 
   ModificarSancion(){
     this.sancion=this.prepareSaveHero();
@@ -147,10 +151,13 @@ export class SancionComponent implements OnInit {
             'success'
             );
             this.sancion = new Sancion('', '',true,0, '');
+            this.resetForm();
             this.getSancion(); 
             this.titulo="Nueva Sanción"
             this.idModificar = '';
-      
+
+            $('#collapseExample').collapse('hide');
+            
       },
       err => {
         console.log(err);
