@@ -41,6 +41,8 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
   // }
   ngOnChanges(){
     this.personal=this.equip.personal_equipo;
+    console.log("estos son los jugadores del equipo");
+    console.log(this.personal);
     this.emitir.emit({
       'mostrarAgregarPersonal':false      
     })

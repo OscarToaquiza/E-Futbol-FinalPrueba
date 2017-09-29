@@ -34,7 +34,7 @@ export class NuevoPersonalComponent implements OnInit, OnChanges {
   // public btnUpdateNoticia:boolean=false;
 
   constructor(private _PS: PersonalService, private _US: UserService, private _ES: EquipoService) {
-    this.personal = new Personal('', '', '', this.aux, '', 0, 0, 0, this.aux, '', '', true);
+    this.personal = new Personal('','', '', this.aux,'', 0, 0, 0, this.aux, '', '', true);
     console.log(this.personal.fecha_nacimiento_personal);
 
     this.url = GLOBAL.url;

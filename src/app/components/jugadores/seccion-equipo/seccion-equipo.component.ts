@@ -44,6 +44,7 @@ export class SeccionEquipoComponent implements OnInit,DoCheck {
     // this.identity = this._userService.getIdentity();
     // this.token = this._userService.getToken();
     // console.log(this.equipo);
+    console.log(this.equipo);
     this.emitirEvento(this.equipo);
 
   }
