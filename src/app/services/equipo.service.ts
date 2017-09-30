@@ -22,6 +22,7 @@ export class EquipoService {
     let headers = new Headers({
       'Content-Type': 'application/json'
     });
+    console.log("una solo vezzzzzzzzzzzz");
     return this._http.get(this.url + 'equipo/listartodos',{headers: headers})
       .map(res => res.json());
 

@@ -47,9 +47,9 @@ export class NuevoPersonalComponent implements OnInit, OnChanges {
   ngOnChanges() {
     //  alert("darwin es el mejor");
     console.log("darwin es el mejor y siempre lo sera");
-    // if(this.PersonaRecibida!=null && this.PersonaRecibida != undefined){
-    //   this.personal=this.PersonaRecibida;
-    // }
+     if(this.PersonaRecibida!=null && this.PersonaRecibida != undefined){
+       this.personal=this.PersonaRecibida;
+     }
   }
 
   ngOnInit() {
@@ -113,29 +113,29 @@ export class NuevoPersonalComponent implements OnInit, OnChanges {
            console.log("Hubo un error");
          }else{
            console.log(response);
+           this.personal = new Personal('','', '', '', this.aux, '', 0, 0, 0, this.aux, '', '', true);           
            this.personalCreado = response;
-            this._ES.addPersonalAEquipo(this.personalCreado.personal._id,this.IdEquipo)
-                   .subscribe(response=>{
-                     if(response){
-                       swal(
-                         'El ' + this.personalCreado.personal.rol_personal + ' ' +  this.personalCreado.personal.nombre_personal,
-                         'Se ha actulizado correctamente',
-                         'success'
-                       );
-                     }else{
-                       console.log("error");                      
-                     }
-                   },error=>{
-                     alert("este es el ide del personal"+this.personalCreado.personal._id);
+            // this._ES.addPersonalAEquipo(this.personalCreado.personal._id,this.IdEquipo)
+            //        .subscribe(response=>{
+            //          if(response){
+            //            swal(
+            //              'El ' + this.personalCreado.personal.rol_personal + ' ' +  this.personalCreado.personal.nombre_personal,
+            //              'Se ha actulizado correctamente',
+            //              'success'
+            //            );
+            //          }else{
+            //            console.log("error");                      
+            //          }
+            //        },error=>{
+            //          alert("este es el ide del personal"+this.personalCreado.personal._id);
  
-                     alert("este es el ide del equipo "+this.IdEquipo);
-                     console.log(error);
+            //          alert("este es el ide del equipo "+this.IdEquipo);
+            //          console.log(error);
  
-                   });
+            //        });
          }
        }).catch((e) => {
-     let body = JSON.parse(e);
-     // console.log(body.mensaje);
+      let body = JSON.parse(e);
      swal(
        '¡' + body.mensaje + '!',
        '',

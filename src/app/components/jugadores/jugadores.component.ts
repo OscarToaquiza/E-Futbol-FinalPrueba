@@ -29,8 +29,6 @@ export class JugadoresComponent implements OnInit {
     }
   }
   
-
-  
   mostrarNuevoPer(event){
     this.verNuevoPersonal=event.mostrarAgregarPersonal;
     this.persona=event.personal;
