@@ -47,6 +47,7 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
     
   // }
   ngOnChanges(){
+    console.log(this.equip);
     this.personal=this.equip.personal_equipo;
     console.log("estos son los jugadores del equipo");
     console.log(this.personal);
