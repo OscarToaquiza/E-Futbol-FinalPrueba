@@ -2,11 +2,11 @@
 <div class="row">
         <!-- <div class="col-lg-8 tabla_posiciones" [ngSwitch]="verElemento"> -->
         <div class="col-lg-8" >
-                <app-seccion-equipo (mostrar)="mostrarDescripcionEquipo($event)"></app-seccion-equipo>
+                <app-seccion-equipo (notificacion)="actualizarSeccionPersonal($event)" (mostrar)="mostrarDescripcionEquipo($event)"></app-seccion-equipo>
         </div>
         <div class="col-lg-4 ">
                 
-                <app-seccion-personal-equipo [equip]="equipo" (emitir)="mostrarNuevoPer($event)" *ngIf="verLista"></app-seccion-personal-equipo>
+                <app-seccion-personal-equipo [equip]="equipo" [notificacion]="msgEvent"    (emitir)="mostrarNuevoPer($event)" *ngIf="verLista"></app-seccion-personal-equipo>
                 
         </div>
 </div>

@@ -13,6 +13,7 @@ export class JugadoresComponent implements OnInit {
   public verLista:boolean=false;
   public verNuevoPersonal=false;
   public equipo:any;
+  public msgEvent:any;
   constructor() { }
   ngOnInit() {
   }
@@ -26,6 +27,10 @@ export class JugadoresComponent implements OnInit {
       this.verLista=true;
       // this.verNuevoPersonal=false;
     }
+  }
+
+  actualizarSeccionPersonal(evento){
+    this.msgEvent=evento.mensaje;
   }
   
 

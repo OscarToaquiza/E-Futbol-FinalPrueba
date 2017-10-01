@@ -10,6 +10,13 @@ import {UserService} from '../../../services/user.service';
 export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
   @Output() emitir=new EventEmitter();
   @Input() equip:Equipo;
+  @Input('notificacion')
+  set notificacion(value:any) {
+    this.personal=this.equip.personal_equipo;
+    this.emitir.emit({
+      'mostrarAgregarPersonal':false      
+    })
+  }
   public personal:any[];
   public identity;
 
@@ -40,7 +47,10 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
     
   // }
   ngOnChanges(){
+    console.log(this.equip);
     this.personal=this.equip.personal_equipo;
+    console.log("estos son los jugadores del equipo");
+    console.log(this.personal);
     this.emitir.emit({
       'mostrarAgregarPersonal':false      
     })
