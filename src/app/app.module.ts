@@ -46,6 +46,7 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { EstadiosComponent } from './components/estadios/estadios.component';
 import { ReglamentoComponent } from './components/reglamento/reglamento.component';
 import { JugadoresComponent } from './components/jugadores/jugadores.component';
+import{EditarPersonalComponent} from './components/jugadores/nuevo-personal/editar-personal';
 import { NuevoPersonalComponent } from './components/jugadores/nuevo-personal/nuevo-personal.component';
 import { SeccionEquipoComponent } from './components/jugadores/seccion-equipo/seccion-equipo.component';
 import { SeccionPersonalEquipoComponent } from './components/jugadores/seccion-personal-equipo/seccion-personal-equipo.component';
@@ -84,6 +85,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     EstadiosComponent,
     ReglamentoComponent,
     JugadoresComponent,
+    EditarPersonalComponent,
     NuevoPersonalComponent,
     SeccionEquipoComponent,
     SeccionPersonalEquipoComponent,
