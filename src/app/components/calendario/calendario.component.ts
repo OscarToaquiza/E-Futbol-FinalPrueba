@@ -40,12 +40,19 @@ export class CalendarioComponent implements OnInit {
 
   public p: number = 1;
 
+  public partidosSuspencionEquipo1 = new Array();
+  public partidosSuspencionEquipo2 = new Array();
+
 
   public token;
   public temporada_actual: Temporada;
   public fecha:any;
   public plantilla:any;
-  public fechaAgrupada:any;
+  public fechaAgrupada: any;
+
+  public f: Fecha;
+  public fechas= new Array(this.f);
+
   public fechaAgrupadaT1:any;
   public fechaAgrupadaT2:any;
   public fechaAux:any;
@@ -86,7 +93,7 @@ export class CalendarioComponent implements OnInit {
     private _fechaService: FechaService,
     private _estadioService: EstadioService,
     private _sancionService: SancionService
-  ) {    
+  ) {
     this.token = this._userService.getToken();
     this.url = GLOBAL.url;
    }
@@ -94,27 +101,27 @@ export class CalendarioComponent implements OnInit {
    ngOnInit() {
     this.obtenerTemporadas();
     this.obtenerEstadios();
-    this.getSancion();
+    // this.getSancion();
   }
 
-  getSancion(){
-    this._sancionService.getSancion()
-    .subscribe((res)=>{
-      console.log(res);
-      this.sanciones=res;
-    },(err)=>{
-      console.log("Error");
-      console.log(err);
-      if(err.status!=404)
-      {              
-        swal(
-          'Oops...',
-          '¡Algo salio mal, pruebe despues de un momento!',
-          'error'
-        )
-      }      
-    });
-  }
+  // getSancion(){
+  //   this._sancionService.getSancion()
+  //   .subscribe((res)=>{
+  //     console.log(res);
+  //     this.sanciones=res;
+  //   },(err)=>{
+  //     console.log("Error");
+  //     console.log(err);
+  //     if(err.status!=404)
+  //     {
+  //       swal(
+  //         'Oops...',
+  //         '¡Algo salio mal, pruebe despues de un momento!',
+  //         'error'
+  //       )
+  //     }
+  //   });
+  // }
 
   obtenerEstadios(){
     this._estadioService.getEstadios().subscribe(
@@ -126,7 +133,7 @@ export class CalendarioComponent implements OnInit {
         }
       },
       error =>{
-  
+
       });
   }
 
@@ -147,7 +154,7 @@ export class CalendarioComponent implements OnInit {
     //       response.forEach(element => {
     //         if ( element.estado_temporada ) {
     //           this.temporada_actual = element;
-    //           console.log(this.temporada_actual);              
+    //           console.log(this.temporada_actual);
     //         }
     //       });
     //     this.CategoriasTemporada(this.temporada_actual._id);
@@ -178,7 +185,7 @@ export class CalendarioComponent implements OnInit {
               i++
             }
           }
-          console.log(response);          
+          console.log(response);
           console.log(this.arrayCategoria);
         }
       },
@@ -196,25 +203,25 @@ export class CalendarioComponent implements OnInit {
     this.categoriaSeleccionada = e;
     this.obtenerCalendario(e);
   }
-  
+
   // *ngFor="let fec of fechaAgrupada"
-  obtenerCalendario(e){    
+  obtenerCalendario(e){
     if(e.target.selectedIndex!=0)
-      {        
+      {
         console.log(e.target.selectedIndex);
-        let index=e.target.selectedIndex-1;        
+        let index=e.target.selectedIndex-1;
           this._fechaService.getFechaByIdCategoriaAdministrador(this.arrayCategoria[index]._id)
-          .subscribe((res)=>{            
+          .subscribe((res)=>{
             if(res){
               this.fecha=res;
               this.fechaAgrupadaT1=JSON.stringify(this.fecha.fechasEncontradas[2]);
 
               // this.fechaAux=this.fecha.fechasEncontradas;
-              console.log(":D");              
-              // console.log(_.values(_.groupBy(this.fecha.fechasEncontradas,'n_fecha')));   
+              console.log(":D");
+              // console.log(_.values(_.groupBy(this.fecha.fechasEncontradas,'n_fecha')));
 
               //  let LongF=this.fechaAux.length;
-              //  this.fechaAgrupadaT1=this.fechaAux.splice(0,LongF/2);          
+              //  this.fechaAgrupadaT1=this.fechaAux.splice(0,LongF/2);
               //  console.log(_.values(_.groupBy(this.fechaAux,'n_fecha')));
               //  console.log("##");
               //  console.log(_.values(_.groupBy(this.fechaAgrupadaT1,'n_fecha')));
@@ -222,14 +229,14 @@ export class CalendarioComponent implements OnInit {
               console.log(this.fecha.fechasEncontradas);
               this.fechaAgrupada=_.values(_.groupBy(this.fecha.fechasEncontradas,'n_fecha'));
               console.log(this.fechaAgrupada);
-              // console.log(a); 
+              // console.log(a);
               // this.fechaAgrupadaT1=_.values(_.groupBy(_.chunk(this.fecha.fechasEncontradas,2)[0],'n_fecha'));
               // console.log(_.values(_.groupBy(_.chunk(_.values(this.fecha.fechasEncontradas),2),'n_fecha')));
               // console.log(_.chunk(_.values(this.fecha.fechasEncontradas),2));
               // if(this.arrayCategoria[index].segunda_vuelta){
               //   this.fechaAgrupadaT2=_.values(_.groupBy(_.chunk(this.fecha.fechasEncontradas,2)[1],'n_fecha'));
               // }
-              
+
               // console.log(_.values(_.groupBy(this.fecha.fechasEncontradas,'n_fecha'))[0]);
               // console.log(_.groupBy([{a:1,j:"j"},{a:2,j:"b"},{a:1,j:":D"}],'a'));
               // _.chain(this.standings)
@@ -271,7 +278,12 @@ export class CalendarioComponent implements OnInit {
               this.fechaAgrupada = this.primeraVueltaClasificada;
               console.log('Primera Vuelta: ' + this.primeraVuelta);
               console.log('Segunda Vuelta: ' + this.segundaVuelta);
+              this.fechas = this.fechaAgrupada;
+
               }else{
+                this.fechas = this.fechaAgrupada;
+                console.log('Array de tipo fechas:');
+                console.log(this.fechas);
                 console.log("Un sola vuelta");
                 this.verVuelta = '1';
                 console.log('Primera Vuelta: ' + this.primeraVuelta);
@@ -286,7 +298,7 @@ export class CalendarioComponent implements OnInit {
             if(err.status==404){
               swal(
                 'Calendario',
-                '¡No existe un calendario para esta categoría.!',                
+                '¡No existe un calendario para esta categoría.!',
               )
             }else{
               swal(
@@ -295,16 +307,16 @@ export class CalendarioComponent implements OnInit {
                 'error'
               )
             }
-                        
-          });                   
-            
+
+          });
+
       }else{
-        console.log("No se ha seleccionado una categoria.");        
+        console.log("No se ha seleccionado una categoria.");
       }
   }
 
-  generarGoles1(GOL1: number,fecha){    
-    fecha.goles_equipo1 = new Array(GOL1);    
+  generarGoles1(GOL1: number,fecha){
+    fecha.goles_equipo1 = new Array(GOL1);
   }
   generarTA1(TA1: number,fecha){
     fecha.tarjetas_amarilla_equipo1 = new Array(TA1);
@@ -313,7 +325,7 @@ export class CalendarioComponent implements OnInit {
     fecha.tarjetas_roja_equipo1 = new Array(TR1);
   }
   generarGoles2(GOL2: number,fecha){
-    fecha.goles_equipo2 = new Array(GOL2);  
+    fecha.goles_equipo2 = new Array(GOL2);
   }
   generarTA2(TA2: number,fecha){
   fecha.tarjetas_amarilla_equipo2 = new Array(TA2);
@@ -325,23 +337,23 @@ export class CalendarioComponent implements OnInit {
   guardarFecha(fechas,r){
     console.log(fechas);
     // fechas.forEach(element => {
-    //   if(element.primera_segunda==r) 
+    //   if(element.primera_segunda==r)
     //   {
     //     element.jugado=true;
     //     this._fechaService.updateCalendario(this.token,element,element._id)
     //     .subscribe((response)=>{
-    //       console.log(response);      
-    //     },(err)=>{        
+    //       console.log(response);
+    //     },(err)=>{
     //         swal(
     //           'Oops...',
     //           '¡Algo salio mal, pruebe despues de un momento!',
     //           'error'
-    //         )                            
+    //         )
     //     });
-    //   }     
-      
-    // }); 
-    // this.obtenerCalendario(this.categoriaSeleccionada);   
+    //   }
+
+    // });
+    // this.obtenerCalendario(this.categoriaSeleccionada);
   }
 
   HabilitarResultados(id){
@@ -354,6 +366,32 @@ export class CalendarioComponent implements OnInit {
   }
 
   guardarPartido(partido,estadio,fecha){
+    let data1 = new Array();
+    let data2 = new Array();
+    console.log(this.partidosSuspencionEquipo1);
+    console.log(this.partidosSuspencionEquipo2);
+    let arrayIdsEquipo1 = partido.tarjetas_roja_equipo1;
+    let arrayIdsEquipo2 = partido.tarjetas_roja_equipo2;
+    console.log(arrayIdsEquipo1);
+    console.log(arrayIdsEquipo2);
+    partido.tarjetas_roja_equipo1 = new Array();
+    partido.tarjetas_roja_equipo2 = new Array();
+    for (var index = 0; index < this.partidosSuspencionEquipo1.length; index++) {
+        data1[index] = {
+          'partidosSuspendidos' : this.partidosSuspencionEquipo1[index],
+          'id' : arrayIdsEquipo1[index]
+        }
+    }
+    for (var index = 0; index < this.partidosSuspencionEquipo2.length; index++) {
+      data2[index] = {
+        'partidosSuspendidos' : this.partidosSuspencionEquipo2[index],
+        'id' : arrayIdsEquipo2[index]
+      }
+  }
+    console.log(data1);
+    partido.tarjetas_roja_equipo1 = data1;
+    partido.tarjetas_roja_equipo2 = data2;
+    console.log(partido);
     console.log("estadio:" + estadio._id);
     if(this.estadioSelec == ''){
       partido.id_estadio = estadio;
@@ -364,6 +402,7 @@ export class CalendarioComponent implements OnInit {
     partido.estado_fecha = this.partidoJugado;
     partido.jugado = this.partidoJugado;
     console.log(partido);
+
     this._fechaService.updateCalendario(this.token,partido,partido._id).subscribe(
       response =>{
         if(!response){
@@ -387,6 +426,7 @@ export class CalendarioComponent implements OnInit {
 
       }
     );
+
     // let fechaModificada: Fecha;
     // fechaModificada = partido;
     // fechaModificada.estado_fecha = true;
@@ -404,9 +444,9 @@ export class CalendarioComponent implements OnInit {
     html2canvas($('#hojaVocalia')[0]).then(function(canvas) {
       console.log(":D");
      var img=canvas.toDataURL("image/png");
-     let doc = new jsPDF()        
-    //  doc.fromHTML($('#prueba')[0],35, 25)           
-    doc.addImage(img,'JPEG',5,5);     
+     let doc = new jsPDF()
+    //  doc.fromHTML($('#prueba')[0],35, 25)
+    doc.addImage(img,'JPEG',5,5);
     // ctx.pdf = doc.output('datauristring')
     //  console.log(doc.output('datauristring'));
     doc.save('file.pdf');
@@ -434,7 +474,7 @@ export class CalendarioComponent implements OnInit {
         i++;
       }
     });
-    
+
     this.arrayPersonal1 = _.orderBy(this.arrayPersonal1,['nombre_personal'],['asc']);
     data.id_equipo2.personal_equipo.forEach(element => {
       if(element.rol_personal === 'jugador'){
@@ -443,7 +483,7 @@ export class CalendarioComponent implements OnInit {
       }
     });
     this.arrayPersonal2 = _.orderBy(this.arrayPersonal2,['nombre_personal'],['asc']);
-    
-  
+
+
   }
 }
