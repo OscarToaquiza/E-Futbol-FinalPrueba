@@ -3,6 +3,7 @@ import { GLOBAL } from './../../../services/global';
 import { Component, OnInit } from '@angular/core';
 import{EquipoService} from '../../../services/equipo.service';
 import { TemporadaService } from '../../../services/temporada.service';
+import{UserService} from '../../../services/user.service';
 import { Temporada } from '../../../models/temporada.models';
 import * as _ from 'lodash';
 import * as jsPDF from  'jspdf'
@@ -23,11 +24,11 @@ export class DetalleEquipoComponent implements OnInit {
   public escudo:any;  
   public  imgPDFI=new Array();
   public escu:any; 
-  constructor(private _temporadaService: TemporadaService) { 
+  public identity;
+  constructor(private _temporadaService: TemporadaService,private _US:UserService) { 
     this.obtenerTemporadas();
     this.url = GLOBAL.url;  
-
-    
+    this.identity = this._US.getIdentity();    
   }
 
   ngOnInit() {
@@ -114,7 +115,7 @@ export class DetalleEquipoComponent implements OnInit {
           var anios=hoy.diff(nacimiento,"years");
           console.log(anios);
           if(anios<18)        
-            doc.addImage($('#formatoCarnet')[0],'PNG',110,10,90,70);
+            doc.addImage($('#formatoCarnet2')[0],'PNG',110,10,90,70);
           else 
             doc.addImage($('#formatoCarnet')[0],'PNG',110,10,90,70);        
         // ESCUDO Y FOTO
@@ -137,7 +138,7 @@ export class DetalleEquipoComponent implements OnInit {
           var anios=hoy.diff(nacimiento,"years");
           console.log(anios);
           if(anios<18)        
-            doc.addImage($('#formatoCarnet')[0],'PNG',10,90,90,70); 
+            doc.addImage($('#formatoCarnet2')[0],'PNG',10,90,90,70); 
           else 
             doc.addImage($('#formatoCarnet')[0],'PNG',10,90,90,70);           
           // ESCUDO Y FOTO
@@ -158,7 +159,7 @@ export class DetalleEquipoComponent implements OnInit {
           var anios=hoy.diff(nacimiento,"years");
           console.log(anios);
           if(anios<18)        
-            doc.addImage($('#formatoCarnet')[0],'PNG',110,90,90,70);
+            doc.addImage($('#formatoCarnet2')[0],'PNG',110,90,90,70);
           else 
             doc.addImage($('#formatoCarnet')[0],'PNG',110,90,90,70);          
                     // ESCUDO Y FOTO
@@ -182,7 +183,7 @@ export class DetalleEquipoComponent implements OnInit {
           var anios=hoy.diff(nacimiento,"years");
           console.log(anios);
           if(anios<18)        
-            doc.addImage($('#formatoCarnet')[0],'PNG',10,170,90,70);
+            doc.addImage($('#formatoCarnet2')[0],'PNG',10,170,90,70);
           else 
             doc.addImage($('#formatoCarnet')[0],'PNG',10,170,90,70);             
           // ESCUDO Y FOTO          
@@ -203,7 +204,7 @@ export class DetalleEquipoComponent implements OnInit {
           var anios=hoy.diff(nacimiento,"years");
           console.log(anios);
           if(anios<18)        
-            doc.addImage($('#formatoCarnet')[0],'PNG',110,170,90,70);
+            doc.addImage($('#formatoCarnet2')[0],'PNG',110,170,90,70);
           else 
             doc.addImage($('#formatoCarnet')[0],'PNG',110,170,90,70);          
                     // ESCUDO Y FOTO

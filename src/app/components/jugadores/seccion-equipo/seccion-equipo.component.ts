@@ -101,17 +101,21 @@ export class SeccionEquipoComponent implements OnInit,DoCheck {
             swal(
               '¡Registros creados!',
               'Asignando a equipo...',              
-            )
+            )            
             this.rs=response;
             this.rs.data.insertedIds.forEach((element)=>{  
               console.log(":Dñññ"); 
               console.log(element); 
               console.log("FFFFFFFFF"+equipo._id);          
-              console.log();
+              console.log();              
               this._ES.addPersonalAEquipo(element,equipo._id)
               .subscribe(response=>{
                 console.log("Guardado");
-                this.notificacion.emit({mensaje:element});
+                                
+                console.log(response);                
+                console.log("respo");
+                console.log(response.equipo.personal_equipo);                
+                this.notificacion.emit({'mensaje':this.rs.personalI});
               },(er)=>{
                 console.log("Error:"+er);
               });

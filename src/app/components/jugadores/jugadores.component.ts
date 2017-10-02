@@ -34,6 +34,10 @@ export class JugadoresComponent implements OnInit {
     this.msgEvent=evento.mensaje;
   }
   
+  actualizarPersonal(evento)
+  {
+    this.msgEvent=evento.mensaje;
+  }
   mostrarNuevoPer(event){
     this.verNuevoPersonal=event.mostrarAgregarPersonal;
     this.persona=event.personal;

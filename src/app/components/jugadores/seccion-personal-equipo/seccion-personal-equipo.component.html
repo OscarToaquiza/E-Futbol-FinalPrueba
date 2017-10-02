@@ -8,7 +8,7 @@
         <div class="card-header" role="tab" id="headingOne">
           <h5 class="pull-left">
             <a data-toggle = "collapse" href="#{{persona._id}}"  aria-controls="collapseOne">
-                {{persona.cedula_personal}}
+              {{persona.apellido_personal}} {{persona.nombre_personal}}
             </a>
           </h5>
           <i *ngIf="persona.rol_personal === 'ambos'" class="fa fa-universal-access" aria-hidden="true"></i>
@@ -19,8 +19,10 @@
           <div class="card-body">
             <h5><strong>Nombres: </strong>{{persona.nombre_personal}}</h5>
             <h5><strong>Apellidos: </strong>{{persona.apellido_personal}}</h5>
+            <h5><strong>Cédula:</strong>{{persona.cedula_personal}}</h5>
             <h5><strong>Rol: </strong>{{persona.rol_personal}}</h5>
             <h5><strong>Fecha de nacimiento: </strong>{{persona.fecha_nacimiento_personal | date}}</h5>
+
           </div>
         </div>
       </div>
