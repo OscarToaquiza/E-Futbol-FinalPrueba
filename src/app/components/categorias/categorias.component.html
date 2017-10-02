@@ -13,8 +13,9 @@
 </div>
 
 <div class="collapse" id="collapseExample">
-  <form>
+  
     <div class="card container">
+      <form #forma="ngForm" novalidate>
       <div class="card-header text-center">
         <h3>{{titulo}}</h3>
       </div>
@@ -24,17 +25,18 @@
             <!-- <div class="row"> -->
             <!-- <div class="col-md-6"> -->
             <div class="form-group">
-              <small class="text-muted Error">
+              <label class="text-muted">
                 Nombre de la Categoria
-              </small>
+              </label>
               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
-                <input type="text" name="name" class="form-control" placeholder="Nombre de la Categoria" #nombre="ngModel" 
-                  [(ngModel)]="categoria.nombre_categoria" required autofocus
-                  [ngClass]="{'is-valid': nombre?.valid ,'is-invalid':nombre?.invalid && nombre.touched}"/>
-                <div *ngIf="nombre.errors?.required && nombre.touched"  class="invalid-feedback">
-                    El nombre es obligatorio
-                  </div>
+                <input type="text" name="nombre_categoria" class="form-control" placeholder="Nombre de la Categoria" #nombre="ngModel" 
+                  [(ngModel)]="categoria.nombre_categoria" required 
+                  [ngClass]="{'is-valid': nombre?.valid && !nombre.pristine ,'is-invalid':nombre?.invalid && nombre.touched}"/>
+                
+              </div>
+              <div *ngIf="nombre.errors?.required && nombre.touched"  class="error-campo">
+                  El nombre es obligatorio
               </div>
             </div>
             <!-- </div> -->
@@ -44,26 +46,29 @@
           <div class="col-lg-3 col-md-3">
             <!-- <div class="col-md-6"> -->
             <div class="form-group">
-              <small class="text-muted Error">
+              <label class="text-muted ">
                 Número de Equipos Participantes
-              </small>
+              </label>
               <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                 <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-                <input type="number" min="1" max="100" name="name" class="form-control" placeholder="Número de Equipos Participantes" #numero="ngModel"
-                [ngClass]="{'is-valid': numero?.valid ,'is-invalid':numero?.invalid && numero.touched}" 
+                <input type="number" min="1" max="100" name="n_equipos_categoria" class="form-control" placeholder="Número de Equipos Participantes" 
+                  #numero="ngModel" [ngClass]="{'is-valid': numero?.valid && !numero.pristine ,'is-invalid':numero?.invalid && numero.touched}" 
                 [(ngModel)]="categoria.n_equipos_categoria" required/>
-                <div class="invalid-feedback" *ngIf="numero.errors?.required && numero.touched">
-                  Este campo es obligatorio
                 
-                </div>
               </div>
+              <div class="error-campo" *ngIf="numero.errors?.required && numero.touched">
+                  Este campo es obligatorio
+                </div>
+                <div class="error-campo" *ngIf="numero.errors?.min && numero.touched">
+                  El número debe ser mayor a cero
+                </div>
             </div>
             <!-- </div> -->
           </div>
           <div class="col-lg-3 col-md-4">
-            <small id="activar" class="text-muted">
+            <label id="activar" class="text-muted">
                 Marcar Segunda Vuelta en la Categoria
-            </small>
+            </label>
             <form id="activar" action="" class="accounttype">
               <input id="radiouno" type="radio" [checked]="categoria.segunda_vuelta" (click)="setProperty($event.target.checked)" name="segunda_vuelta">
               <label
@@ -77,29 +82,33 @@
         </div>
         <div class="row">
           <div class=" col-lg-12 form-group">
-            <small class="text-muted Error">
+            <label class="text-muted">
                   Observación
-            </small>
+            </label>
             <div class="input-group mb-2 mr-sm-2 mb-sm-0">
               <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-              <input type="text" name="name" class="form-control" placeholder="Observaciones Generales" #observacion_categoria="ngModel"
-                [(ngModel)]="categoria.observacion_categoria" required>
-              <div class="invalid-feedback">
-                Please provide a valid city.
-              </div>
+              <input type="text" name=".observacion_categoria" class="form-control" placeholder="Observaciones Generales" #observacion_categoria="ngModel"
+                [(ngModel)]="categoria.observacion_categoria" >
             </div>
           </div>
         </div>
 
       </div>
       <div class="card-footer">
-        <button *ngIf="titulo == 'Nueva Categoria'" class="btn btn-success pull-left" type="submit" (click)="guardarcategoria()">Guardar Nueva Categoria </button>
-        <button *ngIf="titulo == 'Modificar Categoria'" class="btn btn-success pull-left" type="submit" (click)="ModificarCategoria()">{{titulo}}</button>
+        <button [disabled]="!forma.valid || forma.pristine" *ngIf="titulo == 'Nueva Categoria'" class="btn btn-success pull-left" type="submit" (click)="guardarcategoria()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Guardar
+        </button>
+        <button [disabled]="!forma.valid || forma.pristine" *ngIf="titulo == 'Modificar Categoria'" class="btn btn-success pull-left" type="submit" (click)="ModificarCategoria()">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Guardar
+        </button>
         <!-- <a class="btn btn-success pull-left" (click)="guardarEquipo()" role="button">Guardar Equipo</a> -->
-        <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">Cancelar</a>
+        <a class="btn btn-danger pull-right" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="true" 
+          aria-controls="collapseExample">  <i class="fa fa-ban" aria-hidden="true"></i>&nbsp;Cancelar 
+        </a>
       </div>
+    </form>
     </div>
-  </form>
+  
 </div>
 <!-- CARDS DE LA CATEGORIAS -->
 <div class="container marketing">
@@ -114,22 +123,27 @@
             Número de Equipos Participantes: {{categoriaTemporada.n_equipos_categoria}} <br> Número de Equipos Registrados
             : {{categoriaTemporada.codigo_equipo.length}} <br>
           </p>
-          <h3>Cupos Diponibles: ({{categoriaTemporada.n_equipos_categoria - categoriaTemporada.codigo_equipo.length}})</h3>
+          <h6>Cupos Diponibles: ({{categoriaTemporada.n_equipos_categoria - categoriaTemporada.codigo_equipo.length}})</h6>
           <i class="fa fa-flag" aria-hidden="true"></i>
           <p class="card-text">Descripción: {{categoriaTemporada.observacion_categoria}}</p>
           <p><strong>Equipos Participantes:</strong></p>
           <div class="row margenes">
-            <div class="col-6" *ngFor="let item of (categoriaTemporada.codigo_equipo)">
-              <div>
-                <a href="">{{item.nombre_equipo}}</a>
+            <ul>
+              <div class="col-12" *ngFor="let item of (categoriaTemporada.codigo_equipo)">
+                <li>
+                  <a href="">{{item.nombre_equipo}}</a>
+                </li>
               </div>
-            </div>
+          </ul>
           </div>
         </div>
         <div class="card-footer">
           <a *ngIf="identity" class="btn btn-warning" role="button" data-toggle="collapse" href="#collapseExample" aria-expanded="false"
-            aria-controls="collapseExample" (click)="DatsoModificarCategoria(categoriaTemporada,categoriaTemporada._id)">Modificar</a>
-          <button *ngIf="identity" class="btn btn-success" type="submit" (click)="generarCalendario(categoriaTemporada,categoriaTemporada._id)">Generar Calendario</button>
+            aria-controls="collapseExample" (click)="DatsoModificarCategoria(categoriaTemporada,categoriaTemporada._id)">
+            <i class="fa fa-cog" aria-hidden="true"></i> Modificar
+         </a>
+          <a *ngIf="identity" class="btn btn-success" type="submit" (click)="generarCalendario(categoriaTemporada,categoriaTemporada._id)">
+              <i class="fa fa-calendar-check-o" aria-hidden="true"></i> Generar Calendario</a>
           <!-- <a *ngIf="identity" class="btn btn-danger pull-right" href="#" role="button">Eliminar</a> -->
         </div>
       </div>
@@ -140,14 +154,14 @@
     <div class="col-lg-4 equipo" *ngIf="mostrar_formulario_inicial && identity">
       <div class="card" id="prueba">
         <div class="card-header">
-          <h3>Agregar una Nueva Categoria o Division</h3>
+          <h5>Agregar una Nueva Categoria o Division</h5>
         </div>
         <div class="card-block">
           <p class="card-text">Click sobre la Imagen para empezar</p>
-          <h2><i class="fa fa-hand-o-down" aria-hidden="true"></i></h2>
+          <h6><i class="fa fa-hand-o-down" aria-hidden="true"></i></h6>
           <a data-toggle="collapse" href="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
-                                                     <img id="addequipo" class="rounded-circle imgcenter" src="assets/popper/docs/images/nuevo.jpg" alt="Generic placeholder image" width="140" height="140">
-                                                    </a>
+            <img id="addequipo" class="rounded-circle imgcenter" src="assets/popper/docs/images/nuevo.jpg" alt="Generic placeholder image" width="140" height="140">
+          </a>
         </div>
         <br>
         <div class="card-footer">
