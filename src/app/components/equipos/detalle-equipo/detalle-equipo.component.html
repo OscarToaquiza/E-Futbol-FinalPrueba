@@ -3,91 +3,102 @@
       <div class="card-header text-center">
         <h3>Información del Equipo</h3>
       </div>
-      <div class="card-body">
-        <div class="row">
-          <div class="col-lg-10">
+      <form>
+        <fieldset [disabled]=true>
+          <div class="card-body">
             <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
-                    <input type="text"  #edicion_equipo.nombre_equipo="ngModel" [(ngModel)]="edicion_equipo.nombre_equipo" name="up_nombre_equipo" class="form-control" placeholder="Nombre del Equipo" required autofocus>
-                    <div class="invalid-feedback">
-                      Please provide a valid city.
+              <div class="col-lg-10">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputAddress2" class="col-form-label">Nombre</label> 
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-futbol-o"></i></div>
+                        <input type="text"  #edicion_equipo.nombre_equipo="ngModel" [(ngModel)]="edicion_equipo.nombre_equipo" name="nombre_equipo" 
+                          class="form-control" placeholder="Nombre del Equipo" required autofocus> 
+                      </div>
+                      <!-- <div class="error-campo">
+                          El nombre es obligatorio
+                      </div> -->
+                    </div>
+                  </div>
+      
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputAddress2" class="col-form-label">Año de fundación</label>   
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
+                        <input type="date" #edicion_equipo.anio_fundacion_equipo="ngModel"
+                          [ngModel]="edicion_equipo.anio_fundacion_equipo | date:'yyyy-MM-dd'" (ngModelChange)="edicion_equipo.anio_fundacion_equipo= $event"
+                          name="anio_fundacion_equipo" class="form-control" placeholder="Año de Fundacion" required>
+                      </div>
+                      <!-- <div class="error-campo">
+                          El año de fundacion es obligatorio
+                      </div> -->
                     </div>
                   </div>
                 </div>
-              </div>
-  
-              <div class="col-md-6">
-                <div class="form-group">
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
-                    <input type="number" #edicion_equipo.anio_fundacion_equipo="ngModel" [(ngModel)]="edicion_equipo.anio_fundacion_equipo" name="up_anio_fundacion_equipo" class="form-control" placeholder="Año de Fundacion" required>
-                    <div class="invalid-feedback">
-                      Please provide a valid city.
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputAddress2" class="col-form-label">Color principal</label>   
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle"></i></div>
+                        <input type="text" #edicion_equipo.color_principal_equipo="ngModel" [(ngModel)]="edicion_equipo.color_principal_equipo" 
+                          name="color_principal_equipo" class="form-control" placeholder="Color Principal" required>
+                        
+                      </div>
+                      <!-- <div class="error-campo">
+                          El color principal es obligatorio
+                      </div> -->
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="inputAddress2" class="col-form-label">Color secundario</label>   
+                      <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                        <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle-o"></i></div>
+                        <input type="text" #edicion_equipo.color_secundario_equipo="ngModel" [(ngModel)]="edicion_equipo.color_secundario_equipo"
+                          name="color_secundario_equipo" class="form-control" placeholder="Color Secundario" required>
+                        
+                      </div>
+                      <!-- <div class="error-campo">
+                          El color secundario es obligatorio
+                      </div> -->
                     </div>
                   </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputAddress2" class="col-form-label">Descripción</label>                             
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                              <textarea type="text" class="form-control" name="descripcion_equipo" placeholder="Descripción General"
+                                #descripcion_equipo="ngModel" [(ngModel)]="edicion_equipo.descripcion_equipo">
+                              </textarea>
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputAddress2" class="col-form-label">Observación</label>                             
+                            <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                              <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
+                              <textarea type="text" class="form-control" name="observacion_equipo" placeholder="Observación del Equipo"
+                              #observacion_equipo="ngModel" [(ngModel)]="edicion_equipo.observacion_equipo">
+                              </textarea>
+                            </div>
+                          </div>
+                    </div>
+                  </div> 
+                <!-- 3 -->
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle"></i></div>
-                    <input type="text" #edicion_equipo.color_principal_equipo="ngModel" [(ngModel)]="edicion_equipo.color_principal_equipo" name="up_color_principal_equipo" class="form-control" placeholder="Color Principal" required autofocus>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
-                      </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                    <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-check-circle-o"></i></div>
-                    <input type="text" #edicion_equipo.color_secundario_equipo="ngModel" [(ngModel)]="edicion_equipo.color_secundario_equipo" name="up_color_secundario_equipo" class="form-control" placeholder="Color Secundario" required>
-                    <div class="invalid-feedback">
-                        Please provide a valid city.
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-  
-                    <div class="form-group">
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
-                          <textarea type="text" class="form-control" name="" placeholder="Descripción General"
-                          #descripcion_equipo="ngModel" [(ngModel)]="edicion_equipo.descripcion_equipo">
-                          </textarea>
-                        </div>
-                      </div>
-  
-                </div>
-                <div class="col-md-6">
-                  
-                    <div class="form-group">
-                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                          <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-map" aria-hidden="true"></i></div>
-                          <textarea type="text" class="form-control" name="" placeholder="Observación del Equipo"
-                          #observacion_equipo="ngModel" [(ngModel)]="edicion_equipo.observacion_equipo">
-                          </textarea>
-                        </div>
-                      </div>
-  
-                </div>
-              </div> 
-            <!-- 3 -->
           </div>
-          
-  
-        </div>
-  
-      </div>
+        </fieldset>
+      </form>
+
       <div>
         <button (click)="descargarCarnets()">DESCARGAR CARNETS</button>
       </div>      

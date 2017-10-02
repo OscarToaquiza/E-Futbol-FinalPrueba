@@ -1,32 +1,57 @@
 <div class="card text-center">
-  <div class="card-header">
-    <h3>LISTA DE TEMPORADAS</h3>
+
+  <div class="card-header row justify-content-end">
+    <div class="col-6">
+      <h5>Temporadas</h5>        
+    </div>
+    <div class="col-3 ">
+      <a *ngIf="identity" class="btn btn-primary btn-sm pointer" role="button" (click) = "ver_formulario($event)">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>Nueva
+      </a>
+    </div>
   </div>
+  
   <div class="card-block">
     <br>
-    <button  *ngIf="identity" class="btn btn-primary btn-lg btn-block " (click) = "ver_formulario($event)">
+    <!-- <button  *ngIf="identity" class="btn btn-primary btn-lg btn-block " (click) = "ver_formulario($event)">
         Crear Nueva Temporada
-    </button>
-    <div class="card margenCard" *ngFor="let item of temporadas">
-        <div class="card-header">
-            <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
-            <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+    </button> -->
+    <div class="card bg-light mb-3" *ngFor="let item of temporadas">
+        <div class="card-header container row justify-content-end">
+          <div class="col-10">
+            <h6 class="card-title">{{item.nombre_temporada}}</h6> 
+          </div>
+          <div class="col-1">
+              <a *ngIf="identity" class="btn btn-info pointer" (click)="datos_temporada($event,item)">
+                  <i class="fa fa-cog" aria-hidden="true"></i>
+              </a>   
+          </div>
+            <!-- <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
+            <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i> -->
+            
         </div>
-      <div class="card-block">
-        <h4 class="card-title">{{item.nombre_temporada}}</h4>
-        <p>
-          <strong>Fecha de Inicio: {{item.fecha_inicio |date}} </strong><br>
-          <strong>Fecha Fin:{{item.fecha_fin |date}} </strong>
+      <div class="card-block container">
+        <!-- <h4 class="card-title">{{item.nombre_temporada}}</h4> -->
+        <p class="justificado">
+          <strong>Fecha de Inicio:</strong> {{item.fecha_inicio |date}} 
+          <br>
+          <strong>Fecha Fin:</strong>{{item.fecha_fin |date}} 
         </p>
-      <div *ngIf="(item.estado_temporada) == false">
-          <p>Temporada marcada como actual: <i class="fa fa-times" aria-hidden="true"></i></p>
+        <!-- <div *ngIf="(item.estado_temporada) == false">
+            <p>Temporada marcada como actual: <i class="fa fa-times" aria-hidden="true"></i></p>
+        </div> -->
+        <!-- <div *ngIf="(item.estado_temporada) == true">
+            <p>Temporada marcada como actual: <i class="fa fa-check" aria-hidden="true"></i></p>
+        </div> -->
       </div>
-      <div *ngIf="(item.estado_temporada) == true">
-          <p>Temporada marcada como actual: <i class="fa fa-check" aria-hidden="true"></i></p>
-      </div>
-      </div>
-      <div class="card-footer">
-        <button *ngIf="identity" class="btn btn-success" (click)="datos_temporada($event,item)" >Editar</button>   
+      <div class="card-footer text-muted">
+        <!-- <button *ngIf="identity" class="btn btn-success" (click)="datos_temporada($event,item)" >Editar</button>    -->
+        <div *ngIf="(item.estado_temporada) == true">
+            <p>Temporada marcada como actual: <i class="fa fa-check" aria-hidden="true"></i></p>
+        </div>
+        <div *ngIf="(item.estado_temporada) == false">
+            <p>Temporada marcada como actual: <i class="fa fa-times" aria-hidden="true"></i></p>
+        </div>
         <div *ngIf="!identity">
             <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>
             <i class="fa fa-star-o" aria-hidden="true"></i><i class="fa fa-star-o" aria-hidden="true"></i>

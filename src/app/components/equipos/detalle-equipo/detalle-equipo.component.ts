@@ -34,6 +34,7 @@ export class DetalleEquipoComponent implements OnInit {
        
     this.obtenerTemporadas();    
     this.edicion_equipo=JSON.parse(localStorage.getItem('equipoSeleccionado')); 
+    console.log(this.edicion_equipo._id);
     $('#escu').attr('crossOrigin', 'anonymous');   
     $('#escu').attr('src',this.url+'equipo/imagen/'+this.edicion_equipo.escudo_equipo);           
     this.escudo=this.getBase64Image(document.getElementById("escu"));    

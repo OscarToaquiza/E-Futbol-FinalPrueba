@@ -31,7 +31,7 @@ const adminRoutes:Routes=[
   {path:'equipos',component:EquiposComponent},
   {path:'temporada',component:TemporadaComponent},
   {path:'jugadores',component:JugadoresComponent},
-  {path:'detalle-equipo/:equi',component:DetalleEquipoComponent},
+  {path:'detalle-equipo',component:DetalleEquipoComponent},
   {path:'calendario-general', component: CalendarioGeneralComponent},
   {path:'sancion',component:SancionComponent},
   {path:'',redirectTo:'home',pathMatch:'full'},

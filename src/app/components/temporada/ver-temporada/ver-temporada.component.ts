@@ -32,6 +32,10 @@ export class VerTemporadaComponent implements OnInit {
   public temporada_nueva: Temporada;
   public temporada_actual: Temporada;
   public a: any;
+  
+  // para validar fechas
+  public hoy:Date;
+  
 
   //para radio button
   public estado_readio_button = false;
@@ -43,6 +47,7 @@ export class VerTemporadaComponent implements OnInit {
     private _temporadaService: TemporadaService) {
     this.url = GLOBAL.url;
     this.temporada_nueva = new Temporada('','', this.a, this.a, '', '', this.a);
+    this.hoy=new Date();
   }
 
   ngOnInit() {

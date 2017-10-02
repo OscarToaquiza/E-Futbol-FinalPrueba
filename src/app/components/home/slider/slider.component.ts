@@ -52,6 +52,10 @@ export class SliderComponent implements OnInit,OnChanges {
   ngOnChanges(){
     // alert(this.noticias);
   }
+
+  guardarEquipoSeleccionado(equi) {
+    localStorage.setItem('equipoSeleccionado', JSON.stringify(equi));
+  }
   traerTresNoticias(page){
     console.log(page)
               this._noticiaservice.getNoticias(page).subscribe(

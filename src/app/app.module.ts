@@ -25,6 +25,9 @@ import { EquiposComponent } from './components/equipos/equipos.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { TemporadaComponent } from './components/temporada/temporada.component';
 
+//modulo para validaciones
+import { CustomFormsModule } from 'ng2-validation'
+
 //modulo creado
 // import {SharedModule} from './shared-module/shared.module';
 
@@ -107,7 +110,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     ReactiveFormsModule, 
     // SharedModule,
     RoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CustomFormsModule
   
   ],
   providers: [
