@@ -1,5 +1,7 @@
 
-  <button *ngIf="identity" class="btn btn-primary btn-lg btn-block" (click)="emitirEvento()" >Agregar Miembro</button>
+  <button *ngIf="identity" class="btn btn-primary btn-lg btn-block" (click)="emitirEvento()" >
+      <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Agregar Miembro
+  </button>
 
   <div id="accordion" role="tablist" *ngFor="let persona of personal">  
     <div class="card">
@@ -11,7 +13,7 @@
           </h5>
           <i *ngIf="persona.rol_personal === 'ambos'" class="fa fa-universal-access" aria-hidden="true"></i>
           <i *ngIf="persona.rol_personal === 'presidente'"  class="fa fa-handshake-o" aria-hidden="true"></i>
-          <button class="btn btn-success pull-right"   ><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+          <a class="pull-right" role="button" (click)="emitirEvento(persona)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
         </div>
         <div id="{{persona._id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">

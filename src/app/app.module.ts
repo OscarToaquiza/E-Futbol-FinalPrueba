@@ -25,6 +25,9 @@ import { EquiposComponent } from './components/equipos/equipos.component';
 import { CalendarioComponent } from './components/calendario/calendario.component';
 import { TemporadaComponent } from './components/temporada/temporada.component';
 
+//modulo para validaciones
+import { CustomFormsModule } from 'ng2-validation'
+
 //modulo creado
 // import {SharedModule} from './shared-module/shared.module';
 
@@ -46,6 +49,7 @@ import { CategoriasComponent } from './components/categorias/categorias.componen
 import { EstadiosComponent } from './components/estadios/estadios.component';
 import { ReglamentoComponent } from './components/reglamento/reglamento.component';
 import { JugadoresComponent } from './components/jugadores/jugadores.component';
+import{EditarPersonalComponent} from './components/jugadores/nuevo-personal/editar-personal';
 import { NuevoPersonalComponent } from './components/jugadores/nuevo-personal/nuevo-personal.component';
 import { SeccionEquipoComponent } from './components/jugadores/seccion-equipo/seccion-equipo.component';
 import { SeccionPersonalEquipoComponent } from './components/jugadores/seccion-personal-equipo/seccion-personal-equipo.component';
@@ -84,6 +88,7 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     EstadiosComponent,
     ReglamentoComponent,
     JugadoresComponent,
+    EditarPersonalComponent,
     NuevoPersonalComponent,
     SeccionEquipoComponent,
     SeccionPersonalEquipoComponent,
@@ -105,7 +110,8 @@ import { SmoothScrollToDirective, SmoothScrollDirective } from "ng2-smooth-scrol
     ReactiveFormsModule, 
     // SharedModule,
     RoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CustomFormsModule
   
   ],
   providers: [

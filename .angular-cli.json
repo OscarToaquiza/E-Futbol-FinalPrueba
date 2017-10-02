@@ -29,7 +29,8 @@
         "assets/jquery.slim.min.js",
         "assets/popper/dist/umd/popper.min.js",
         "assets/bootstrap/dist/js/bootstrap.min.js",
-        "assets/jspdf.js"
+        "assets/jspdf.js",
+        "../node_modules/ng2-validation/bundles/ng2-validation.umd.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

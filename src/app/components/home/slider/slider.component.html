@@ -41,8 +41,10 @@
 <div  id="equipos_escudos"  *ngIf="equipos != ''">
   
     <ul class="nav justify-content-center" >
+        <!-- [routerLink]="['/detalle-equipo']" (click)="guardarEquipoSeleccionado(equi)" -->
         <li class="nav-item" *ngFor="let equipo of equipos">
-          <a class="nav-link" [routerLink]="['']" data-toggle="tooltip" data-placement="bottom" title="{{equipo.nombre_equipo}}">
+          <a class="nav-link" [routerLink]="['/detalle-equipo']" (click)="guardarEquipoSeleccionado(equipo)" data-toggle="tooltip" 
+            data-placement="bottom" title="{{equipo.nombre_equipo}}">
               <img  *ngIf="equipo.escudo_equipo" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/' + equipo.escudo_equipo}}" alt="Generic placeholder image" width="34"
               height="34">
               <img *ngIf="!equipo.escudo_equipo" class="rounded-circle imgcenter" src="{{ url + 'equipo/imagen/default.png'}}" alt="Generic placeholder image" width="34"

@@ -1,39 +1,33 @@
 <div class="jumbotron">
-  <h2>Nuevo Personal</h2>
+  <h2>{{title}}</h2>
   <hr>
-<form (ngSubmit)="guardarPersonal(forma)" #forma="ngForm"  novalidate="">
+  <!-- <form (ngSubmit)="guardarPersonal()" #forma="ngForm"  novalidate=""> -->
+    
+<form  #forma="ngForm"  novalidate="">
   <div class="form-row">
     <div class="form-group col-md-6 ">
       <label for="name" class="col-form-label">Nombres</label>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
           <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user" aria-hidden="true"></i></div>
           <input type="text" class="form-control form-control-danger" name="personal.nombre_personal"
-            required pattern="[a-zA-Z_áéíóúñàèìòùç\s]*" [ngClass]="{'is-valid': nombre?.valid ,'is-invalid':nombre?.invalid && nombre.touched}"
+            required  [ngClass]="{'is-valid': nombre?.valid ,'is-invalid':nombre?.invalid && nombre.touched}"
           [(ngModel)]="personal.nombre_personal" placeholder="Ingrese el nombre" #nombre="ngModel">
-          
-          <div class="invalid-feedback" *ngIf="nombre.errors?.required && nombre.touched">
-            El nombre es obligatorio
-          </div>
-          <div class="invalid-feedback" *ngIf="nombre.errors?.pattern" >
-            No es un formato valido
-          </div>
+        </div>
+        <div class="error-campo" *ngIf="nombre.errors?.required && nombre.touched">
+          El nombre es obligatorio
         </div>
     </div>
     <div class="form-group col-md-6">
       <label for="inputPassword4" class="col-form-label">Apellidos</label>
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
           <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-user-o" aria-hidden="true"></i></div>
-          <input type="text" class="form-control" name="personal.apellido_personal" #apellido="ngModel" pattern="[a-zA-Z_áéíóúñàèìòùç\s]*"
+          <input type="text" class="form-control" name="personal.apellido_personal" #apellido="ngModel" 
            [ngClass]="{'is-valid': apellido?.valid ,'is-invalid':apellido?.invalid && apellido.touched}"
            required [(ngModel)]="personal.apellido_personal" placeholder="Ingrese apellido">
-           <div class="invalid-feedback" *ngIf="apellido.errors?.required && nombre.touched">
-            El apellido es obligatorio
-          </div>
-          <div class="invalid-feedback" *ngIf="apellido.errors?.pattern" >
-            No es un formato valido
-          </div>
         </div>
-      
+        <div class="error-campo" *ngIf="apellido.errors?.required && apellido.touched">
+          El apellido es obligatorio
+        </div>
     </div>
   </div>
 
@@ -46,17 +40,15 @@
               required pattern="[0-9]+" 
              #cedula="ngModel" [ngClass]="{'is-valid': cedula?.valid ,'is-invalid':cedula?.invalid && cedula.touched}"          
              [(ngModel)]="personal.cedula_personal" placeholder="Ingrese la Cédula">
-             
-              <div class="invalid-feedback" *ngIf="cedula.errors?.required && cedula.touched">
-                  La cédula es obligatoria
-              </div>
-              <div class="invalid-feedback" *ngIf="cedula.errors?.minlength || cedula.errors?.maxlength; else formato ">
-                  Deben ser 10 digitos
-              </div>
-              <div class="invalid-feedback" *ngIf="cedula.errors?.pattern" >
-                  No es un formato valido
-              </div>
-             
+        </div>
+        <div class="error-campo" *ngIf="cedula.errors?.required && cedula.touched">
+          La cédula es obligatoria
+        </div>
+        <div class="error-campo" *ngIf="cedula.errors?.minlength || cedula.errors?.maxlength">
+          Deben ser 10 digitos
+        </div>
+        <div class="error-campo" *ngIf="cedula.errors?.pattern" >
+          No es un formato valido
         </div>
       
     </div>
@@ -65,11 +57,17 @@
       <div class="input-group mb-2 mr-sm-2 mb-sm-0">
           <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar" aria-hidden="true"></i></div>
           <input type="date" class="form-control" [ngClass]="{'is-valid': fecha?.valid ,'is-invalid':fecha?.invalid && fecha.touched}"
-          name="personal.fecha_nacimiento_personal" [(ngModel)]="personal.fecha_nacimiento_personal" required #fecha="ngModel">
-            <div class="invalid-feedback" *ngIf="fecha.errors?.required && fecha.touched">
-                La fecha de nacimiento es obligatoria
-            </div>
+          [ngModel]="personal.fecha_nacimiento_personal | date:'yyyy-MM-dd'" (ngModelChange)="personal.fecha_nacimiento_personal= $event"
+          name="personal.fecha_nacimiento_personal" required #fecha="ngModel">
+
+           
+            <!-- <input type="date" [ngModel] ="dt | date:'yyyy-MM-dd'" (ngModelChange)="dt = $event" [value]="datee | date:'yyyy-MM-dd'"> -->
+            <!-- [ngModel]="personal.fecha_nacimiento_personal | date: 'yyyy-MM-dd'" -->
+            
         </div>
+        <div class="error-campo" *ngIf="fecha.errors?.required && fecha.touched">
+          La fecha de nacimiento es obligatoria
+       </div>
       
     </div>
   </div>
@@ -96,10 +94,10 @@
             <option [ngValue]="'presidente'">Presidente</option>
             <option [ngValue]="'ambos'">Ambos</option>
          </select>
-         <div class="invalid-feedback" *ngIf="rol.errors?.required && rol.touched">
-            El rol es oblogatorio
         </div>
-        </div>
+        <div class="error-campo" *ngIf="rol.errors?.required && rol.touched">
+          El rol es oblogatorio
+      </div>
       
     </div>
     <div class=" form-group col-md-2">
@@ -164,9 +162,9 @@
         </label>
     </div> 
   </div>
-  <button [disabled]="!forma.valid" type="submit" class="btn btn-success">Guardar</button>
-  
-  <button  type="button" class="btn btn-warning" >Cancelar</button>
+  <button [disabled]="!forma.valid" type="button" (click)="guardarPersonal()" class="btn btn-success">Guardar</button>
+  <button [disabled]="!forma.valid || forma.pristine" type="button" class="btn btn-success" (click)=" updatePersonal()">Editar</button>
+  <button  type="button" class="btn btn-danger" >Cancelar</button>
   
 </form>
 </div>

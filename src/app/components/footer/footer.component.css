@@ -1,47 +1,40 @@
-footer{
-    color: white;
-  }
-  footer a{
-    color: #bfffff;
-  }
-  footer a:hover{
-    color: white;
-  }
-  
-  .footer-bottom{
-    background: #3d6277;
-    padding: 2em;
-  }
-  .footer-top{
-    background: #2d4958;  
-  }
-  .footer-middle{
-     background: #3d6277;
-    padding-top: 2em;
-    color: white;
-  }
-  /**Sub Navigation**/
-  .subnavigation-container{
-    background: #3d6277;
-  }
-  .subnavigation .nav-link{
-    color: white;
-    font-weight: bold;
-  }
-  .subnavigation-container{
-    text-align: center;
-  }
-  .subnavigation-container .navbar{
-    display: inline-block;
-    margin-bottom: -6px; /* Inline-block margin offffset HACK -Gilron */
-  }
-  .col-subnav a{
-    padding: 1rem 1rem;
-    color: white;
-    font-weight: bold;
-  }
-  .col-subnav .active{
-    border-top:5px solid orange;
-   background: white;
-    color: black;
-  }
+.bg-primary {
+  background-color: #000 !important;
+ }
+ 
+ .bg-circle
+ {
+   display: inline-block;
+   width: 60px;
+   height: 60px;
+   padding: 14px 4px;
+   color: #ececec;
+   text-align: center;
+   border-radius: 50%;
+ }
+ 
+ .bg-circle-outline
+ {
+   width: 50px;
+   height: 50px;
+   color:smoke;
+   padding: 8px 2px;
+   border: 2px solid;
+   border-color: smoke;
+   border-radius: 50%;
+ }
+ 
+ 
+ .bg-circle a, a:hover, .media a:focus
+ {
+   text-decoration: none !important;
+   outline: none;
+   color: #ececec;
+ }
+ .bg-circle-outline a, a:hover, .media a:focus
+ {
+   text-decoration: none !important;
+   outline: none;
+   color: #ececec;
+ }
+ 

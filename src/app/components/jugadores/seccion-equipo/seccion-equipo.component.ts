@@ -65,6 +65,7 @@ export class SeccionEquipoComponent implements OnInit,DoCheck {
         } else {
           this.equipos = response.equiposEncontrados;
           console.log(this.equipos);
+          console.log("una vezzzzzzzzzzzzzzzz");
         }
       },
       error => {

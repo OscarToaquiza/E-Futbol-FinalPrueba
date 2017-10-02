@@ -272,7 +272,15 @@ input[type="radio"] {
 }
 
 /*Efecto de Botones*/
-.card-footer button:hover{
+ a:hover{
+  -webkit-transform:  scale(1.2);
+  -moz-transform: scale(1.2);
+  -o-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+button:hover{
   -webkit-transform:  scale(1.2);
   -moz-transform: scale(1.2);
   -o-transform: scale(1.2);
@@ -286,4 +294,18 @@ input[type="radio"] {
    margin-top: .25rem !important;
    font-size: .875rem !important; 
    color: #dc3545 !important;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+ 
+.justificado{
+  text-align: justify;
+  text-justify: inter-word;
+
+}
+.contenedor{
+  padding: 2px;
 }

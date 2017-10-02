@@ -44,21 +44,24 @@
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-eye"></i></div> 
                             <input type="text" class="form-control" name="noticia_nueva.observacion" #observacion="ngModel"
-                             [ngClass]="{'is-valid': !observacion.pristine}"
-                             [(ngModel)]="noticia_nueva.observacion" id="txt_observacion_noticia" aria-describedby="txt_observacion_noticia_help" placeholder="Contenido secundario.">                            
+                             [(ngModel)]="noticia_nueva.observacion" id="txt_observacion_noticia" aria-describedby="txt_observacion_noticia_help"
+                             placeholder="Contenido secundario.">                            
                         </div>
                         <small id="txt_observacion_noticia_help"  class="form-text text-muted">Esta será el contenido secundario que se verá en la publicación.</small>
                     </div>
                     
                     <input type="hidden" id="idNoticia" name="noticia_nueva._id" #noticia_nueva._id="ngModel"  [(ngModel)]="noticia_nueva._id" >
                     <div *ngIf="identity">
-                        <button [disabled]="!forma.valid" class="btn btn-primary" *ngIf="btnGuardarNoticia" id="btn_guardar_noticia" type="submit" >Guardar</button>
-                        <button [disabled]=" (titulo?.pristine && descripcion?.pristine) && observacion?.pristine " 
-                            class="btn btn-success" *ngIf="btnUpdateNoticia" (click)="updateNoticia()">Editar
+                        <button [disabled]="!forma.valid" class="btn btn-primary" *ngIf="btnGuardarNoticia" id="btn_guardar_noticia" type="submit" >
+                                <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Guardar</button>
+                        <button [disabled]=" forma.pristine || !forma.valid" 
+                            class="btn btn-primary" *ngIf="btnUpdateNoticia" (click)="updateNoticia()">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Guardar
                         </button>
-                        
                         <!-- <button  class="btn btn-primary" id="btn_modificar_noticia">Modificar</button> -->
-                        <button class="btn btn-primary" (click)="cancelar()" id="btn_cancelar_noticia">Cancelar</button>
+                        <button  class="btn btn-danger" (click)="cancelar()" id="btn_cancelar_noticia">
+                            <i class="fa fa-ban" aria-hidden="true"></i>&nbsp;Cancelar
+                        </button>
                     </div>                    
                 </form>
             </div>

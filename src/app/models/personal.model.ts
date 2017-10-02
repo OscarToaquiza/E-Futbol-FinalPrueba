@@ -1,5 +1,6 @@
 export class Personal {
     constructor(
+        public _id: string,        
         public nombre_personal:String, 
         public apellido_personal:String, 
         public rol_personal:String, 
