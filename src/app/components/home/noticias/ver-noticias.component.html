@@ -29,7 +29,7 @@
         </ul>
       </nav>
     <hr>
-    <div class="card" *ngFor = "let noticiaItem of noticia ; let i = index">
+    <div class="card margenCard" *ngFor = "let noticiaItem of noticia ; let i = index">
       <div class="card-header">
           <div class="row justify-content-end">
               <a *ngIf="identity" (click)="emitirEvento('editarNoticia',noticiaItem,srcItem[i])" class="btn btn-info pointer" 

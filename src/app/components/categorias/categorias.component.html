@@ -1,15 +1,15 @@
 <br>
 <div class="container jumbotron" *ngIf="!mostrar_formulario_inicial">
-  <h1 class="text-center">
+  <h5 class="text-center">
     No ha selecionado una temporada.
-  </h1>
+  </h5>
 </div>
 
 <div class="container jumbotron" *ngIf="mostrar_formulario_inicial">
-  <h1 class="text-center">
-    CATEGORIAS DE LA TEMPORADA: {{temporada_actual.nombre_temporada}}
+  <h5 class="text-center">
+    categorias de la temporada: {{temporada_actual.nombre_temporada}}
     <!-- <small>{{temporada_actual._id}}</small><br> -->
-  </h1>
+  </h5>
 </div>
 
 <div class="collapse" id="collapseExample">

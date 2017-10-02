@@ -1,17 +1,19 @@
 <div class="jumbotron" *ngIf="!validarTemporadas">
-  <h1 class="display-3">¡NO EXISTEN TEMPORADAS CREADAS!</h1>
+  <h5 class="display-3">¡NO EXISTEN TEMPORADAS CREADAS!</h5>
   <p class="lead">En una temporada se podrán crear varias categorios o divisiones</p>
   <hr class="my-4">
   <p>Para empezar a  crear una temporada <br> <a class="btn btn-primary" href="#" role="button">Nueva Temporada</a></p>
 </div>
 
 <div class="jumbotron" *ngIf="validarTemporadas">
-  <h1 class="text-center">TEMPORADA ACTUAL</h1>
+  <h5 class="text-center">TEMPORADA ACTUAL</h5>
   <hr class="my-4">
   <div class="row">
-    <div class="col-lg-12"><h1 class="text-center">
+    <div class="col-lg-12">
+        <h6 class="text-center">
         <i class="fa fa-star-o" aria-hidden="true"></i> {{temporada_actual.nombre_temporada}} <i class="fa fa-star-o" aria-hidden="true"></i>  
-    </h1></div>  
+        </h6>
+    </div>  
   </div>
   <div class="row">
     <div class="col-lg-6">
@@ -28,23 +30,23 @@
 <div class="jumbotron" *ngIf="mostrar_formualrio_nuevo">
   <div class="row">
     <div class="col-lg-12 text-center">
-      <h2>{{titulo}}</h2>
+      <h5>{{titulo}}</h5>
     </div>
   </div>
 
-  <form>
+  <form #forma="ngForm" novalidate>
     <hr class="my-4">
     <div class="row">
         <div class="col-lg-8">
         <div class="row">
             <div class="form-group col-lg-12">
-                    <small class="">
+                    <label class="">
                          Nombre de la temporada
-                    </small>
+                    </label>
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-newspaper-o"></i></div>
                     <input type="text" name="nombre" class="form-control" placeholder="Nombre de la Temporada" 
-                    [ngClass]="{'is-valid': nombre?.valid ,'is-invalid':nombre?.invalid && nombre.touched}"
+                    [ngClass]="{'is-valid': nombre?.valid && !nombre.pristine,'is-invalid':nombre?.invalid && nombre.touched}"
                     #nombre="ngModel" [(ngModel)]="temporada_nueva.nombre_temporada" required/>
                     
                 </div>
@@ -56,13 +58,13 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <small >
-                        Fecha de Inicio de la Temporada
-                    </small>  
+                    <label>
+                        Fecha de Inicio 
+                    </label>  
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
                     <input type="date" name="inicio" class="form-control" placeholder="today" #inicio="ngModel" 
-                    [ngClass]="{'is-valid': inicio?.valid ,'is-invalid':inicio?.invalid && inicio.touched}" 
+                    [ngClass]="{'is-valid': inicio?.valid && !inicio.pristine ,'is-invalid':inicio?.invalid && inicio.touched}" 
                     [(ngModel)]="temporada_nueva.fecha_inicio"  required />
                     
                     </div>
@@ -76,13 +78,13 @@
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <small>
-                        Fecha de Clausura del la Temporada 
-                    </small> 
+                    <label>
+                        Fecha de Clausura 
+                    </label> 
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar"></i></div>
                     <input type="date" name="fin" class="form-control" placeholder=""  required
-                        [ngClass]="{'is-valid': fin?.valid ,'is-invalid':fin?.invalid && fin.touched}"
+                        [ngClass]="{'is-valid': fin?.valid && !fin.pristine,'is-invalid':fin?.invalid && fin.touched}"
                         #fin="ngModel" [(ngModel)]="temporada_nueva.fecha_fin">
                     <!-- <div class="invalid-feedback">
                         Please provide a valid city.
@@ -100,9 +102,9 @@
         </div>
         <div class="row" *ngIf="estado_readio_button == true" >
             <div class="col-lg-6">
-                <small id="activar" class="text-muted Error">
+                <label id="activar" class="">
                     ¿Marcar la temporada como Actual?
-                </small>
+                </label>
                 <form id="activar" action="" class="accounttype">
                 <input id="radiouno" type="radio" [checked]="temporada_nueva.estado_temporada" 
                     (click)="setProperty($event.target.checked)"
@@ -110,13 +112,17 @@
                 <input id="radiodos" type="radio" [checked]="!temporada_nueva.estado_temporada" 
                     (click)="setProperty(!$event.target.checked)" 
                     name="estado_temporada"><label for="radiodos" class="radio">NO</label>
+                    <br>
+                    <small id="activar" class="text-muted Error">
+                            Si la temporada se marca como actual, sera visible para el publico en general
+                    </small>
             </form> 
             </div>
-            <div class="col-lg-6">
+            <!-- <div class="col-lg-6">
                 <small id="activar" class="text-muted Error">
                 Si la temporada se marca como actual, sera visible para el publico en general
                 </small>
-            </div>
+            </div> -->
         </div>
         </div>
 
@@ -133,17 +139,24 @@
         <div *ngIf = "pdfSubido == false" >
             <div class="form-group">
                 <input type="file" (change)="imagen($event)" name="file-5[]" id="file-5" class=" inputfile inputfile-4" />
-                <label for="file-5" ><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span>{{nombre_documento}}</span></label>
+                <label for="file-5" ><figure><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17"
+                     viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg></figure> <span>{{nombre_documento}}</span></label>
             </div>
         </div>
         </div>
     </div>
     <hr class="my-4">
     <div class="row">
-        <div class="col-lg-12">
-            <button  *ngIf = "titulo == 'Editar Temporada'"class="btn btn-success pull-left" href="" (click)="updateTemporada()">Guardar Cambios</button>
-            <button  *ngIf = "titulo == 'Crear Temporada Nueva'" class="btn btn-success pull-left" href="" (click)="guardarTemporada()">Guardar Temporada</button>
-            <button class="btn btn-danger pull-right" href="" (click)="cerrar_formulario($event)">Cancelar</button>
+        <div class="">
+            <button [disabled]=" forma.pristine || !forma.valid" *ngIf = "titulo == 'Editar Temporada'"class="btn btn-primary pull-left" href="" (click)="updateTemporada()">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Guardar
+            </button>
+            <button [disabled]=" forma.pristine || !forma.valid" *ngIf = "titulo == 'Crear Temporada Nueva'" class="btn btn-primary pull-left" href="" (click)="guardarTemporada()">
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Guardar
+            </button>
+            <button class="btn btn-danger pull-right" href="" (click)="cerrar_formulario($event)">
+                    <i class="fa fa-ban" aria-hidden="true"></i>&nbsp;Cancelar
+            </button>
         </div>
     </div>
 </form>
