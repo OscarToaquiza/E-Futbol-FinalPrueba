@@ -29,6 +29,8 @@ import swal from 'sweetalert2';
   styleUrls: ['./calendario.component.css']
 })
 export class CalendarioComponent implements OnInit {
+  private selectUndefinedOptionValue2:any;
+  
 
   public Vocalia = false;
 

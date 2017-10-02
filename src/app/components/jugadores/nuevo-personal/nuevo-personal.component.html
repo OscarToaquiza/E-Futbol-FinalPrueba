@@ -88,7 +88,7 @@
           <select id="inputState" class="form-control"  name="personal.rol_personal" required #rol="ngModel"
             [ngClass]="{'is-valid': rol?.valid ,'is-invalid':rol?.invalid && rol.touched}"
             [(ngModel)]="personal.rol_personal">
-            <option disabled hidden [value]="selectUndefinedOptionValue2">Elija un rol</option>
+            <option disabled hidden [ngValue]="selectUndefinedOptionValue2">Elija un rol</option>
             
             <option [ngValue]="'jugador'">Jugador</option>
             <option [ngValue]="'presidente'">Presidente</option>
