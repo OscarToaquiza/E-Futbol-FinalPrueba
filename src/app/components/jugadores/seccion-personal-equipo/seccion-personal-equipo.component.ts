@@ -10,16 +10,24 @@ import {UserService} from '../../../services/user.service';
 export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
   @Output() emitir=new EventEmitter();
   @Input() equip:Equipo;
-  @Input('notificacion')
-  set notificacion(value:any) {
-    this.personal=this.equip.personal_equipo;
-    this.emitir.emit({
-      'mostrarAgregarPersonal':false      
-    })
-  }
+  
+  
   public personal:any[];
   public identity;
+  @Input('notificacion')
+  set notificacion(value:any) {
+    if(value!=undefined && value.length!=0) 
+    {
+      value.forEach(element => {
+        this.equip.personal_equipo.push(element);
+      });      
+    }         
+    this.personal=this.equip.personal_equipo;  
 
+    console.log("Se activo la notificacion");
+    console.log(this.personal);
+    console.log(value);
+  }
   constructor(
     private _userService : UserService
   ) { 

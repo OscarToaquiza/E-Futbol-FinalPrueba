@@ -32,6 +32,8 @@ export class CalendarioComponent implements OnInit {
   private selectUndefinedOptionValue2:any;
   
 
+   public contact: any;
+
   public Vocalia = false;
 
   public arrayPersonal1 = new Array(25);
@@ -367,7 +369,10 @@ export class CalendarioComponent implements OnInit {
     this.partidoJugado = false;
   }
 
+
   guardarPartido(partido,estadio,fecha){
+    console.log("Partido: ");
+    console.log('Fin PAARTIDO');
     let data1 = new Array();
     let data2 = new Array();
     console.log(this.partidosSuspencionEquipo1);
@@ -393,7 +398,9 @@ export class CalendarioComponent implements OnInit {
     console.log(data1);
     partido.tarjetas_roja_equipo1 = data1;
     partido.tarjetas_roja_equipo2 = data2;
+
     console.log(partido);
+
     console.log("estadio:" + estadio._id);
     if(this.estadioSelec == ''){
       partido.id_estadio = estadio;
@@ -422,6 +429,8 @@ export class CalendarioComponent implements OnInit {
             this.partidoJugado = false;
             this.estadioSelec = '';
             console.log(response);
+            this.partidosSuspencionEquipo1 = new Array();
+            this.partidosSuspencionEquipo2 = new Array();
         }
       },
       error =>{
@@ -489,3 +498,4 @@ export class CalendarioComponent implements OnInit {
 
   }
 }
+
