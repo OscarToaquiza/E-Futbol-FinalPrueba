@@ -104,9 +104,15 @@
                                             </p>
                                         </div>
                     <!-- Otra Row -->
-                                        <div class="col-4">
-                                            <p class="text-right" *ngFor="let gol of (item.goles_equipo1)" >
+                                        <div class="col-4 text-right">
+                                            <p *ngFor="let gol of (item.goles_equipo1)" >
                                                     {{gol.nombre_personal}} {{gol.apellido_personal}} <i class="fa fa-futbol-o" aria-hidden="true"></i><br>
+                                            </p>
+                                            <p  *ngFor="let TA of (item.tarjetas_amarilla_equipo1)" >
+                                                {{TA.nombre_personal}} {{TA.apellido_personal}} <i class="fa fa-clone" style="color:yellow;" aria-hidden="true"  ></i><br>
+                                            </p>
+                                            <p *ngFor="let TR of (item.tarjetas_roja_equipo1)" >
+                                                {{TR.id.nombre_personal}} {{TR.id.apellido_personal}}<i class="fa fa-clone" style="color: red;" aria-hidden="true"  ></i> <br>
                                             </p>
                                         </div>
                                         <div class="col-3 text-center">
@@ -126,6 +132,12 @@
                                                         <i class="fa fa-futbol-o" aria-hidden="true"></i>
                                                         {{gol.nombre_personal}} {{gol.apellido_personal}}
                                                         <br>
+                                                </p>
+                                                <p *ngFor="let TA of (item.tarjetas_amarilla_equipo2)" >
+                                                    <i class="fa fa-clone" style="color:yellow;" aria-hidden="true"  ></i>{{TA.nombre_personal}} {{TA.apellido_personal}} <br>
+                                                </p>
+                                                <p *ngFor="let TR of (item.tarjetas_roja_equipo2)" >
+                                                    <i class="fa fa-clone" style="color: red;" aria-hidden="true"  ></i>{{TR.id.nombre_personal}} {{TR.id.apellido_personal}} <br>
                                                 </p>
                                         </div>
                                     </div>
