@@ -16,7 +16,7 @@ export class Fecha {
     public id_equipo2: string,
     public goles_equipo2: [string],
     public tarjetas_amarilla_equipo2: [string],
-    public tarjetas_roja_equipo2: [string],
+    public tarjetas_roja_equipo2: [any],
     public codigo_sancion_equipo2: string,
     public observacion_equipo2: string,
     public primera_segunda: number
