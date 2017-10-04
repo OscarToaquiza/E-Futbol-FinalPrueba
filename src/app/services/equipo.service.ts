@@ -106,7 +106,6 @@ export class EquipoService {
     return this._http.delete(this.url+'equipo/delete/'+id,options)
     .map(res => res.json());
   }
-<<<<<<< HEAD
 
   deleteONEPersonalEquipo(token,idEQUIPO:string,idPERSONAL:string){
     let params = {'personal_equipo': idPERSONAL};
@@ -118,7 +117,6 @@ export class EquipoService {
                                                                     .map(res => res.json());
   }
 
-=======
   deleteAllPersonalEquipo(token,id){
     let headers = new Headers({
       'Content-Type':'application/json',
@@ -128,7 +126,6 @@ export class EquipoService {
     return this._http.delete(this.url+'equipo/deleteAllPersonal/'+id,options)
     .map(res => res.json());
   }
->>>>>>> 151c6cc8cc7a25ec9e811674ab9fd85fdb688c07
   addPersonalAEquipo(idPersonal,idEquipo){
     // let params=JSON.stringify(equipo_to_update);
     let params={"personal_equipo":idPersonal};
