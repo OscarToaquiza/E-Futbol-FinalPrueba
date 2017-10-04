@@ -1,13 +1,13 @@
     <!-- FORMULARIO DE NOTICIA -->
     <div class="frm jumbotron" >
-        <h2>{{title}}</h2>
+        <h5>{{title}}</h5>
         <hr>
         <div class="row">
             <div class="col-md-6">
                 <!-- FORM -->
                 <form (ngSubmit)="guardarNoticia()" #forma="ngForm" novalidate="">
                     <div class="form-group">
-                        <label for="txt_titulo_noticia">Titulo</label>
+                        <label for="txt_titulo_noticia" class="text-muted">Titulo</label>
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-calendar-o"></i></div> 
                             <input type="text" class="form-control" name="noticia_nueva.titulo" required
@@ -28,7 +28,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="txt_descripcion_noticia">Descripción</label>
+                        <label for="txt_descripcion_noticia" class="text-muted">Descripción</label>
                         <textarea type="text" class="form-control" name="noticia_nueva.descripcion" #descripcion="ngModel" required
                             [ngClass]="{'is-valid': descripcion?.valid && !descripcion.pristine ,'is-invalid':descripcion?.invalid && descripcion.touched}"
                             [(ngModel)]="noticia_nueva.descripcion" id="txt_descripcion_noticia" aria-describedby="txt_descripcion_noticia_help">
@@ -40,7 +40,7 @@
                         </small>
                     </div>
                     <div class="form-group">
-                        <label for="txt_observacion_noticia">Observación</label>                        
+                        <label for="txt_observacion_noticia" class="text-muted">Observación</label>                        
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                             <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-eye"></i></div> 
                             <input type="text" class="form-control" name="noticia_nueva.observacion" #observacion="ngModel"
@@ -51,7 +51,7 @@
                     </div>
                     
                     <input type="hidden" id="idNoticia" name="noticia_nueva._id" #noticia_nueva._id="ngModel"  [(ngModel)]="noticia_nueva._id" >
-                    <div *ngIf="identity">
+                    <div *ngIf="identity" class="btn-group">
                         <button [disabled]="!forma.valid" class="btn btn-primary" *ngIf="btnGuardarNoticia" id="btn_guardar_noticia" type="submit" >
                                 <i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;Guardar</button>
                         <button [disabled]=" forma.pristine || !forma.valid" 
@@ -70,7 +70,7 @@
                 <div class="card" >
                     <img class="card-img-top"  [src]="srcH" alt="Imagen de la noticia" height="180" >
                     <div class="card-block">
-                      <h4 class="card-title">{{noticia_nueva.titulo}}</h4>
+                      <h5 class="card-title">{{noticia_nueva.titulo}}</h5>
                       <p class="card-text">Descripcion: 
                         {{noticia_nueva.descripcion}}
                         </p>

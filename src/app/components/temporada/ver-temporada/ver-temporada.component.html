@@ -40,12 +40,12 @@
         <div class="col-lg-8">
         <div class="row">
             <div class="form-group col-lg-12">
-                    <label class="">
-                         Nombre de la temporada
+                    <label class="text-muted">
+                         Nombre
                     </label>
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon frm-addon" style="width: 2.6rem"><i class="fa fa-newspaper-o"></i></div>
-                    <input type="text" name="nombre" class="form-control" placeholder="Nombre de la Temporada" 
+                    <input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre de la temporada" 
                     [ngClass]="{'is-valid': nombre?.valid && !nombre.pristine,'is-invalid':nombre?.invalid && nombre.touched}"
                     #nombre="ngModel" [(ngModel)]="temporada_nueva.nombre_temporada" required/>
                     
@@ -58,7 +58,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label>
+                    <label class="text-muted">
                         Fecha de Inicio 
                     </label>  
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
@@ -78,7 +78,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="form-group">
-                    <label>
+                    <label class="text-muted">
                         Fecha de Clausura 
                     </label> 
                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
@@ -102,7 +102,7 @@
         </div>
         <div class="row" *ngIf="estado_readio_button == true" >
             <div class="col-lg-6">
-                <label id="activar" class="">
+                <label id="activar" class="text-muted">
                     ¿Marcar la temporada como Actual?
                 </label>
                 <form id="activar" action="" class="accounttype">
@@ -113,7 +113,7 @@
                     (click)="setProperty(!$event.target.checked)" 
                     name="estado_temporada"><label for="radiodos" class="radio">NO</label>
                     <br>
-                    <small id="activar" class="text-muted Error">
+                    <small id="activar" class="text-muted">
                             Si la temporada se marca como actual, sera visible para el publico en general
                     </small>
             </form> 
