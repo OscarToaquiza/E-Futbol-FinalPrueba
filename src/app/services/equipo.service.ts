@@ -107,13 +107,13 @@ export class EquipoService {
     .map(res => res.json());
   }
 
-  deleteONEPersonalEquipo(token,idEQUIPO:string,idPERSONAL:string){
+  deleteONEPersonalEquipo(token,idEQUIPO: String,idPERSONAL:string){
     let params = {'personal_equipo': idPERSONAL};
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': this.token
     });
-    return this._http.put(this.url + 'equipo/agregarPERSONAL/' + idEQUIPO, params, {headers:headers})
+    return this._http.put(this.url + 'equipo/quitarPERSONAL/' + idEQUIPO, params, {headers:headers})
                                                                     .map(res => res.json());
   }
 

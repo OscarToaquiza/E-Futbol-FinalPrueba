@@ -15,6 +15,7 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
   
   public personal:any[];
   public identity;
+  public token;
   @Input('notificacion')
   set notificacion(value:any) {
     if(value!=undefined && value.length!=0) 
@@ -40,6 +41,7 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
     private _equipoService: EquipoService
   ) { 
     this.identity = this._userService.getIdentity();
+    this.token = this._userService.getToken();
     
     // this.personal=this.equipo.personal_equipo;
   }
@@ -64,7 +66,7 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
     
   // }
   ngOnChanges(){
-    console.log(this.equip);
+    // console.log(this.equip);
     this.personal=this.equip.personal_equipo;
     console.log("estos son los jugadores del equipo");
     console.log(this.personal);
@@ -78,7 +80,14 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
   eliminarJugador(idPersonal){
     console.log('IdPersonal' +  idPersonal);
     console.log('IdEquipo' + this.equip._id);
-    
+    this._equipoService.deleteONEPersonalEquipo(this.token, this.equip._id, idPersonal).subscribe(
+      res => {
+        console.log(res);
+      },
+      error => {
+
+      }
+    );
   }
 
 }
