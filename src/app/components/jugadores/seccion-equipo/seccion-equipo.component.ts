@@ -13,9 +13,10 @@ import swal from 'sweetalert2';
 })
 export class SeccionEquipoComponent implements OnInit,DoCheck {
   @Output() notificacion=new EventEmitter();
+  @Output() notificacionEliminacion=new EventEmitter();
   public url;
   public rs:any;
-
+  public rsE:any;
   public equipos:Equipo[];
   public equipo;
   private selectUndefinedOptionValue:any;
@@ -139,6 +140,48 @@ export class SeccionEquipoComponent implements OnInit,DoCheck {
            
   }
 
+
+  //ELIMINAR TODO  PERSONAL 
+  eliminarPersonal(equipo){
+    console.log(this.identity);
+               
+      //Guardar excel:
+      swal({
+        title: '¿Está usted seguro?',
+        text: "¡Todo el personal será eliminado!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si, Eliminar registros!'
+      }).then(()=>{
+        this._ES.deleteAllPersonalEquipo(this.token,equipo._id)
+        .subscribe((response)=>{
+          console.log("Eliminado:::");
+          console.log(response);
+          this.rsE=response;
+          this._PS.eliminarGroupPersonal(this.token,this.rsE.mensaje.personal_equipo)
+          .subscribe(
+            ()=>{
+              swal(
+                '¡Registros eliminados!',
+                '',              
+              )  
+              this.notificacionEliminacion.emit({'mensaje':(this.rsE.mensaje.personal_equipo)+Math.random()});
+            },
+            (err)=>{
+              swal(
+                'Oops...',
+                '¡Algo salio mal, pruebe despues de un momento!',
+                'error'
+              )
+            }
+          );
+        });                                         
+           
+      });
+           
+  }
   public filesToUpdate : Array<File>;
   subirFilePersonal(fileInput : any){
       //si fueran check se podrian selecciones varios.

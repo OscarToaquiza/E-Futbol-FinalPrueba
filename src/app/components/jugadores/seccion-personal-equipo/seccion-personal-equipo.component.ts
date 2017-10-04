@@ -22,13 +22,19 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
       value.forEach(element => {
         this.equip.personal_equipo.push(element);
       });      
-    }         
+    }             
     this.personal=this.equip.personal_equipo;  
 
     console.log("Se activo la notificacion");
     console.log(this.personal);
     console.log(value);
   }
+  @Input('notificacionEliminacion')
+  set notificacionEliminacion(value:any) {
+    console.log("Notificacion-->Activa");
+    this.equip.personal_equipo.length=0;
+    this.personal=this.equip.personal_equipo;             
+  } 
   constructor(
     private _userService : UserService,
     private _equipoService: EquipoService

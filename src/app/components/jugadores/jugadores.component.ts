@@ -15,6 +15,7 @@ export class JugadoresComponent implements OnInit {
   public equipo:any;
   public msgEvent:any;
   public persona:any;
+  public msgEventEliminacion:any;
   constructor() { }
   ngOnInit() {
   }
@@ -33,7 +34,9 @@ export class JugadoresComponent implements OnInit {
   actualizarSeccionPersonal(evento){
     this.msgEvent=evento.mensaje;
   }
-  
+  eliminarGroupPersonal(evento){
+    this.msgEventEliminacion=evento.mensaje;
+  }
   actualizarPersonal(evento)
   {
     this.msgEvent=evento.mensaje;
