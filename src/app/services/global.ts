@@ -1,3 +1,3 @@
 export var GLOBAL = {
-    url: 'https://apiefutbol2.herokuapp.com'
+    url: 'http://localhost:3999/'
 }
