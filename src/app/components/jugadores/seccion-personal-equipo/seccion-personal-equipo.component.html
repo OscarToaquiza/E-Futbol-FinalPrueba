@@ -13,6 +13,7 @@
           </h5>
           <i *ngIf="persona.rol_personal === 'ambos'" class="fa fa-universal-access" aria-hidden="true"></i>
           <i *ngIf="persona.rol_personal === 'presidente'"  class="fa fa-handshake-o" aria-hidden="true"></i>
+          <a class="pull-right ml-2" role="button" (click)="eliminarJugador(persona._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
           <a class="pull-right" role="button" (click)="emitirEvento(persona)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
         </div>
         <div id="{{persona._id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
@@ -21,7 +22,7 @@
             <h5><strong>Apellidos: </strong>{{persona.apellido_personal}}</h5>
             <h5><strong>Cédula:</strong>{{persona.cedula_personal}}</h5>
             <h5><strong>Rol: </strong>{{persona.rol_personal}}</h5>
-            <h5><strong>Fecha de nacimiento: </strong>{{persona.fecha_nacimiento_personal | date}}</h5>
+            <h5><strong>Fecha de nacimiento: </strong>{{persona.fecha_nacimiento_personal | date:'yyyy-MM-dd'}}</h5>
 
           </div>
         </div>
