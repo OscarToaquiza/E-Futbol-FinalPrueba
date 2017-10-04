@@ -57,7 +57,7 @@
             <li class="nav-item" routerLinkActive="active">
               <a class="nav-link link-1" [routerLink]="['jugadores']">Personal</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" routerLinkActive="active" *ngIf="identity">
               <a class="nav-link link-1" [routerLink]="['sancion']">Sanción</a>
             </li>
           </ul>

@@ -75,12 +75,13 @@ export class DetalleEquipoComponent implements OnInit {
   }
 
   descargarCarnets(){
-    this.nAux=Math.floor(this.personalEquipo.length)-1;    
-    this.pdf(this.nAux);
+    console.log("!!");
+    console.log(this.personalEquipo);        
+    this.pdf();
     // let doc=this.pdf(nHojas);    
   }
 
-  pdf(n){
+  pdf(){
       var doc = new jsPDF();
       // doc.addImage(,'JPEG',20,20);
             

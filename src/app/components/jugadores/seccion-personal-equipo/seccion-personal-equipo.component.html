@@ -1,7 +1,10 @@
 
-  <button *ngIf="identity" class="btn btn-primary btn-lg btn-block" (click)="emitirEvento()" >
+  <button *ngIf="equip.personal_equipo.length < 30 && identity"class="btn btn-primary btn-lg btn-block" (click)="emitirEvento()" >
       <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Agregar Miembro
   </button>
+  <button *ngIf="equip.personal_equipo.length>=30 && identity" class="btn btn-primary btn-lg btn-block" disabled >
+    Equipo completo
+</button>
 
   <div id="accordion" role="tablist" *ngFor="let persona of personal;let i=index ">  
     <div class="card">

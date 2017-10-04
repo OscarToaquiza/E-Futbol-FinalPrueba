@@ -95,7 +95,7 @@ export class SeccionEquipoComponent implements OnInit,DoCheck {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Si, Guardar registros!'
       }).then(()=>{
-        this._PS.addExcelPersonal(this.url+'personal/saveXLS',this.filesToUpdate,this.token,'xls')
+        this._PS.addExcelPersonal(this.url+'personal/saveXLS/'+equipo.personal_equipo.length,this.filesToUpdate,this.token,'xls')
         .then(response=>{ 
           console.log(response);
           if(response){
@@ -118,7 +118,13 @@ export class SeccionEquipoComponent implements OnInit,DoCheck {
                 console.log(response.equipo.personal_equipo);                
                 this.notificacion.emit({'mensaje':this.rs.personalI});
               },(er)=>{
-                console.log("Error:"+er);
+                console.log(er);
+                
+                  swal(
+                    'Oops...',
+                    '¡Algo salio mal, pruebe despues de un momento!',
+                    'error'
+                  )                               
               });
             });                        
           }else{
@@ -129,12 +135,14 @@ export class SeccionEquipoComponent implements OnInit,DoCheck {
             )
           }        
   
-         }).catch(()=>{
-          swal(
-            'Oops...',
-            '¡Algo salio mal, pruebe despues de un momento!',
-            'error'
-          )
+         }).catch((er)=>{
+           console.log(er);
+
+            swal(
+              'Oops...',
+              'Error:'+JSON.parse(er).mensaje,
+              'error'
+            )                              
          }); 
       });
            
