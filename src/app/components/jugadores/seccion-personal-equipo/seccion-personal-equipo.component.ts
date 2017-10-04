@@ -2,6 +2,9 @@ import { Component,Input,Output,OnInit,DoCheck,OnChanges,EventEmitter } from '@a
 import{Equipo} from '../../../models/equipo.model';
 import {UserService} from '../../../services/user.service';
 import { EquipoService } from '../../../services/equipo.service';
+import { PersonalService } from '../../../services/personal.service';
+
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-seccion-personal-equipo',
@@ -41,7 +44,8 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
   } 
   constructor(
     private _userService : UserService,
-    private _equipoService: EquipoService
+    private _equipoService: EquipoService,
+    private _personalService: PersonalService
   ) { 
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
@@ -83,14 +87,43 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
   eliminarJugador(idPersonal){
     console.log('IdPersonal' +  idPersonal);
     console.log('IdEquipo' + this.equip._id);
-    this._equipoService.deleteONEPersonalEquipo(this.token, this.equip._id, idPersonal).subscribe(
-      res => {
-        console.log(res);
-      },
-      error => {
 
-      }
-    );
+    swal({
+      title: '¿Está usted seguro?',
+      text: "¡Se Eliminaran los Datos del Personal!",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, Eliminar'
+    }).then(()=>{
+      this._equipoService.deleteONEPersonalEquipo(this.token, this.equip._id, idPersonal).subscribe(
+        res => {
+          this._personalService.eliminarONEPersonal(this.token,idPersonal).subscribe(
+            res1 => {
+              swal(
+                '¡Registro Borrados!',
+                'Exitosamente',
+              );
+
+            },
+            error2 =>{
+              swal(
+                'Oops...',
+                '¡Algo salio mal al Borrar los Datos del Personal!',
+                'error'
+              )
+            }
+          );
+        },
+        error => {
+          swal(
+            'Oops...',
+            '¡Algo salio al Quitar el Personal del Equipo!',
+            'error'
+          );
+        }
+      );
+    });
   }
-
 }
