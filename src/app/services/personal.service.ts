@@ -133,15 +133,16 @@ export class PersonalService {
 //       xhr.send(formData);
 //       }); 
 //   }
-  //Eliminar Noticia
-//   deleteNoticia(token,id){
-//     let headers = new Headers({
-//       'Content-Type':'application/json',
-//       'Authorization':token  
-//     })
-//     let options = new RequestOptions({headers:headers});
-//     return this._http.delete(this.url+'noticia/delete/'+id,options)
-//     .map(res => res.json());
-//   }
+  //Eliminar Group Personal
+  eliminarGroupPersonal(token,array){
+    let headers = new Headers({
+      'Content-Type':'application/json',
+      'Authorization':token  
+    })
+    let params=JSON.stringify(array);
+    let options = new RequestOptions({headers:headers});
+    return this._http.delete(this.url+'personal/eliminarGroup/'+params,options)
+    .map(res => res.json());
+  }
 
 }
