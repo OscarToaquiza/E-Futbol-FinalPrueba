@@ -87,11 +87,18 @@ export class DetalleEquipoComponent implements OnInit {
     this.personalEquipo.forEach((jugador,i) => {             
         // FILA 1 
         console.log("::::::"+(i*6));              
-        if(jugador[0]!=undefined){          
-          var nacimiento=moment(jugador[0].fecha_nacimiento_personal);
-          var hoy=moment();
-          var anios=hoy.diff(nacimiento,"years");
+        if(jugador[0]!=undefined){ 
+                 
+          var nacimiento=moment(jugador[0].fecha_nacimiento_personal).format('YYYY');
+          var hoy=moment().format('YYYY');
+          console.log('hoy:'+hoy);
+          console.log('nac:'+nacimiento);
+          var anios=parseInt(hoy)-parseInt(nacimiento);
           console.log(anios);
+          // var nacimiento=moment(jugador[0].fecha_nacimiento_personal);
+          // var hoy=moment();
+          // var anios=hoy.diff(nacimiento,"years");
+          // console.log(anios);
           if(anios<18)        
             doc.addImage($('#formatoCarnet2')[0],'PNG',10,10,90,70);                 
           else 
@@ -110,10 +117,14 @@ export class DetalleEquipoComponent implements OnInit {
         }        
 
         if(jugador[1]!=undefined){
-          var nacimiento=moment(jugador[1].fecha_nacimiento_personal);
-          var hoy=moment();
-          var anios=hoy.diff(nacimiento,"years");
+          var nacimiento=moment(jugador[1].fecha_nacimiento_personal).format('YYYY');
+          var hoy=moment().format('YYYY');
+          var anios=parseInt(hoy)-parseInt(nacimiento);
           console.log(anios);
+          // var nacimiento=moment(jugador[1].fecha_nacimiento_personal);
+          // var hoy=moment();
+          // var anios=hoy.diff(nacimiento,"years");
+          // console.log(anios);
           if(anios<18)        
             doc.addImage($('#formatoCarnet2')[0],'PNG',110,10,90,70);
           else 
@@ -133,10 +144,14 @@ export class DetalleEquipoComponent implements OnInit {
         // FILA 2 
 
         if(jugador[2]!=undefined){
-          var nacimiento=moment(jugador[2].fecha_nacimiento_personal);
-          var hoy=moment();
-          var anios=hoy.diff(nacimiento,"years");
+          var nacimiento=moment(jugador[2].fecha_nacimiento_personal).format('YYYY');
+          var hoy=moment().format('YYYY');
+          var anios=parseInt(hoy)-parseInt(nacimiento);
           console.log(anios);
+          // var nacimiento=moment(jugador[2].fecha_nacimiento_personal);
+          // var hoy=moment();
+          // var anios=hoy.diff(nacimiento,"years");
+          // console.log(anios);
           if(anios<18)        
             doc.addImage($('#formatoCarnet2')[0],'PNG',10,90,90,70); 
           else 
@@ -154,10 +169,14 @@ export class DetalleEquipoComponent implements OnInit {
           doc.text(jugador[2].cedula_personal,37,47+80);
         }      
         if(jugador[3]!=undefined){
-          var nacimiento=moment(jugador[3].fecha_nacimiento_personal);
-          var hoy=moment();
-          var anios=hoy.diff(nacimiento,"years");
+          var nacimiento=moment(jugador[3].fecha_nacimiento_personal).format('YYYY');
+          var hoy=moment().format('YYYY');
+          var anios=parseInt(hoy)-parseInt(nacimiento);
           console.log(anios);
+          // var nacimiento=moment(jugador[3].fecha_nacimiento_personal);
+          // var hoy=moment();
+          // var anios=hoy.diff(nacimiento,"years");
+          // console.log(anios);
           if(anios<18)        
             doc.addImage($('#formatoCarnet2')[0],'PNG',110,90,90,70);
           else 
@@ -178,10 +197,14 @@ export class DetalleEquipoComponent implements OnInit {
         // FILA 3
 
         if(jugador[4]!=undefined){
-          var nacimiento=moment(jugador[4].fecha_nacimiento_personal);
-          var hoy=moment();
-          var anios=hoy.diff(nacimiento,"years");
+          var nacimiento=moment(jugador[4].fecha_nacimiento_personal).format('YYYY');
+          var hoy=moment().format('YYYY');
+          var anios=parseInt(hoy)-parseInt(nacimiento);
           console.log(anios);
+          // var nacimiento=moment(jugador[4].fecha_nacimiento_personal);
+          // var hoy=moment();
+          // var anios=hoy.diff(nacimiento,"years");
+          // console.log(anios);
           if(anios<18)        
             doc.addImage($('#formatoCarnet2')[0],'PNG',10,170,90,70);
           else 
@@ -199,10 +222,14 @@ export class DetalleEquipoComponent implements OnInit {
           doc.text(jugador[4].cedula_personal,37,47+160);    
         }
         if(jugador[5]!=undefined){
-          var nacimiento=moment(jugador[5].fecha_nacimiento_personal);
-          var hoy=moment();
-          var anios=hoy.diff(nacimiento,"years");
+          var nacimiento=moment(jugador[5].fecha_nacimiento_personal).format('YYYY');
+          var hoy=moment().format('YYYY');
+          var anios=parseInt(hoy)-parseInt(nacimiento);
           console.log(anios);
+          // var nacimiento=moment(jugador[5].fecha_nacimiento_personal);
+          // var hoy=moment();
+          // var anios=hoy.diff(nacimiento,"years");
+          // console.log(anios);
           if(anios<18)        
             doc.addImage($('#formatoCarnet2')[0],'PNG',110,170,90,70);
           else 

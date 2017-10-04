@@ -30,9 +30,12 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
   }
   @Input('notificacionEliminacion')
   set notificacionEliminacion(value:any) {
+    if(value!=undefined && value.length!=0) 
+    {
     console.log("Notificacion-->Activa");
-    this.equip.personal_equipo.length=0;
-    this.personal=this.equip.personal_equipo;             
+    this.equip.personal_equipo.length=0;      
+    }           
+    this.personal=this.equip.personal_equipo;
   } 
   constructor(
     private _userService : UserService
