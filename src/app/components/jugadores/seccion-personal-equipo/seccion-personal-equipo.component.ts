@@ -106,7 +106,6 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
                 'Exitosamente',
               );
               this.equip.personal_equipo.splice(i,1);
-
             },
             error2 =>{
               swal(
