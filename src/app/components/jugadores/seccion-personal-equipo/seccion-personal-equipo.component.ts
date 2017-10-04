@@ -1,6 +1,7 @@
 import { Component,Input,Output,OnInit,DoCheck,OnChanges,EventEmitter } from '@angular/core';
 import{Equipo} from '../../../models/equipo.model';
 import {UserService} from '../../../services/user.service';
+import { EquipoService } from '../../../services/equipo.service';
 
 @Component({
   selector: 'app-seccion-personal-equipo',
@@ -29,7 +30,8 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
     console.log(value);
   }
   constructor(
-    private _userService : UserService
+    private _userService : UserService,
+    private _equipoService: EquipoService
   ) { 
     this.identity = this._userService.getIdentity();
     
@@ -63,6 +65,14 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
     this.emitir.emit({
       'mostrarAgregarPersonal':false      
     })
+  }
+
+
+
+  eliminarJugador(idPersonal){
+    console.log('IdPersonal' +  idPersonal);
+    console.log('IdEquipo' + this.equip._id);
+    
   }
 
 }

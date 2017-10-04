@@ -106,6 +106,17 @@ export class EquipoService {
     return this._http.delete(this.url+'equipo/delete/'+id,options)
     .map(res => res.json());
   }
+
+  deleteONEPersonalEquipo(token,idEQUIPO:string,idPERSONAL:string){
+    let params = {'personal_equipo': idPERSONAL};
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+    });
+    return this._http.put(this.url + 'equipo/agregarPERSONAL/' + idEQUIPO, params, {headers:headers})
+                                                                    .map(res => res.json());
+  }
+
   addPersonalAEquipo(idPersonal,idEquipo){
     // let params=JSON.stringify(equipo_to_update);
     let params={"personal_equipo":idPersonal};
