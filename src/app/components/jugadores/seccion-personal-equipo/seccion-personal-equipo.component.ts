@@ -84,7 +84,7 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
 
 
 
-  eliminarJugador(idPersonal){
+  eliminarJugador(idPersonal,i){
     console.log('IdPersonal' +  idPersonal);
     console.log('IdEquipo' + this.equip._id);
 
@@ -102,9 +102,10 @@ export class SeccionPersonalEquipoComponent implements OnInit,OnChanges {
           this._personalService.eliminarONEPersonal(this.token,idPersonal).subscribe(
             res1 => {
               swal(
-                '¡Registro Borrados!',
+                '¡Registro Borrado!',
                 'Exitosamente',
               );
+              this.equip.personal_equipo.splice(i,1);
 
             },
             error2 =>{

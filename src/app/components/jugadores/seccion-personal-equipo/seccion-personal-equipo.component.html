@@ -3,7 +3,7 @@
       <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Agregar Miembro
   </button>
 
-  <div id="accordion" role="tablist" *ngFor="let persona of personal">  
+  <div id="accordion" role="tablist" *ngFor="let persona of personal;let i=index ">  
     <div class="card">
         <div class="card-header" role="tab" id="headingOne">
           <h5 class="pull-left">
@@ -13,7 +13,7 @@
           </h5>
           <i *ngIf="persona.rol_personal === 'ambos'" class="fa fa-universal-access" aria-hidden="true"></i>
           <i *ngIf="persona.rol_personal === 'presidente'"  class="fa fa-handshake-o" aria-hidden="true"></i>
-          <a class="pull-right ml-2" role="button" (click)="eliminarJugador(persona._id)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+          <a class="pull-right ml-2" role="button" (click)="eliminarJugador(persona._id,i)"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
           <a class="pull-right" role="button" (click)="emitirEvento(persona)"><i class="fa fa-pencil" aria-hidden="true"></i></a>
         </div>
         <div id="{{persona._id}}" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
